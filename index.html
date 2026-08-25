@@ -1,265 +1,227 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FORME — Basic Wear</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FORME — Basic Wear</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  color:#111;
+  background:#fff;
+}
+header{
+  padding:28px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #eee;
+}
+.logo{
+  font-size:28px;
+  font-weight:700;
+  letter-spacing:7px;
+}
+.cart-btn{
+  border:0;
+  background:none;
+  font-size:15px;
+  cursor:pointer;
+}
+.hero{
+  padding:70px 22px;
+  background:#f3f3f3;
+}
+.hero h1{
+  font-size:48px;
+  line-height:1;
+  max-width:500px;
+  margin-bottom:25px;
+}
+.hero p{
+  color:#666;
+  font-size:17px;
+  margin-bottom:30px;
+}
+.hero a{
+  display:inline-block;
+  background:#111;
+  color:white;
+  text-decoration:none;
+  padding:17px 28px;
+}
+.shop{
+  padding:50px 20px;
+}
+.shop h2{
+  font-size:26px;
+  margin-bottom:30px;
+}
+.products{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:55px;
+}
+.product-image{
+  width:100%;
+  aspect-ratio:1/1;
+  background:#f1f1f1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#999;
+  font-size:17px;
+  margin-bottom:22px;
+}
+.product h3{
+  font-size:23px;
+  margin-bottom:10px;
+}
+.price{
+  font-weight:bold;
+  font-size:20px;
+  margin-bottom:25px;
+}
+label{
+  display:block;
+  color:#666;
+  margin:16px 0 8px;
+}
+select,input,textarea{
+  width:100%;
+  padding:14px;
+  border:1px solid #ccc;
+  border-radius:0;
+  font-size:16px;
+  background:#fff;
+}
+.add{
+  width:100%;
+  padding:17px;
+  margin-top:20px;
+  border:0;
+  background:#111;
+  color:white;
+  font-size:16px;
+}
+.about{
+  background:#111;
+  color:#fff;
+  padding:55px 22px;
+}
+.about h2{margin-bottom:18px}
+.about p{
+  color:#ccc;
+  line-height:1.7;
+}
+footer{
+  padding:35px 20px;
+  text-align:center;
+  font-size:13px;
+  color:#777;
+}
 
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #fff;
-      color: #111;
-    }
+/* CART */
+.overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.35);
+  z-index:20;
+}
+.cart{
+  position:absolute;
+  right:0;
+  top:0;
+  width:100%;
+  max-width:500px;
+  height:100%;
+  overflow:auto;
+  background:#fff;
+  padding:30px 25px;
+}
+.cart-head{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:35px;
+}
+.cart-head h2{font-size:28px}
+.close{
+  border:0;
+  background:none;
+  font-size:30px;
+}
+.cart-item{
+  padding:18px 0;
+  border-bottom:1px solid #ddd;
+}
+.cart-item h3{margin-bottom:8px}
+.cart-item p{
+  color:#666;
+  margin-bottom:5px;
+}
+.remove{
+  margin-top:8px;
+  border:0;
+  background:none;
+  text-decoration:underline;
+}
+.total{
+  font-size:22px;
+  font-weight:bold;
+  margin:25px 0;
+}
+.checkout{
+  width:100%;
+  padding:18px;
+  border:0;
+  background:#111;
+  color:#fff;
+  font-size:17px;
+}
 
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background: #fff;
-      border-bottom: 1px solid #eee;
-      padding: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+/* CHECKOUT */
+.checkout-box{
+  display:none;
+  margin-top:30px;
+  padding-top:25px;
+  border-top:1px solid #ddd;
+}
+.checkout-box h2{
+  margin-bottom:20px;
+}
+.checkout-box textarea{
+  min-height:90px;
+}
+.payment{
+  margin:20px 0;
+  padding:16px;
+  background:#f4f4f4;
+  line-height:1.6;
+}
+.order{
+  width:100%;
+  padding:18px;
+  border:0;
+  background:#111;
+  color:#fff;
+  font-size:17px;
+}
+.notice{
+  display:none;
+  padding:20px;
+  background:#f1f1f1;
+  margin-top:20px;
+  line-height:1.6;
+}
 
-    .logo {
-      font-size: 24px;
-      font-weight: 700;
-      letter-spacing: 4px;
-    }
-
-    .cart-btn {
-      background: none;
-      border: none;
-      font-size: 14px;
-      cursor: pointer;
-    }
-
-    .hero {
-      min-height: 55vh;
-      background: #f3f3f3;
-      padding: 45px 22px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .hero h1 {
-      font-size: 46px;
-      line-height: 1.02;
-      margin-bottom: 18px;
-    }
-
-    .hero p {
-      font-size: 15px;
-      color: #555;
-      margin-bottom: 25px;
-    }
-
-    .hero a {
-      background: #111;
-      color: #fff;
-      text-decoration: none;
-      padding: 14px 24px;
-      width: fit-content;
-      font-size: 13px;
-    }
-
-    .products {
-      padding: 45px 20px;
-    }
-
-    .section-title {
-      font-size: 28px;
-      margin-bottom: 25px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 35px;
-    }
-
-    .product-card {
-      border-bottom: 1px solid #eee;
-      padding-bottom: 30px;
-    }
-
-    .product-image {
-      width: 100%;
-      aspect-ratio: 3 / 4;
-      background: #eee;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #999;
-      font-size: 13px;
-      margin-bottom: 18px;
-    }
-
-    .product-name {
-      font-size: 18px;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-
-    .price {
-      font-size: 16px;
-      font-weight: bold;
-      margin-bottom: 16px;
-    }
-
-    .label {
-      font-size: 12px;
-      margin-bottom: 8px;
-      display: block;
-      color: #555;
-    }
-
-    select,
-    input[type="number"] {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #ccc;
-      background: #fff;
-      margin-bottom: 14px;
-      font-size: 14px;
-    }
-
-    .add-btn {
-      width: 100%;
-      background: #111;
-      color: #fff;
-      border: none;
-      padding: 14px;
-      font-size: 14px;
-      cursor: pointer;
-    }
-
-    .about {
-      background: #111;
-      color: #fff;
-      padding: 50px 22px;
-    }
-
-    .about h2 {
-      font-size: 30px;
-      margin-bottom: 15px;
-    }
-
-    .about p {
-      color: #ccc;
-      line-height: 1.7;
-      font-size: 14px;
-    }
-
-    .about a {
-      display: inline-block;
-      margin-top: 20px;
-      color: #fff;
-    }
-
-    footer {
-      padding: 30px 20px;
-      text-align: center;
-      font-size: 11px;
-      color: #777;
-    }
-
-    .cart-panel {
-      position: fixed;
-      top: 0;
-      right: -100%;
-      width: 100%;
-      max-width: 420px;
-      height: 100%;
-      background: #fff;
-      z-index: 50;
-      padding: 25px;
-      box-shadow: -5px 0 20px rgba(0,0,0,0.12);
-      transition: 0.3s;
-      overflow-y: auto;
-    }
-
-    .cart-panel.open {
-      right: 0;
-    }
-
-    .cart-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 25px;
-    }
-
-    .close-cart {
-      background: none;
-      border: none;
-      font-size: 24px;
-      cursor: pointer;
-    }
-
-    .cart-item {
-      border-bottom: 1px solid #eee;
-      padding: 14px 0;
-    }
-
-    .cart-item strong {
-      display: block;
-      margin-bottom: 5px;
-    }
-
-    .cart-item small {
-      color: #666;
-    }
-
-    .cart-total {
-      margin-top: 25px;
-      font-size: 18px;
-      font-weight: bold;
-    }
-
-    .checkout-btn {
-      width: 100%;
-      margin-top: 18px;
-      background: #111;
-      color: #fff;
-      border: none;
-      padding: 15px;
-      font-size: 14px;
-    }
-
-    .empty-cart {
-      color: #777;
-      font-size: 14px;
-    }
-
-    @media (min-width: 700px) {
-      .hero {
-        padding: 70px;
-      }
-
-      .hero h1 {
-        font-size: 72px;
-      }
-
-      .products {
-        padding: 70px;
-      }
-
-      .grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-  </style>
+@media(min-width:700px){
+  .products{grid-template-columns:1fr 1fr}
+  .hero h1{font-size:65px}
+}
+</style>
 </head>
 
 <body>
@@ -277,186 +239,226 @@
   <a href="#shop">SHOP NOW</a>
 </section>
 
-<section class="products" id="shop">
-  <h2 class="section-title">SHOP FORME</h2>
+<section class="shop" id="shop">
+<h2>SHOP FORME</h2>
 
-  <div class="grid">
+<div class="products">
 
-    <div class="product-card">
-      <div class="product-image">ẢNH BOXY TEE</div>
+<div class="product">
+  <div class="product-image">ẢNH BOXY TEE</div>
+  <h3>FORME BOXY TEE</h3>
+  <div class="price">240.000₫</div>
 
-      <div class="product-name">FORME BOXY TEE</div>
-      <div class="price">240.000₫</div>
+  <label>Màu</label>
+  <select id="boxyColor">
+    <option>Đen</option>
+    <option>Trắng</option>
+  </select>
 
-      <label class="label">Màu</label>
-      <select id="boxyColor">
-        <option value="Đen">Đen</option>
-        <option value="Trắng">Trắng</option>
-      </select>
+  <label>Size</label>
+  <select id="boxySize">
+    <option>S</option>
+    <option>M</option>
+    <option>L</option>
+  </select>
 
-      <label class="label">Size</label>
-      <select id="boxySize">
-        <option value="S">S</option>
-        <option value="M">M</option>
-        <option value="L">L</option>
-      </select>
+  <label>Số lượng</label>
+  <input id="boxyQty" type="number" value="1" min="1" max="10">
 
-      <label class="label">Số lượng</label>
-      <input id="boxyQty" type="number" value="1" min="1">
+  <button class="add" onclick="addProduct('boxy')">
+    THÊM VÀO GIỎ
+  </button>
+</div>
 
-      <button class="add-btn" onclick="addBoxy()">
-        THÊM VÀO GIỎ
-      </button>
-    </div>
+<div class="product">
+  <div class="product-image">ẢNH LONG SLEEVE</div>
+  <h3>FORME LONG SLEEVE</h3>
+  <div class="price">290.000₫</div>
 
-    <div class="product-card">
-      <div class="product-image">ẢNH LONG SLEEVE</div>
+  <label>Màu</label>
+  <select id="longColor">
+    <option>Đen</option>
+    <option>Trắng</option>
+  </select>
 
-      <div class="product-name">FORME LONG SLEEVE</div>
-      <div class="price">260.000₫</div>
+  <label>Size</label>
+  <select id="longSize">
+    <option>S</option>
+    <option>M</option>
+    <option>L</option>
+  </select>
 
-      <label class="label">Màu</label>
-      <select id="longColor">
-        <option value="Đen">Đen</option>
-        <option value="Trắng">Trắng</option>
-      </select>
+  <label>Số lượng</label>
+  <input id="longQty" type="number" value="1" min="1" max="10">
 
-      <label class="label">Size</label>
-      <select id="longSize">
-        <option value="S">S</option>
-        <option value="M">M</option>
-        <option value="L">L</option>
-      </select>
+  <button class="add" onclick="addProduct('long')">
+    THÊM VÀO GIỎ
+  </button>
+</div>
 
-      <label class="label">Số lượng</label>
-      <input id="longQty" type="number" value="1" min="1">
-
-      <button class="add-btn" onclick="addLong()">
-        THÊM VÀO GIỎ
-      </button>
-    </div>
-
-  </div>
+</div>
 </section>
 
 <section class="about">
-  <h2>FORME</h2>
-
+  <h2>FORME BASIC</h2>
   <p>
-    Basic pieces made to fit into your everyday wardrobe.
-    Simple forms. Easy to wear. Easy to style.
+    Basic pieces made to fit naturally into your everyday wardrobe.
+    Nothing extra. Just the right form.
   </p>
-
-  <a href="https://instagram.com/formebasic.vn" target="_blank">
-    @formebasic.vn
-  </a>
 </section>
 
 <footer>
-  © 2026 FORME — NOTHING EXTRA. JUST THE RIGHT FORM.
+  FORME BASIC · @formebasic.vn
 </footer>
 
-<div class="cart-panel" id="cartPanel">
+<div class="overlay" id="overlay">
+<div class="cart">
 
-  <div class="cart-header">
+  <div class="cart-head">
     <h2>GIỎ HÀNG</h2>
-    <button class="close-cart" onclick="closeCart()">×</button>
+    <button class="close" onclick="closeCart()">×</button>
   </div>
 
-  <div id="cartItems" class="empty-cart">
-    Giỏ hàng đang trống.
+  <div id="cartItems"></div>
+
+  <div class="total">
+    Tổng: <span id="total">0₫</span>
   </div>
 
-  <div class="cart-total">
-    Tổng: <span id="cartTotal">0₫</span>
-  </div>
-
-  <button class="checkout-btn">
+  <button class="checkout" onclick="showCheckout()">
     TIẾN HÀNH ĐẶT HÀNG
   </button>
 
+  <div class="checkout-box" id="checkoutBox">
+    <h2>THÔNG TIN ĐẶT HÀNG</h2>
+
+    <label>Họ và tên *</label>
+    <input id="name" type="text">
+
+    <label>Số điện thoại *</label>
+    <input id="phone" type="tel">
+
+    <label>Địa chỉ nhận hàng *</label>
+    <textarea id="address"></textarea>
+
+    <label>Ghi chú</label>
+    <textarea id="note" placeholder="Ghi chú cho FORME (nếu có)"></textarea>
+
+    <div class="payment">
+      <strong>Thanh toán chuyển khoản</strong><br>
+      Sacombank<br>
+      STK: 070130993840<br>
+      Chủ tài khoản: VO QUANG TRUNG
+    </div>
+
+    <button class="order" onclick="placeOrder()">
+      XÁC NHẬN ĐẶT HÀNG
+    </button>
+
+    <div class="notice" id="notice"></div>
+  </div>
+
+</div>
 </div>
 
 <script>
-  let cart = [];
+let cart=[];
 
-  function formatMoney(number) {
-    return number.toLocaleString("vi-VN") + "₫";
+const money=n=>n.toLocaleString('vi-VN')+'₫';
+
+function addProduct(type){
+  let item;
+
+  if(type==='boxy'){
+    item={
+      name:'FORME BOXY TEE',
+      price:240000,
+      color:document.getElementById('boxyColor').value,
+      size:document.getElementById('boxySize').value,
+      qty:Number(document.getElementById('boxyQty').value)
+    };
+  }else{
+    item={
+      name:'FORME LONG SLEEVE',
+      price:290000,
+      color:document.getElementById('longColor').value,
+      size:document.getElementById('longSize').value,
+      qty:Number(document.getElementById('longQty').value)
+    };
   }
 
-  function addBoxy() {
-    const color = document.getElementById("boxyColor").value;
-    const size = document.getElementById("boxySize").value;
-    const qty = Number(document.getElementById("boxyQty").value);
+  cart.push(item);
+  renderCart();
+  openCart();
+}
 
-    addToCart("FORME BOXY TEE", 240000, color, size, qty);
+function renderCart(){
+  let html='';
+  let total=0;
+  let count=0;
+
+  cart.forEach((item,index)=>{
+    total += item.price*item.qty;
+    count += item.qty;
+
+    html += `
+      <div class="cart-item">
+        <h3>${item.name}</h3>
+        <p>${item.color} · Size ${item.size} · SL ${item.qty}</p>
+        <strong>${money(item.price*item.qty)}</strong><br>
+        <button class="remove" onclick="removeItem(${index})">Xóa</button>
+      </div>
+    `;
+  });
+
+  document.getElementById('cartItems').innerHTML =
+    html || '<p>Giỏ hàng đang trống.</p>';
+
+  document.getElementById('total').innerText=money(total);
+  document.getElementById('cartCount').innerText=count;
+}
+
+function removeItem(index){
+  cart.splice(index,1);
+  renderCart();
+}
+
+function openCart(){
+  document.getElementById('overlay').style.display='block';
+}
+
+function closeCart(){
+  document.getElementById('overlay').style.display='none';
+}
+
+function showCheckout(){
+  if(cart.length===0){
+    alert('Em chưa có sản phẩm trong giỏ hàng.');
+    return;
   }
 
-  function addLong() {
-    const color = document.getElementById("longColor").value;
-    const size = document.getElementById("longSize").value;
-    const qty = Number(document.getElementById("longQty").value);
+  document.getElementById('checkoutBox').style.display='block';
+}
 
-    addToCart("FORME LONG SLEEVE", 260000, color, size, qty);
+function placeOrder(){
+  const name=document.getElementById('name').value.trim();
+  const phone=document.getElementById('phone').value.trim();
+  const address=document.getElementById('address').value.trim();
+
+  if(!name || !phone || !address){
+    alert('Vui lòng nhập đầy đủ họ tên, số điện thoại và địa chỉ.');
+    return;
   }
 
-  function addToCart(name, price, color, size, qty) {
-    cart.push({
-      name,
-      price,
-      color,
-      size,
-      qty
-    });
+  let total=0;
+  cart.forEach(item=>total+=item.price*item.qty);
 
-    updateCart();
-    openCart();
-  }
-
-  function updateCart() {
-    const cartItems = document.getElementById("cartItems");
-    const cartCount = document.getElementById("cartCount");
-    const cartTotal = document.getElementById("cartTotal");
-
-    let totalQty = 0;
-    let totalPrice = 0;
-
-    if (cart.length === 0) {
-      cartItems.innerHTML = "Giỏ hàng đang trống.";
-      cartItems.className = "empty-cart";
-    } else {
-      cartItems.className = "";
-      cartItems.innerHTML = "";
-
-      cart.forEach((item) => {
-        totalQty += item.qty;
-        totalPrice += item.price * item.qty;
-
-        cartItems.innerHTML += `
-          <div class="cart-item">
-            <strong>${item.name}</strong>
-            <small>
-              ${item.color} · Size ${item.size} · SL ${item.qty}
-            </small>
-            <div>
-              ${formatMoney(item.price * item.qty)}
-            </div>
-          </div>
-        `;
-      });
-    }
-
-    cartCount.textContent = totalQty;
-    cartTotal.textContent = formatMoney(totalPrice);
-  }
-
-  function openCart() {
-    document.getElementById("cartPanel").classList.add("open");
-  }
-
-  function closeCart() {
-    document.getElementById("cartPanel").classList.remove("open");
-  }
+  document.getElementById('notice').style.display='block';
+  document.getElementById('notice').innerHTML=
+    '<strong>Đã ghi nhận thông tin đơn hàng.</strong><br><br>'+
+    'Tổng đơn: '+money(total)+
+    '<br><br>Vui lòng chuyển khoản theo thông tin phía trên và gửi ảnh xác nhận qua Instagram <strong>@formebasic.vn</strong>.';
+}
 </script>
 
 </body>
