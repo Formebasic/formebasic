@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FORME — Basic Wear</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #fff;
+      color: #111;
+    }
+
+    header {
+      padding: 22px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #eee;
+      position: sticky;
+      top: 0;
+      background: white;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 4px;
+    }
+
+    .cart {
+      font-size: 14px;
+    }
+
+    .hero {
+      min-height: 55vh;
+      background: #f2f2f2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 40px 22px;
+    }
+
+    .hero h1 {
+      font-size: 46px;
+      line-height: 1;
+      margin-bottom: 18px;
+    }
+
+    .hero p {
+      font-size: 15px;
+      color: #555;
+      margin-bottom: 25px;
+    }
+
+    .hero a {
+      color: white;
+      background: #111;
+      padding: 14px 24px;
+      text-decoration: none;
+      width: fit-content;
+      font-size: 13px;
+    }
+
+    .products {
+      padding: 45px 20px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      margin-bottom: 25px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .product-image {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: #eee;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #999;
+      font-size: 12px;
+    }
+
+    .product-info {
+      padding: 12px 0 30px;
+    }
+
+    .product-name {
+      font-size: 14px;
+      margin-bottom: 7px;
+    }
+
+    .price {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .colors {
+      color: #777;
+      font-size: 12px;
+      margin-top: 5px;
+    }
+
+    .about {
+      background: #111;
+      color: white;
+      padding: 55px 22px;
+    }
+
+    .about h2 {
+      font-size: 30px;
+      margin-bottom: 15px;
+    }
+
+    .about p {
+      color: #ccc;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    .instagram {
+      display: inline-block;
+      margin-top: 22px;
+      color: white;
+      text-decoration: underline;
+    }
+
+    footer {
+      padding: 30px 20px;
+      text-align: center;
+      font-size: 11px;
+      color: #777;
+    }
+
+    @media (min-width: 700px) {
+      .hero {
+        padding: 70px;
+      }
+
+      .hero h1 {
+        font-size: 70px;
+      }
+
+      .products {
+        padding: 70px;
+      }
+
+      .grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">FORME</div>
+  <div class="cart">BASIC WEAR</div>
+</header>
+
+<section class="hero">
+  <h1>Nothing extra.<br>Just the right form.</h1>
+  <p>Những thiết kế basic dành cho mọi ngày.</p>
+  <a href="#shop">SHOP NOW</a>
+</section>
+
+<section class="products" id="shop">
+
+  <h2 class="section-title">SHOP FORME</h2>
+
+  <div class="grid">
+
+    <div class="product">
+      <div class="product-image">ẢNH SẢN PHẨM</div>
+      <div class="product-info">
+        <div class="product-name">FORME BOXY TEE</div>
+        <div class="price">240.000₫</div>
+        <div class="colors">Black / White · S / M / L</div>
+      </div>
+    </div>
+
+    <div class="product">
+      <div class="product-image">ẢNH SẢN PHẨM</div>
+      <div class="product-info">
+        <div class="product-name">FORME LONG SLEEVE</div>
+        <div class="price">260.000₫</div>
+        <div class="colors">Black / White · S / M / L</div>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<section class="about">
+  <h2>FORME</h2>
+
+  <p>
+    Basic pieces made to fit into your everyday wardrobe.
+    Simple forms. Easy to wear. Easy to style.
+  </p>
+
+  <a
+    class="instagram"
+    href="https://instagram.com/formebasic.vn"
+    target="_blank"
+  >
+    @formebasic.vn
+  </a>
+</section>
+
+<footer>
+  © 2026 FORME — NOTHING EXTRA. JUST THE RIGHT FORM.
+</footer>
+
+</body>
+</html>
