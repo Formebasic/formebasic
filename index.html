@@ -6,183 +6,181 @@
   <title>FORME — Basic Wear</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    *{box-sizing:border-box;margin:0;padding:0}
+
+    body{
+      font-family:Arial,Helvetica,sans-serif;
+      color:#111;
+      background:#fff;
     }
 
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      color: #111;
-      background: #fff;
+    header{
+      padding:28px 20px;
+      text-align:center;
+      border-bottom:1px solid #eee;
     }
 
-    header {
-      padding: 28px 20px;
-      text-align: center;
-      border-bottom: 1px solid #eee;
+    .logo{
+      font-size:28px;
+      font-weight:700;
+      letter-spacing:6px;
     }
 
-    .logo {
-      font-size: 28px;
-      font-weight: 700;
-      letter-spacing: 6px;
+    .tagline{
+      font-size:11px;
+      letter-spacing:2px;
+      margin-top:8px;
+      color:#777;
     }
 
-    .tagline {
-      font-size: 11px;
-      letter-spacing: 2px;
-      margin-top: 8px;
-      color: #777;
+    main{
+      max-width:600px;
+      margin:auto;
+      padding:30px 18px 60px;
     }
 
-    main {
-      max-width: 600px;
-      margin: auto;
-      padding: 30px 18px 60px;
+    h2{
+      font-size:18px;
+      margin-bottom:20px;
+      letter-spacing:1px;
     }
 
-    h2 {
-      font-size: 18px;
-      margin-bottom: 20px;
-      letter-spacing: 1px;
+    .product{
+      border-bottom:1px solid #ddd;
+      padding:25px 0;
     }
 
-    .product {
-      border-bottom: 1px solid #ddd;
-      padding: 25px 0;
+    .placeholder{
+      width:100%;
+      height:330px;
+      background:#f3f3f3;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      color:#aaa;
+      font-size:13px;
+      margin-bottom:18px;
     }
 
-    .placeholder {
-      width: 100%;
-      height: 330px;
-      background: #f3f3f3;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #aaa;
-      font-size: 13px;
-      margin-bottom: 18px;
+    .product h3{
+      font-size:17px;
+      margin-bottom:7px;
     }
 
-    .product h3 {
-      font-size: 17px;
-      margin-bottom: 7px;
+    .price{
+      font-size:15px;
+      margin-bottom:18px;
     }
 
-    .price {
-      font-size: 15px;
-      margin-bottom: 18px;
+    label{
+      display:block;
+      font-size:12px;
+      margin:13px 0 6px;
+      font-weight:bold;
     }
 
-    label {
-      display: block;
-      font-size: 12px;
-      margin: 13px 0 6px;
-      font-weight: bold;
+    select,input,textarea{
+      width:100%;
+      padding:13px;
+      border:1px solid #ccc;
+      background:#fff;
+      font-size:16px;
+      border-radius:0;
     }
 
-    select,
-    input,
-    textarea {
-      width: 100%;
-      padding: 13px;
-      border: 1px solid #ccc;
-      background: #fff;
-      font-size: 16px;
-      border-radius: 0;
+    button{
+      width:100%;
+      background:#111;
+      color:#fff;
+      border:0;
+      padding:15px;
+      margin-top:18px;
+      font-size:13px;
+      letter-spacing:1px;
+      cursor:pointer;
     }
 
-    button {
-      width: 100%;
-      background: #111;
-      color: #fff;
-      border: 0;
-      padding: 15px;
-      margin-top: 18px;
-      font-size: 13px;
-      letter-spacing: 1px;
-      cursor: pointer;
+    button:disabled{
+      opacity:.5;
     }
 
-    .cart {
-      margin-top: 35px;
-      padding: 22px 0;
-      border-top: 2px solid #111;
+    .cart{
+      margin-top:35px;
+      padding:22px 0;
+      border-top:2px solid #111;
     }
 
-    .cart-item {
-      padding: 12px 0;
-      border-bottom: 1px solid #eee;
-      font-size: 14px;
-      line-height: 1.6;
+    .cart-item{
+      padding:12px 0;
+      border-bottom:1px solid #eee;
+      font-size:14px;
+      line-height:1.6;
     }
 
-    .remove {
-      background: none;
-      color: #888;
-      padding: 0;
-      margin: 5px 0 0;
-      text-align: left;
-      font-size: 12px;
+    .remove{
+      background:none;
+      color:#888;
+      padding:0;
+      margin:5px 0 0;
+      text-align:left;
+      font-size:12px;
     }
 
-    .total {
-      font-size: 18px;
-      font-weight: bold;
-      margin-top: 18px;
+    .total{
+      font-size:18px;
+      font-weight:bold;
+      margin-top:18px;
     }
 
-    .checkout {
-      margin-top: 35px;
+    .checkout{
+      margin-top:35px;
     }
 
     .checkout input,
-    .checkout textarea {
-      margin-bottom: 12px;
+    .checkout textarea{
+      margin-bottom:12px;
     }
 
-    .note {
-      font-size: 12px;
-      color: #777;
-      line-height: 1.6;
-      margin-top: 15px;
+    .note{
+      font-size:12px;
+      color:#777;
+      line-height:1.6;
+      margin-top:15px;
     }
 
-    footer {
-      text-align: center;
-      padding: 30px 20px;
-      border-top: 1px solid #eee;
-      font-size: 11px;
-      color: #777;
-      line-height: 1.8;
+    footer{
+      text-align:center;
+      padding:30px 20px;
+      border-top:1px solid #eee;
+      font-size:11px;
+      color:#777;
+      line-height:1.8;
     }
 
-    #thankyou {
-      display: none;
-      min-height: 100vh;
-      padding: 30px;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
+    #thankyou{
+      display:none;
+      min-height:100vh;
+      padding:30px;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
     }
 
-    #thankyou h1 {
-      font-size: 30px;
-      letter-spacing: 4px;
-      margin-bottom: 20px;
+    #thankyou h1{
+      font-size:30px;
+      letter-spacing:4px;
+      margin-bottom:20px;
     }
 
-    #thankyou p {
-      font-size: 14px;
-      line-height: 1.8;
-      color: #555;
-      margin-bottom: 25px;
+    #thankyou p{
+      font-size:14px;
+      line-height:1.8;
+      color:#555;
+      margin-bottom:25px;
     }
 
-    #thankyou button {
-      max-width: 300px;
+    #thankyou button{
+      max-width:300px;
     }
   </style>
 </head>
@@ -200,7 +198,6 @@
 
     <h2>SHOP</h2>
 
-    <!-- BOXY TEE -->
     <div class="product">
 
       <div class="placeholder">
@@ -239,7 +236,6 @@
     </div>
 
 
-    <!-- LONG SLEEVE -->
     <div class="product">
 
       <div class="placeholder">
@@ -278,7 +274,6 @@
     </div>
 
 
-    <!-- GIỎ HÀNG -->
     <div class="cart">
 
       <h2>ĐƠN HÀNG CỦA BẠN</h2>
@@ -296,22 +291,13 @@
     </div>
 
 
-    <!-- THÔNG TIN KHÁCH -->
     <div class="checkout">
 
       <h2>THÔNG TIN NHẬN HÀNG</h2>
 
-      <input
-        id="name"
-        type="text"
-        placeholder="Họ và tên"
-      >
+      <input id="name" type="text" placeholder="Họ và tên">
 
-      <input
-        id="phone"
-        type="tel"
-        placeholder="Số điện thoại"
-      >
+      <input id="phone" type="tel" placeholder="Số điện thoại">
 
       <textarea
         id="address"
@@ -325,13 +311,13 @@
         placeholder="Ghi chú (không bắt buộc)"
       ></textarea>
 
-      <button onclick="submitOrder()">
+      <button id="orderButton" onclick="submitOrder()">
         ĐẶT HÀNG
       </button>
 
       <div class="note">
-        Sau khi nhận được đơn, FORME sẽ liên hệ để xác nhận
-        thông tin và hướng dẫn thanh toán.
+        Sau khi nhận được đơn, FORME sẽ liên hệ để xác nhận thông tin
+        và hướng dẫn thanh toán.
       </div>
 
     </div>
@@ -346,7 +332,6 @@
 </div>
 
 
-<!-- TRANG CẢM ƠN -->
 <div id="thankyou">
 
   <div>
@@ -369,153 +354,233 @@
 
 <script>
 
-  let cart = [];
+let cart = [];
 
-  function money(number) {
-    return number.toLocaleString("vi-VN") + "đ";
+
+function money(number){
+  return number.toLocaleString("vi-VN") + "đ";
+}
+
+
+function addToCart(product,price,colorId,sizeId,qtyId){
+
+  const color = document.getElementById(colorId).value;
+  const size = document.getElementById(sizeId).value;
+  const qty = Number(document.getElementById(qtyId).value);
+
+  cart.push({
+    product,
+    price,
+    color,
+    size,
+    qty
+  });
+
+  renderCart();
+
+  document.querySelector(".cart").scrollIntoView({
+    behavior:"smooth"
+  });
+}
+
+
+function renderCart(){
+
+  const container = document.getElementById("cartItems");
+
+  if(cart.length === 0){
+
+    container.innerHTML =
+      '<p style="font-size:13px;color:#888;">Chưa có sản phẩm.</p>';
+
+    document.getElementById("total").innerText = "0đ";
+
+    return;
+  }
+
+  let html = "";
+  let total = 0;
+
+  cart.forEach(function(item,index){
+
+    const subtotal = item.price * item.qty;
+
+    total += subtotal;
+
+    html += `
+      <div class="cart-item">
+
+        <strong>${item.product}</strong><br>
+
+        ${item.color} / Size ${item.size}<br>
+
+        Số lượng: ${item.qty}<br>
+
+        ${money(subtotal)}
+
+        <button
+          class="remove"
+          onclick="removeItem(${index})"
+        >
+          XÓA
+        </button>
+
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
+
+  document.getElementById("total").innerText = money(total);
+}
+
+
+function removeItem(index){
+
+  cart.splice(index,1);
+
+  renderCart();
+}
+
+
+async function submitOrder(){
+
+  const name =
+    document.getElementById("name").value.trim();
+
+  const phone =
+    document.getElementById("phone").value.trim();
+
+  const address =
+    document.getElementById("address").value.trim();
+
+  const note =
+    document.getElementById("note").value.trim();
+
+
+  if(cart.length === 0){
+
+    alert("Vui lòng chọn sản phẩm.");
+
+    return;
   }
 
 
-  function addToCart(product, price, colorId, sizeId, qtyId) {
+  if(!name || !phone || !address){
 
-    const color = document.getElementById(colorId).value;
-    const size = document.getElementById(sizeId).value;
-    const qty = Number(document.getElementById(qtyId).value);
+    alert("Vui lòng nhập đầy đủ họ tên, số điện thoại và địa chỉ.");
 
-    cart.push({
-      product: product,
-      price: price,
-      color: color,
-      size: size,
-      qty: qty
-    });
-
-    renderCart();
-
-    document.querySelector(".cart").scrollIntoView({
-      behavior: "smooth"
-    });
+    return;
   }
 
 
-  function renderCart() {
+  let total = 0;
 
-    const container = document.getElementById("cartItems");
+  let orderText = "";
 
-    if (cart.length === 0) {
+  cart.forEach(function(item,index){
 
-      container.innerHTML =
-        '<p style="font-size:13px;color:#888;">Chưa có sản phẩm.</p>';
+    const subtotal = item.price * item.qty;
 
-      document.getElementById("total").innerText = "0đ";
+    total += subtotal;
 
-      return;
+    orderText +=
+      (index + 1) + ". " +
+      item.product +
+      " | Màu: " + item.color +
+      " | Size: " + item.size +
+      " | SL: " + item.qty +
+      " | " + money(subtotal) +
+      "\n";
+  });
+
+
+  const button = document.getElementById("orderButton");
+
+  button.disabled = true;
+
+  button.innerText = "ĐANG GỬI ĐƠN...";
+
+
+  const formData = new FormData();
+
+  formData.append("Họ tên",name);
+
+  formData.append("Số điện thoại",phone);
+
+  formData.append("Địa chỉ",address);
+
+  formData.append("Sản phẩm",orderText);
+
+  formData.append("Tổng tiền",money(total));
+
+  formData.append("Ghi chú",note || "Không có");
+
+  formData.append("_subject","ĐƠN HÀNG MỚI - FORME");
+
+
+  try{
+
+    const response = await fetch(
+      "https://formsubmit.co/ajax/formebasic882@gmail.com",
+      {
+        method:"POST",
+        body:formData,
+        headers:{
+          "Accept":"application/json"
+        }
+      }
+    );
+
+
+    if(!response.ok){
+      throw new Error("Không gửi được");
     }
 
-
-    let html = "";
-    let total = 0;
-
-
-    cart.forEach(function(item, index) {
-
-      const subtotal = item.price * item.qty;
-
-      total += subtotal;
-
-      html += `
-        <div class="cart-item">
-
-          <strong>${item.product}</strong><br>
-
-          ${item.color} / Size ${item.size}<br>
-
-          Số lượng: ${item.qty}<br>
-
-          ${money(subtotal)}
-
-          <button
-            class="remove"
-            onclick="removeItem(${index})"
-          >
-            XÓA
-          </button>
-
-        </div>
-      `;
-
-    });
-
-
-    container.innerHTML = html;
-
-    document.getElementById("total").innerText = money(total);
-  }
-
-
-  function removeItem(index) {
-
-    cart.splice(index, 1);
-
-    renderCart();
-  }
-
-
-  function submitOrder() {
-
-    const name =
-      document.getElementById("name").value.trim();
-
-    const phone =
-      document.getElementById("phone").value.trim();
-
-    const address =
-      document.getElementById("address").value.trim();
-
-
-    if (cart.length === 0) {
-
-      alert("Em chưa chọn sản phẩm.");
-
-      return;
-    }
-
-
-    if (!name || !phone || !address) {
-
-      alert("Vui lòng nhập đầy đủ họ tên, số điện thoại và địa chỉ.");
-
-      return;
-    }
-
-
-    /* Khi đơn hợp lệ */
 
     document.getElementById("shop").style.display = "none";
 
     document.getElementById("thankyou").style.display = "flex";
 
-    window.scrollTo(0, 0);
+    window.scrollTo(0,0);
+
+
+  }catch(error){
+
+    alert(
+      "Chưa gửi được đơn. Vui lòng thử lại hoặc liên hệ FORME qua Instagram @formebasic.vn"
+    );
+
+  }finally{
+
+    button.disabled = false;
+
+    button.innerText = "ĐẶT HÀNG";
+
   }
+}
 
 
-  function backToShop() {
+function backToShop(){
 
-    cart = [];
+  cart = [];
 
-    renderCart();
+  renderCart();
 
-    document.getElementById("name").value = "";
-    document.getElementById("phone").value = "";
-    document.getElementById("address").value = "";
-    document.getElementById("note").value = "";
+  document.getElementById("name").value = "";
 
-    document.getElementById("thankyou").style.display = "none";
+  document.getElementById("phone").value = "";
 
-    document.getElementById("shop").style.display = "block";
+  document.getElementById("address").value = "";
 
-    window.scrollTo(0, 0);
-  }
+  document.getElementById("note").value = "";
+
+  document.getElementById("thankyou").style.display = "none";
+
+  document.getElementById("shop").style.display = "block";
+
+  window.scrollTo(0,0);
+}
 
 </script>
 
