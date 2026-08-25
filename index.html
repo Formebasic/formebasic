@@ -1,588 +1,1118 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FORME — Basic Wear</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    *{box-sizing:border-box;margin:0;padding:0}
+<title>FORME — Basic Wear</title>
 
-    body{
-      font-family:Arial,Helvetica,sans-serif;
-      color:#111;
-      background:#fff;
-    }
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-    header{
-      padding:28px 20px;
-      text-align:center;
-      border-bottom:1px solid #eee;
-    }
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  color:#111;
+  background:#fff;
+}
 
-    .logo{
-      font-size:28px;
-      font-weight:700;
-      letter-spacing:6px;
-    }
+header{
+  padding:28px 20px;
+  text-align:center;
+  border-bottom:1px solid #eee;
+}
 
-    .tagline{
-      font-size:11px;
-      letter-spacing:2px;
-      margin-top:8px;
-      color:#777;
-    }
+.logo{
+  font-size:28px;
+  font-weight:700;
+  letter-spacing:6px;
+}
 
-    main{
-      max-width:600px;
-      margin:auto;
-      padding:30px 18px 60px;
-    }
+.tagline{
+  font-size:11px;
+  letter-spacing:2px;
+  margin-top:8px;
+  color:#777;
+}
 
-    h2{
-      font-size:18px;
-      margin-bottom:20px;
-      letter-spacing:1px;
-    }
+main{
+  max-width:600px;
+  margin:auto;
+  padding:30px 18px 60px;
+}
 
-    .product{
-      border-bottom:1px solid #ddd;
-      padding:25px 0;
-    }
+h2{
+  font-size:18px;
+  margin-bottom:20px;
+  letter-spacing:1px;
+}
 
-    .placeholder{
-      width:100%;
-      height:330px;
-      background:#f3f3f3;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      color:#aaa;
-      font-size:13px;
-      margin-bottom:18px;
-    }
+.product{
+  border-bottom:1px solid #ddd;
+  padding:25px 0;
+}
 
-    .product h3{
-      font-size:17px;
-      margin-bottom:7px;
-    }
+.placeholder{
+  width:100%;
+  height:330px;
+  background:#f3f3f3;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:#aaa;
+  font-size:13px;
+  margin-bottom:18px;
+}
 
-    .price{
-      font-size:15px;
-      margin-bottom:18px;
-    }
+.product h3{
+  font-size:17px;
+  margin-bottom:7px;
+}
 
-    label{
-      display:block;
-      font-size:12px;
-      margin:13px 0 6px;
-      font-weight:bold;
-    }
+.price{
+  font-size:15px;
+  margin-bottom:18px;
+}
 
-    select,input,textarea{
-      width:100%;
-      padding:13px;
-      border:1px solid #ccc;
-      background:#fff;
-      font-size:16px;
-      border-radius:0;
-    }
+label{
+  display:block;
+  font-size:12px;
+  margin:13px 0 6px;
+  font-weight:bold;
+}
 
-    button{
-      width:100%;
-      background:#111;
-      color:#fff;
-      border:0;
-      padding:15px;
-      margin-top:18px;
-      font-size:13px;
-      letter-spacing:1px;
-      cursor:pointer;
-    }
+select,
+input,
+textarea{
+  width:100%;
+  padding:13px;
+  border:1px solid #ccc;
+  background:#fff;
+  font-size:16px;
+  border-radius:0;
+}
 
-    button:disabled{
-      opacity:.5;
-    }
+button{
+  width:100%;
+  background:#111;
+  color:#fff;
+  border:0;
+  padding:15px;
+  margin-top:18px;
+  font-size:13px;
+  letter-spacing:1px;
+  cursor:pointer;
+}
 
-    .cart{
-      margin-top:35px;
-      padding:22px 0;
-      border-top:2px solid #111;
-    }
+button:disabled{
+  opacity:.5;
+}
 
-    .cart-item{
-      padding:12px 0;
-      border-bottom:1px solid #eee;
-      font-size:14px;
-      line-height:1.6;
-    }
+.cart{
+  margin-top:35px;
+  padding:22px 0;
+  border-top:2px solid #111;
+}
 
-    .remove{
-      background:none;
-      color:#888;
-      padding:0;
-      margin:5px 0 0;
-      text-align:left;
-      font-size:12px;
-    }
+.cart-item{
+  padding:12px 0;
+  border-bottom:1px solid #eee;
+  font-size:14px;
+  line-height:1.6;
+}
 
-    .total{
-      font-size:18px;
-      font-weight:bold;
-      margin-top:18px;
-    }
+.remove{
+  background:none;
+  color:#888;
+  padding:0;
+  margin:5px 0 0;
+  text-align:left;
+  font-size:12px;
+}
 
-    .checkout{
-      margin-top:35px;
-    }
+.total{
+  font-size:18px;
+  font-weight:bold;
+  margin-top:18px;
+}
 
-    .checkout input,
-    .checkout textarea{
-      margin-bottom:12px;
-    }
+.checkout{
+  margin-top:35px;
+}
 
-    .note{
-      font-size:12px;
-      color:#777;
-      line-height:1.6;
-      margin-top:15px;
-    }
+.checkout input,
+.checkout textarea{
+  margin-bottom:12px;
+}
 
-    footer{
-      text-align:center;
-      padding:30px 20px;
-      border-top:1px solid #eee;
-      font-size:11px;
-      color:#777;
-      line-height:1.8;
-    }
+.note{
+  font-size:12px;
+  color:#777;
+  line-height:1.6;
+  margin-top:15px;
+}
 
-    #thankyou{
-      display:none;
-      min-height:100vh;
-      padding:30px;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-    }
+footer{
+  text-align:center;
+  padding:30px 20px;
+  border-top:1px solid #eee;
+  font-size:11px;
+  color:#777;
+  line-height:1.8;
+}
 
-    #thankyou h1{
-      font-size:30px;
-      letter-spacing:4px;
-      margin-bottom:20px;
-    }
 
-    #thankyou p{
-      font-size:14px;
-      line-height:1.8;
-      color:#555;
-      margin-bottom:25px;
-    }
+/* THANK YOU */
 
-    #thankyou button{
-      max-width:300px;
-    }
-  </style>
+#thankyou{
+  display:none;
+  min-height:100vh;
+  padding:50px 20px;
+  justify-content:center;
+  text-align:center;
+}
+
+.thank-container{
+  width:100%;
+  max-width:500px;
+}
+
+#thankyou h1{
+  font-size:30px;
+  letter-spacing:4px;
+  margin-bottom:18px;
+}
+
+.thank-text{
+  font-size:14px;
+  line-height:1.8;
+  color:#555;
+  margin-bottom:35px;
+}
+
+
+/* PAYMENT */
+
+.payment{
+  border-top:1px solid #ddd;
+  border-bottom:1px solid #ddd;
+  padding:30px 0;
+  text-align:left;
+  margin-bottom:25px;
+}
+
+.payment h2{
+  text-align:center;
+  font-size:16px;
+  letter-spacing:2px;
+  margin-bottom:25px;
+}
+
+.payment-row{
+  margin-bottom:18px;
+}
+
+.payment-label{
+  font-size:11px;
+  color:#888;
+  letter-spacing:1px;
+  margin-bottom:5px;
+}
+
+.payment-value{
+  font-size:17px;
+  font-weight:bold;
+  word-break:break-word;
+}
+
+.payment-total{
+  font-size:24px;
+  font-weight:bold;
+}
+
+.payment-note{
+  margin-top:22px;
+  font-size:12px;
+  color:#777;
+  line-height:1.7;
+}
+
+#thankyou button{
+  max-width:320px;
+}
+
+</style>
 </head>
+
 
 <body>
 
+
 <div id="shop">
 
-  <header>
-    <div class="logo">FORME</div>
-    <div class="tagline">NOTHING EXTRA. JUST THE RIGHT FORM.</div>
-  </header>
+<header>
 
-  <main>
+<div class="logo">
+FORME
+</div>
 
-    <h2>SHOP</h2>
+<div class="tagline">
+NOTHING EXTRA. JUST THE RIGHT FORM.
+</div>
 
-    <div class="product">
-
-      <div class="placeholder">
-        BOXY TEE — PRODUCT IMAGE
-      </div>
-
-      <h3>FORME BOXY TEE</h3>
-      <div class="price">240.000đ</div>
-
-      <label>MÀU</label>
-      <select id="boxyColor">
-        <option>Đen</option>
-        <option>Trắng</option>
-      </select>
-
-      <label>SIZE</label>
-      <select id="boxySize">
-        <option>S</option>
-        <option>M</option>
-        <option>L</option>
-      </select>
-
-      <label>SỐ LƯỢNG</label>
-      <select id="boxyQty">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-      </select>
-
-      <button onclick="addToCart('Boxy Tee',240000,'boxyColor','boxySize','boxyQty')">
-        THÊM VÀO ĐƠN
-      </button>
-
-    </div>
+</header>
 
 
-    <div class="product">
+<main>
 
-      <div class="placeholder">
-        LONG SLEEVE — PRODUCT IMAGE
-      </div>
-
-      <h3>FORME LONG SLEEVE</h3>
-      <div class="price">260.000đ</div>
-
-      <label>MÀU</label>
-      <select id="longColor">
-        <option>Đen</option>
-        <option>Trắng</option>
-      </select>
-
-      <label>SIZE</label>
-      <select id="longSize">
-        <option>S</option>
-        <option>M</option>
-        <option>L</option>
-      </select>
-
-      <label>SỐ LƯỢNG</label>
-      <select id="longQty">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-      </select>
-
-      <button onclick="addToCart('Long Sleeve',260000,'longColor','longSize','longQty')">
-        THÊM VÀO ĐƠN
-      </button>
-
-    </div>
+<h2>SHOP</h2>
 
 
-    <div class="cart">
+<!-- BOXY -->
 
-      <h2>ĐƠN HÀNG CỦA BẠN</h2>
+<div class="product">
 
-      <div id="cartItems">
-        <p style="font-size:13px;color:#888;">
-          Chưa có sản phẩm.
-        </p>
-      </div>
+<div class="placeholder">
+BOXY TEE — PRODUCT IMAGE
+</div>
 
-      <div class="total">
-        Tổng: <span id="total">0đ</span>
-      </div>
+<h3>FORME BOXY TEE</h3>
 
-    </div>
+<div class="price">
+240.000đ
+</div>
 
 
-    <div class="checkout">
+<label>MÀU</label>
 
-      <h2>THÔNG TIN NHẬN HÀNG</h2>
+<select id="boxyColor">
+<option>Đen</option>
+<option>Trắng</option>
+</select>
 
-      <input id="name" type="text" placeholder="Họ và tên">
 
-      <input id="phone" type="tel" placeholder="Số điện thoại">
+<label>SIZE</label>
 
-      <textarea
-        id="address"
-        rows="3"
-        placeholder="Địa chỉ nhận hàng"
-      ></textarea>
+<select id="boxySize">
+<option>S</option>
+<option>M</option>
+<option>L</option>
+</select>
 
-      <textarea
-        id="note"
-        rows="2"
-        placeholder="Ghi chú (không bắt buộc)"
-      ></textarea>
 
-      <button id="orderButton" onclick="submitOrder()">
-        ĐẶT HÀNG
-      </button>
+<label>SỐ LƯỢNG</label>
 
-      <div class="note">
-        Sau khi nhận được đơn, FORME sẽ liên hệ để xác nhận thông tin
-        và hướng dẫn thanh toán.
-      </div>
+<select id="boxyQty">
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+</select>
 
-    </div>
 
-  </main>
-
-  <footer>
-    FORME BASIC<br>
-    Instagram: @formebasic.vn
-  </footer>
+<button onclick="addToCart(
+'Boxy Tee',
+240000,
+'boxyColor',
+'boxySize',
+'boxyQty'
+)">
+THÊM VÀO ĐƠN
+</button>
 
 </div>
 
+
+
+<!-- LONG SLEEVE -->
+
+<div class="product">
+
+<div class="placeholder">
+LONG SLEEVE — PRODUCT IMAGE
+</div>
+
+<h3>FORME LONG SLEEVE</h3>
+
+<div class="price">
+260.000đ
+</div>
+
+
+<label>MÀU</label>
+
+<select id="longColor">
+<option>Đen</option>
+<option>Trắng</option>
+</select>
+
+
+<label>SIZE</label>
+
+<select id="longSize">
+<option>S</option>
+<option>M</option>
+<option>L</option>
+</select>
+
+
+<label>SỐ LƯỢNG</label>
+
+<select id="longQty">
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+</select>
+
+
+<button onclick="addToCart(
+'Long Sleeve',
+260000,
+'longColor',
+'longSize',
+'longQty'
+)">
+THÊM VÀO ĐƠN
+</button>
+
+</div>
+
+
+
+<!-- CART -->
+
+<div class="cart">
+
+<h2>
+ĐƠN HÀNG CỦA BẠN
+</h2>
+
+
+<div id="cartItems">
+
+<p style="font-size:13px;color:#888;">
+Chưa có sản phẩm.
+</p>
+
+</div>
+
+
+<div class="total">
+
+Tổng:
+<span id="total">
+0đ
+</span>
+
+</div>
+
+</div>
+
+
+
+<!-- CUSTOMER -->
+
+<div class="checkout">
+
+<h2>
+THÔNG TIN NHẬN HÀNG
+</h2>
+
+
+<input
+id="name"
+type="text"
+placeholder="Họ và tên"
+>
+
+
+<input
+id="phone"
+type="tel"
+placeholder="Số điện thoại"
+>
+
+
+<textarea
+id="address"
+rows="3"
+placeholder="Địa chỉ nhận hàng"
+></textarea>
+
+
+<textarea
+id="note"
+rows="2"
+placeholder="Ghi chú (không bắt buộc)"
+></textarea>
+
+
+<button
+id="orderButton"
+onclick="submitOrder()"
+>
+ĐẶT HÀNG
+</button>
+
+
+<div class="note">
+
+Sau khi nhận được đơn, FORME sẽ liên hệ
+để xác nhận thông tin đơn hàng.
+
+</div>
+
+</div>
+
+
+</main>
+
+
+<footer>
+
+FORME BASIC
+<br>
+
+Instagram: @formebasic.vn
+
+</footer>
+
+</div>
+
+
+
+<!-- THANK YOU -->
 
 <div id="thankyou">
 
-  <div>
+<div class="thank-container">
 
-    <h1>THANK YOU ♡</h1>
 
-    <p>
-      FORME đã nhận được đơn hàng của bạn.<br>
-      Chúng mình sẽ liên hệ xác nhận đơn sớm nhất.
-    </p>
+<h1>
+THANK YOU ♡
+</h1>
 
-    <button onclick="backToShop()">
-      BACK TO FORME
-    </button>
 
-  </div>
+<div class="thank-text">
+
+FORME đã nhận được đơn hàng của bạn.
+<br>
+
+Vui lòng chuyển khoản theo thông tin bên dưới
+để hoàn tất đơn hàng.
 
 </div>
+
+
+
+<div class="payment">
+
+
+<h2>
+THÔNG TIN THANH TOÁN
+</h2>
+
+
+<div class="payment-row">
+
+<div class="payment-label">
+NGÂN HÀNG
+</div>
+
+<div class="payment-value">
+SACOMBANK
+</div>
+
+</div>
+
+
+
+<div class="payment-row">
+
+<div class="payment-label">
+SỐ TÀI KHOẢN
+</div>
+
+<div class="payment-value">
+070130993840
+</div>
+
+</div>
+
+
+
+<div class="payment-row">
+
+<div class="payment-label">
+CHỦ TÀI KHOẢN
+</div>
+
+<div class="payment-value">
+VO QUANG TRUNG
+</div>
+
+</div>
+
+
+
+<div class="payment-row">
+
+<div class="payment-label">
+SỐ TIỀN CẦN THANH TOÁN
+</div>
+
+<div
+class="payment-total"
+id="paymentTotal"
+>
+0đ
+</div>
+
+</div>
+
+
+
+<div class="payment-row">
+
+<div class="payment-label">
+NỘI DUNG CHUYỂN KHOẢN
+</div>
+
+<div
+class="payment-value"
+id="paymentContent"
+>
+FORME
+</div>
+
+</div>
+
+
+
+<div class="payment-note">
+
+Vui lòng chuyển đúng số tiền và nội dung
+để FORME dễ dàng xác nhận đơn hàng.
+
+<br><br>
+
+Sau khi kiểm tra thanh toán,
+FORME sẽ liên hệ xác nhận đơn với bạn.
+
+</div>
+
+
+</div>
+
+
+
+<button onclick="backToShop()">
+
+BACK TO FORME
+
+</button>
+
+
+</div>
+
+</div>
+
 
 
 <script>
 
+
 let cart = [];
 
 
+
 function money(number){
-  return number.toLocaleString("vi-VN") + "đ";
+
+return number.toLocaleString("vi-VN") + "đ";
+
 }
 
 
-function addToCart(product,price,colorId,sizeId,qtyId){
 
-  const color = document.getElementById(colorId).value;
-  const size = document.getElementById(sizeId).value;
-  const qty = Number(document.getElementById(qtyId).value);
+function addToCart(
+product,
+price,
+colorId,
+sizeId,
+qtyId
+){
 
-  cart.push({
-    product,
-    price,
-    color,
-    size,
-    qty
-  });
+const color =
+document.getElementById(colorId).value;
 
-  renderCart();
+const size =
+document.getElementById(sizeId).value;
 
-  document.querySelector(".cart").scrollIntoView({
-    behavior:"smooth"
-  });
+const qty =
+Number(
+document.getElementById(qtyId).value
+);
+
+
+cart.push({
+
+product:product,
+price:price,
+color:color,
+size:size,
+qty:qty
+
+});
+
+
+renderCart();
+
+
+document
+.querySelector(".cart")
+.scrollIntoView({
+
+behavior:"smooth"
+
+});
+
 }
+
 
 
 function renderCart(){
 
-  const container = document.getElementById("cartItems");
+const container =
+document.getElementById("cartItems");
 
-  if(cart.length === 0){
 
-    container.innerHTML =
-      '<p style="font-size:13px;color:#888;">Chưa có sản phẩm.</p>';
+if(cart.length === 0){
 
-    document.getElementById("total").innerText = "0đ";
+container.innerHTML =
+'<p style="font-size:13px;color:#888;">Chưa có sản phẩm.</p>';
 
-    return;
-  }
+document.getElementById("total").innerText =
+"0đ";
 
-  let html = "";
-  let total = 0;
+return;
 
-  cart.forEach(function(item,index){
-
-    const subtotal = item.price * item.qty;
-
-    total += subtotal;
-
-    html += `
-      <div class="cart-item">
-
-        <strong>${item.product}</strong><br>
-
-        ${item.color} / Size ${item.size}<br>
-
-        Số lượng: ${item.qty}<br>
-
-        ${money(subtotal)}
-
-        <button
-          class="remove"
-          onclick="removeItem(${index})"
-        >
-          XÓA
-        </button>
-
-      </div>
-    `;
-  });
-
-  container.innerHTML = html;
-
-  document.getElementById("total").innerText = money(total);
 }
+
+
+let html = "";
+
+let total = 0;
+
+
+cart.forEach(function(item,index){
+
+const subtotal =
+item.price * item.qty;
+
+total += subtotal;
+
+
+html += `
+
+<div class="cart-item">
+
+<strong>
+${item.product}
+</strong>
+
+<br>
+
+${item.color}
+/
+Size ${item.size}
+
+<br>
+
+Số lượng:
+${item.qty}
+
+<br>
+
+${money(subtotal)}
+
+
+<button
+class="remove"
+onclick="removeItem(${index})"
+>
+
+XÓA
+
+</button>
+
+</div>
+
+`;
+
+});
+
+
+container.innerHTML =
+html;
+
+
+document.getElementById("total").innerText =
+money(total);
+
+}
+
 
 
 function removeItem(index){
 
-  cart.splice(index,1);
+cart.splice(index,1);
 
-  renderCart();
+renderCart();
+
 }
+
 
 
 async function submitOrder(){
 
-  const name =
-    document.getElementById("name").value.trim();
 
-  const phone =
-    document.getElementById("phone").value.trim();
-
-  const address =
-    document.getElementById("address").value.trim();
-
-  const note =
-    document.getElementById("note").value.trim();
+const name =
+document
+.getElementById("name")
+.value
+.trim();
 
 
-  if(cart.length === 0){
-
-    alert("Vui lòng chọn sản phẩm.");
-
-    return;
-  }
-
-
-  if(!name || !phone || !address){
-
-    alert("Vui lòng nhập đầy đủ họ tên, số điện thoại và địa chỉ.");
-
-    return;
-  }
+const phone =
+document
+.getElementById("phone")
+.value
+.trim();
 
 
-  let total = 0;
-
-  let orderText = "";
-
-  cart.forEach(function(item,index){
-
-    const subtotal = item.price * item.qty;
-
-    total += subtotal;
-
-    orderText +=
-      (index + 1) + ". " +
-      item.product +
-      " | Màu: " + item.color +
-      " | Size: " + item.size +
-      " | SL: " + item.qty +
-      " | " + money(subtotal) +
-      "\n";
-  });
+const address =
+document
+.getElementById("address")
+.value
+.trim();
 
 
-  const button = document.getElementById("orderButton");
-
-  button.disabled = true;
-
-  button.innerText = "ĐANG GỬI ĐƠN...";
-
-
-  const formData = new FormData();
-
-  formData.append("Họ tên",name);
-
-  formData.append("Số điện thoại",phone);
-
-  formData.append("Địa chỉ",address);
-
-  formData.append("Sản phẩm",orderText);
-
-  formData.append("Tổng tiền",money(total));
-
-  formData.append("Ghi chú",note || "Không có");
-
-  formData.append("_subject","ĐƠN HÀNG MỚI - FORME");
+const note =
+document
+.getElementById("note")
+.value
+.trim();
 
 
-  try{
 
-    const response = await fetch(
-      "https://formsubmit.co/ajax/formebasic882@gmail.com",
-      {
-        method:"POST",
-        body:formData,
-        headers:{
-          "Accept":"application/json"
-        }
-      }
-    );
+if(cart.length === 0){
 
+alert(
+"Vui lòng chọn sản phẩm."
+);
 
-    if(!response.ok){
-      throw new Error("Không gửi được");
-    }
+return;
 
-
-    document.getElementById("shop").style.display = "none";
-
-    document.getElementById("thankyou").style.display = "flex";
-
-    window.scrollTo(0,0);
-
-
-  }catch(error){
-
-    alert(
-      "Chưa gửi được đơn. Vui lòng thử lại hoặc liên hệ FORME qua Instagram @formebasic.vn"
-    );
-
-  }finally{
-
-    button.disabled = false;
-
-    button.innerText = "ĐẶT HÀNG";
-
-  }
 }
+
+
+
+if(
+!name ||
+!phone ||
+!address
+){
+
+alert(
+"Vui lòng nhập đầy đủ họ tên, số điện thoại và địa chỉ."
+);
+
+return;
+
+}
+
+
+
+let total = 0;
+
+let orderText = "";
+
+
+
+cart.forEach(function(item,index){
+
+const subtotal =
+item.price * item.qty;
+
+total += subtotal;
+
+
+orderText +=
+
+(index + 1) + ". " +
+
+item.product +
+
+" | Màu: " +
+item.color +
+
+" | Size: " +
+item.size +
+
+" | SL: " +
+item.qty +
+
+" | " +
+money(subtotal) +
+
+"\n";
+
+});
+
+
+
+const transferContent =
+"FORME " + phone;
+
+
+
+const button =
+document.getElementById(
+"orderButton"
+);
+
+
+button.disabled =
+true;
+
+
+button.innerText =
+"ĐANG GỬI ĐƠN...";
+
+
+
+const formData =
+new FormData();
+
+
+
+formData.append(
+"Họ tên",
+name
+);
+
+
+formData.append(
+"Số điện thoại",
+phone
+);
+
+
+formData.append(
+"Địa chỉ",
+address
+);
+
+
+formData.append(
+"Sản phẩm",
+orderText
+);
+
+
+formData.append(
+"Tổng tiền",
+money(total)
+);
+
+
+formData.append(
+"Ghi chú",
+note || "Không có"
+);
+
+
+formData.append(
+"Nội dung chuyển khoản",
+transferContent
+);
+
+
+formData.append(
+"_subject",
+"ĐƠN HÀNG MỚI - FORME"
+);
+
+
+
+try{
+
+
+const response =
+await fetch(
+
+"https://formsubmit.co/ajax/formebasic882@gmail.com",
+
+{
+
+method:"POST",
+
+body:formData,
+
+headers:{
+
+"Accept":
+"application/json"
+
+}
+
+}
+
+);
+
+
+
+if(!response.ok){
+
+throw new Error(
+"Không gửi được đơn"
+);
+
+}
+
+
+
+/* HIỆN THÔNG TIN THANH TOÁN */
+
+document
+.getElementById(
+"paymentTotal"
+)
+.innerText =
+money(total);
+
+
+
+document
+.getElementById(
+"paymentContent"
+)
+.innerText =
+transferContent;
+
+
+
+/* CHUYỂN SANG THANK YOU */
+
+document
+.getElementById("shop")
+.style.display =
+"none";
+
+
+document
+.getElementById("thankyou")
+.style.display =
+"flex";
+
+
+window.scrollTo(
+0,
+0
+);
+
+
+
+}catch(error){
+
+
+alert(
+
+"Chưa gửi được đơn. Vui lòng thử lại hoặc liên hệ FORME qua Instagram @formebasic.vn"
+
+);
+
+
+}finally{
+
+
+button.disabled =
+false;
+
+
+button.innerText =
+"ĐẶT HÀNG";
+
+
+}
+
+}
+
 
 
 function backToShop(){
 
-  cart = [];
 
-  renderCart();
+cart = [];
 
-  document.getElementById("name").value = "";
 
-  document.getElementById("phone").value = "";
+renderCart();
 
-  document.getElementById("address").value = "";
 
-  document.getElementById("note").value = "";
 
-  document.getElementById("thankyou").style.display = "none";
+document
+.getElementById("name")
+.value =
+"";
 
-  document.getElementById("shop").style.display = "block";
 
-  window.scrollTo(0,0);
+document
+.getElementById("phone")
+.value =
+"";
+
+
+document
+.getElementById("address")
+.value =
+"";
+
+
+document
+.getElementById("note")
+.value =
+"";
+
+
+
+document
+.getElementById("thankyou")
+.style.display =
+"none";
+
+
+document
+.getElementById("shop")
+.style.display =
+"block";
+
+
+window.scrollTo(
+0,
+0
+);
+
 }
 
+
 </script>
+
 
 </body>
 </html>
