@@ -11,6 +11,10 @@
   box-sizing:border-box;
 }
 
+html{
+  scroll-behavior:smooth;
+}
+
 body{
   margin:0;
   font-family:Arial,Helvetica,sans-serif;
@@ -28,6 +32,14 @@ button{
   cursor:pointer;
 }
 
+body.modal-open{
+  overflow:hidden;
+}
+
+/* =========================
+   HEADER
+========================= */
+
 header{
   height:64px;
   display:flex;
@@ -37,7 +49,8 @@ header{
   border-bottom:1px solid #eee;
   position:sticky;
   top:0;
-  background:#fff;
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(10px);
   z-index:100;
 }
 
@@ -53,14 +66,18 @@ header{
   color:#777;
 }
 
+/* =========================
+   HERO
+========================= */
+
 .hero{
-  padding:50px 20px 35px;
+  padding:55px 20px 28px;
   text-align:center;
 }
 
 .hero h1{
   margin:0;
-  font-size:28px;
+  font-size:30px;
   font-weight:500;
   letter-spacing:2px;
 }
@@ -72,18 +89,199 @@ header{
   letter-spacing:1.2px;
 }
 
+/* =========================
+   CATEGORY BAR
+========================= */
+
+.category-wrap{
+  max-width:1100px;
+  margin:0 auto;
+  padding:0 18px 20px;
+  position:sticky;
+  top:64px;
+  z-index:90;
+  background:#fff;
+}
+
+.category-bar{
+  display:flex;
+  gap:9px;
+  overflow-x:auto;
+  padding:12px 0;
+  scrollbar-width:none;
+  border-bottom:1px solid #eee;
+}
+
+.category-bar::-webkit-scrollbar{
+  display:none;
+}
+
+.category-btn{
+  white-space:nowrap;
+  background:#fff;
+  border:1px solid #ddd;
+  padding:11px 16px;
+  font-size:10px;
+  letter-spacing:1px;
+}
+
+.category-btn.active{
+  background:#111;
+  color:#fff;
+  border-color:#111;
+}
+
+/* =========================
+   FEATURED PRODUCTS
+========================= */
+
+.featured{
+  max-width:1100px;
+  margin:0 auto;
+  padding:25px 18px 50px;
+}
+
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:20px;
+  margin-bottom:18px;
+}
+
+.section-title{
+  margin:0;
+  font-size:18px;
+  font-weight:500;
+  letter-spacing:1.5px;
+}
+
+.section-caption{
+  margin:6px 0 0;
+  color:#888;
+  font-size:10px;
+  letter-spacing:1px;
+}
+
+.featured-row{
+  display:flex;
+  gap:14px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  scrollbar-width:none;
+  padding-bottom:5px;
+}
+
+.featured-row::-webkit-scrollbar{
+  display:none;
+}
+
+.featured-card{
+  min-width:260px;
+  width:260px;
+  scroll-snap-align:start;
+  border:1px solid #eee;
+  background:#fff;
+  transition:.2s ease;
+}
+
+.featured-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 10px 28px rgba(0,0,0,.06);
+}
+
+.featured-img{
+  width:100%;
+  aspect-ratio:4/5;
+  background:#f3f3f3;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  font-size:11px;
+  letter-spacing:1px;
+  color:#888;
+  overflow:hidden;
+}
+
+.featured-img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:none;
+}
+
+.featured-info{
+  padding:14px;
+}
+
+.featured-name{
+  font-size:13px;
+  letter-spacing:.5px;
+  font-weight:600;
+}
+
+.featured-price{
+  margin-top:7px;
+  font-size:12px;
+}
+
+.featured-btn{
+  width:100%;
+  border:0;
+  background:#111;
+  color:#fff;
+  height:42px;
+  margin-top:12px;
+  font-size:10px;
+  letter-spacing:1.3px;
+}
+
+/* =========================
+   COLLECTION TITLE
+========================= */
+
+.collection-title{
+  max-width:1100px;
+  margin:0 auto;
+  padding:15px 18px 0;
+}
+
+.collection-title h2{
+  margin:0;
+  font-size:25px;
+  font-weight:500;
+  letter-spacing:2px;
+}
+
+.collection-title p{
+  margin:9px 0 0;
+  font-size:11px;
+  color:#777;
+  line-height:1.7;
+}
+
+/* =========================
+   PRODUCTS
+========================= */
+
 .products{
   max-width:1100px;
   margin:auto;
-  padding:0 18px 70px;
+  padding:0 18px 90px;
 }
 
 .product-card{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:45px;
-  padding:45px 0;
+  padding:48px 0;
   border-bottom:1px solid #eee;
+  scroll-margin-top:130px;
+}
+
+.product-card.hidden{
+  display:none;
 }
 
 .image-wrap{
@@ -91,6 +289,7 @@ header{
   aspect-ratio:4/5;
   background:#f2f2f2;
   overflow:hidden;
+  position:relative;
 }
 
 .product-image{
@@ -185,7 +384,9 @@ header{
   border-color:#111;
 }
 
-/* SIZE FINDER */
+/* =========================
+   SIZE FINDER
+========================= */
 
 .size-finder{
   margin-top:16px;
@@ -247,6 +448,20 @@ header{
   margin-top:5px;
 }
 
+.use-size-btn{
+  margin-top:10px;
+  padding:9px 12px;
+  border:1px solid #111;
+  background:#fff;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.7px;
+}
+
+/* =========================
+   QUANTITY
+========================= */
+
 .quantity{
   display:inline-flex;
   align-items:center;
@@ -267,19 +482,82 @@ header{
   font-size:12px;
 }
 
+/* =========================
+   PRODUCT ACTIONS
+========================= */
+
+.product-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+  margin-top:28px;
+}
+
+.add-cart-btn{
+  width:100%;
+  height:54px;
+  border:1px solid #111;
+  background:#fff;
+  color:#111;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:1.4px;
+}
+
 .order-btn{
   width:100%;
   height:54px;
-  margin-top:28px;
   border:none;
   background:#111;
   color:#fff;
-  font-size:11px;
+  font-size:10px;
   font-weight:700;
-  letter-spacing:2px;
+  letter-spacing:1.4px;
 }
 
-/* MODAL */
+/* =========================
+   FLOATING CART
+========================= */
+
+.floating-cart{
+  position:fixed;
+  right:18px;
+  bottom:22px;
+  width:62px;
+  height:62px;
+  border-radius:50%;
+  border:0;
+  background:#111;
+  color:#fff;
+  z-index:500;
+  box-shadow:0 10px 30px rgba(0,0,0,.22);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:21px;
+}
+
+.cart-badge{
+  position:absolute;
+  top:-2px;
+  right:-2px;
+  min-width:22px;
+  height:22px;
+  padding:0 5px;
+  border-radius:50px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#fff;
+  color:#111;
+  border:1px solid #111;
+  font-size:10px;
+  font-weight:700;
+}
+
+/* =========================
+   MODAL BASE
+========================= */
 
 .modal{
   display:none;
@@ -298,7 +576,7 @@ header{
 
 .modal-box{
   width:100%;
-  max-width:470px;
+  max-width:500px;
   background:#fff;
   padding:27px 20px;
   max-height:92vh;
@@ -322,6 +600,98 @@ header{
   margin-bottom:23px;
 }
 
+/* =========================
+   CART MODAL
+========================= */
+
+.cart-empty{
+  padding:35px 10px;
+  text-align:center;
+  color:#777;
+  font-size:12px;
+}
+
+.cart-item{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:15px;
+  padding:15px 0;
+  border-bottom:1px solid #eee;
+}
+
+.cart-item-name{
+  font-size:12px;
+  font-weight:700;
+  margin-bottom:5px;
+}
+
+.cart-item-meta{
+  font-size:10px;
+  line-height:1.7;
+  color:#777;
+}
+
+.cart-item-price{
+  margin-top:7px;
+  font-size:11px;
+}
+
+.cart-item-actions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:7px;
+  margin-top:8px;
+}
+
+.cart-mini-btn{
+  width:30px;
+  height:30px;
+  border:1px solid #ddd;
+  background:#fff;
+}
+
+.cart-mini-qty{
+  min-width:20px;
+  text-align:center;
+  font-size:11px;
+}
+
+.remove-btn{
+  border:0;
+  background:none;
+  color:#999;
+  font-size:10px;
+  text-decoration:underline;
+  padding:0;
+}
+
+.cart-total{
+  margin-top:18px;
+  padding-top:15px;
+  border-top:1px solid #111;
+  display:flex;
+  justify-content:space-between;
+  font-size:13px;
+  font-weight:700;
+}
+
+.checkout-btn{
+  width:100%;
+  height:53px;
+  margin-top:18px;
+  border:0;
+  background:#111;
+  color:#fff;
+  font-size:10px;
+  letter-spacing:1.5px;
+  font-weight:700;
+}
+
+/* =========================
+   CHECKOUT
+========================= */
+
 .summary{
   background:#f7f7f7;
   padding:15px;
@@ -330,11 +700,22 @@ header{
   margin-bottom:18px;
 }
 
+.summary-item{
+  padding:8px 0;
+  border-bottom:1px solid #e5e5e5;
+}
+
+.summary-item:last-child{
+  border-bottom:0;
+}
+
 .summary-total{
-  margin-top:7px;
-  border-top:1px solid #ddd;
-  padding-top:7px;
+  margin-top:10px;
+  border-top:1px solid #bbb;
+  padding-top:10px;
   font-weight:700;
+  display:flex;
+  justify-content:space-between;
 }
 
 .field{
@@ -425,7 +806,35 @@ header{
   opacity:.55;
 }
 
-/* THANK YOU */
+/* =========================
+   TOAST
+========================= */
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:100px;
+  transform:translateX(-50%) translateY(20px);
+  background:#111;
+  color:#fff;
+  padding:12px 16px;
+  font-size:10px;
+  letter-spacing:.8px;
+  opacity:0;
+  pointer-events:none;
+  transition:.25s ease;
+  z-index:1500;
+  white-space:nowrap;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+/* =========================
+   THANK YOU
+========================= */
 
 .thank-you{
   display:none;
@@ -442,7 +851,7 @@ header{
 
 .thank-box{
   width:100%;
-  max-width:520px;
+  max-width:560px;
 }
 
 .thank-logo{
@@ -490,6 +899,10 @@ header{
   color:#777;
 }
 
+/* =========================
+   MOBILE
+========================= */
+
 @media(max-width:760px){
   .header-sub{
     display:none;
@@ -497,6 +910,23 @@ header{
 
   .hero{
     padding:35px 18px 20px;
+  }
+
+  .hero h1{
+    font-size:26px;
+  }
+
+  .category-wrap{
+    top:64px;
+  }
+
+  .featured{
+    padding-top:15px;
+  }
+
+  .featured-card{
+    min-width:220px;
+    width:220px;
   }
 
   .product-card{
@@ -513,6 +943,10 @@ header{
     font-size:21px;
   }
 
+  .product-actions{
+    grid-template-columns:1fr;
+  }
+
   .modal{
     padding:0;
     align-items:flex-end;
@@ -521,6 +955,12 @@ header{
   .modal-box{
     max-width:none;
     padding-bottom:32px;
+    max-height:90vh;
+  }
+
+  .floating-cart{
+    right:15px;
+    bottom:18px;
   }
 }
 </style>
@@ -540,15 +980,128 @@ header{
   <p>ESSENTIALS FOR EVERYDAY FORM.</p>
 </section>
 
+<!-- CATEGORY -->
+
+<div class="category-wrap">
+  <div class="category-bar">
+    <button class="category-btn active" onclick="filterProducts('all',this)">
+      TẤT CẢ SẢN PHẨM
+    </button>
+
+    <button class="category-btn" onclick="filterProducts('new',this)">
+      BỘ SƯU TẬP MỚI
+    </button>
+
+    <button class="category-btn" onclick="filterProducts('boxy',this)">
+      BOXY
+    </button>
+
+    <button class="category-btn" onclick="filterProducts('long',this)">
+      ÁO TAY DÀI OVERSIZE
+    </button>
+  </div>
+</div>
+
+<!-- FEATURED -->
+
+<section class="featured" id="featuredSection">
+  <div class="section-head">
+    <div>
+      <h2 class="section-title">NEW IN</h2>
+      <p class="section-caption">FORME ESSENTIAL COLLECTION</p>
+    </div>
+  </div>
+
+  <div class="featured-row">
+
+    <article class="featured-card">
+      <div class="featured-img" id="featuredBoxyBlack">
+        BOXY T-SHIRT<br>BLACK
+      </div>
+
+      <div class="featured-info">
+        <div class="featured-name">BOXY T-SHIRT — BLACK</div>
+        <div class="featured-price">240.000đ</div>
+
+        <button class="featured-btn" onclick="goToProduct('boxy','Black')">
+          XEM SẢN PHẨM
+        </button>
+      </div>
+    </article>
+
+    <article class="featured-card">
+      <div class="featured-img" id="featuredBoxyWhite">
+        BOXY T-SHIRT<br>WHITE
+      </div>
+
+      <div class="featured-info">
+        <div class="featured-name">BOXY T-SHIRT — WHITE</div>
+        <div class="featured-price">240.000đ</div>
+
+        <button class="featured-btn" onclick="goToProduct('boxy','White')">
+          XEM SẢN PHẨM
+        </button>
+      </div>
+    </article>
+
+    <article class="featured-card">
+      <div class="featured-img" id="featuredLongBlack">
+        LONG SLEEVE<br>BLACK
+      </div>
+
+      <div class="featured-info">
+        <div class="featured-name">LONG SLEEVE — BLACK</div>
+        <div class="featured-price">290.000đ</div>
+
+        <button class="featured-btn" onclick="goToProduct('long','Black')">
+          XEM SẢN PHẨM
+        </button>
+      </div>
+    </article>
+
+    <article class="featured-card">
+      <div class="featured-img" id="featuredLongWhite">
+        LONG SLEEVE<br>WHITE
+      </div>
+
+      <div class="featured-info">
+        <div class="featured-name">LONG SLEEVE — WHITE</div>
+        <div class="featured-price">290.000đ</div>
+
+        <button class="featured-btn" onclick="goToProduct('long','White')">
+          XEM SẢN PHẨM
+        </button>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- COLLECTION -->
+
+<div class="collection-title" id="collectionTitle">
+  <h2>BỘ SƯU TẬP MỚI</h2>
+  <p>
+    Những phom dáng cơ bản cho ngày thường.
+    Tối giản, dễ mặc và dễ phối.
+  </p>
+</div>
+
 <main class="products">
 
-  <!-- ======================
-        BOXY T-SHIRT
-  ======================= -->
+  <!-- =========================
+       BOXY
+  ========================= -->
 
-  <section class="product-card" data-product="boxy">
+  <section
+    class="product-card"
+    id="product-boxy"
+    data-category="new boxy"
+    data-product="boxy"
+  >
 
     <div class="image-wrap">
+
       <div class="placeholder" id="boxyPlaceholder">
         <strong id="boxyPlaceholderColor">BLACK</strong>
         BOXY T-SHIRT IMAGE
@@ -560,6 +1113,7 @@ header{
         src=""
         alt="Boxy T-Shirt"
       >
+
     </div>
 
     <div class="product-info">
@@ -573,14 +1127,19 @@ header{
         Chất cotton 2 chiều. Hai màu Black / White.
       </div>
 
+      <!-- COLOR -->
+
       <div class="option">
+
         <div class="option-title">
           Màu — <span id="boxyColorText">Black</span>
         </div>
 
         <div class="color-list">
+
           <button
             class="color-btn active"
+            data-color="Black"
             onclick="selectColor('boxy','Black',this)"
           >
             BLACK
@@ -588,21 +1147,29 @@ header{
 
           <button
             class="color-btn"
+            data-color="White"
             onclick="selectColor('boxy','White',this)"
           >
             WHITE
           </button>
+
         </div>
+
       </div>
 
+      <!-- SIZE -->
+
       <div class="option">
+
         <div class="option-title">
           Size — <span id="boxySizeText">Chưa chọn</span>
         </div>
 
         <div class="size-list">
+
           <button
             class="size-btn"
+            data-size="S"
             onclick="selectSize('boxy','S',this)"
           >
             S
@@ -610,6 +1177,7 @@ header{
 
           <button
             class="size-btn"
+            data-size="M"
             onclick="selectSize('boxy','M',this)"
           >
             M
@@ -617,26 +1185,32 @@ header{
 
           <button
             class="size-btn"
+            data-size="L"
             onclick="selectSize('boxy','L',this)"
           >
             L
           </button>
+
         </div>
 
-        <!-- THANH KÉO TÌM SIZE -->
+        <!-- SIZE FINDER -->
+
         <div class="size-finder">
+
           <div class="size-finder-title">
             TÌM SIZE PHÙ HỢP
           </div>
 
-          <!-- Chiều cao -->
           <div class="finder-row">
+
             <div class="finder-label-row">
               <span>Chiều cao</span>
+
               <span class="finder-value">
                 <span id="boxyHeight">165</span> cm
               </span>
             </div>
+
             <input
               class="finder-slider"
               id="boxyHeightSlider"
@@ -647,20 +1221,24 @@ header{
               step="1"
               oninput="updateSizeFinder('boxy')"
             >
+
             <div class="finder-scale">
               <span>150cm</span>
               <span>185cm</span>
             </div>
+
           </div>
 
-          <!-- Cân nặng -->
           <div class="finder-row">
+
             <div class="finder-label-row">
               <span>Cân nặng</span>
+
               <span class="finder-value">
                 <span id="boxyWeight">55</span> kg
               </span>
             </div>
+
             <input
               class="finder-slider"
               id="boxyWeightSlider"
@@ -671,48 +1249,100 @@ header{
               step="1"
               oninput="updateSizeFinder('boxy')"
             >
+
             <div class="finder-scale">
               <span>40kg</span>
               <span>80kg</span>
             </div>
+
           </div>
 
           <div class="size-result">
-            Gợi ý: <strong id="boxySuggestedSize">M</strong>
+
+            Gợi ý:
+            <strong id="boxySuggestedSize">M</strong>
+
             <div class="size-note">
-              Chỉ mang tính tham khảo. Nếu thích mặc rộng hơn, có thể tăng 1 size.
+              Chỉ mang tính tham khảo.
+              Nếu thích mặc rộng hơn, có thể tăng 1 size.
             </div>
+
+            <button
+              class="use-size-btn"
+              onclick="useSuggestedSize('boxy')"
+            >
+              CHỌN SIZE GỢI Ý
+            </button>
+
           </div>
+
         </div>
 
       </div>
 
+      <!-- QUANTITY -->
+
       <div class="option">
+
         <div class="option-title">Số lượng</div>
 
         <div class="quantity">
-          <button class="qty-btn" onclick="changeQty('boxy',-1)">−</button>
+
+          <button
+            class="qty-btn"
+            onclick="changeQty('boxy',-1)"
+          >
+            −
+          </button>
+
           <div class="qty-number" id="boxyQty">1</div>
-          <button class="qty-btn" onclick="changeQty('boxy',1)">+</button>
+
+          <button
+            class="qty-btn"
+            onclick="changeQty('boxy',1)"
+          >
+            +
+          </button>
+
         </div>
+
       </div>
 
-      <button class="order-btn" onclick="openOrder('boxy')">
-        ĐẶT HÀNG
-      </button>
+      <div class="product-actions">
+
+        <button
+          class="add-cart-btn"
+          onclick="addToCart('boxy')"
+        >
+          THÊM VÀO GIỎ
+        </button>
+
+        <button
+          class="order-btn"
+          onclick="buyNow('boxy')"
+        >
+          MUA NGAY
+        </button>
+
+      </div>
 
     </div>
 
   </section>
 
+  <!-- =========================
+       LONG SLEEVE
+  ========================= -->
 
-  <!-- ======================
-        LONG SLEEVE
-  ======================= -->
-
-  <section class="product-card" data-product="long">
+  <section
+    class="product-card"
+    id="product-long"
+    data-category="new long"
+    data-product="long"
+  >
 
     <div class="image-wrap">
+
       <div class="placeholder" id="longPlaceholder">
         <strong id="longPlaceholderColor">BLACK</strong>
         LONG SLEEVE IMAGE
@@ -724,13 +1354,14 @@ header{
         src=""
         alt="Long Sleeve Oversize"
       >
+
     </div>
 
     <div class="product-info">
 
       <h2 class="product-name">LONG SLEEVE OVERSIZE</h2>
 
-      <div class="price" id="longPriceText">290.000đ</div>
+      <div class="price">290.000đ</div>
 
       <div class="description">
         Áo tay dài oversize basic, form rộng thoải mái,
@@ -738,14 +1369,19 @@ header{
         Hai màu Black / White.
       </div>
 
+      <!-- COLOR -->
+
       <div class="option">
+
         <div class="option-title">
           Màu — <span id="longColorText">Black</span>
         </div>
 
         <div class="color-list">
+
           <button
             class="color-btn active"
+            data-color="Black"
             onclick="selectColor('long','Black',this)"
           >
             BLACK
@@ -753,21 +1389,29 @@ header{
 
           <button
             class="color-btn"
+            data-color="White"
             onclick="selectColor('long','White',this)"
           >
             WHITE
           </button>
+
         </div>
+
       </div>
 
+      <!-- SIZE -->
+
       <div class="option">
+
         <div class="option-title">
           Size — <span id="longSizeText">Chưa chọn</span>
         </div>
 
         <div class="size-list">
+
           <button
             class="size-btn"
+            data-size="S"
             onclick="selectSize('long','S',this)"
           >
             S
@@ -775,6 +1419,7 @@ header{
 
           <button
             class="size-btn"
+            data-size="M"
             onclick="selectSize('long','M',this)"
           >
             M
@@ -782,26 +1427,32 @@ header{
 
           <button
             class="size-btn"
+            data-size="L"
             onclick="selectSize('long','L',this)"
           >
             L
           </button>
+
         </div>
 
-        <!-- THANH KÉO TÌM SIZE -->
+        <!-- SIZE FINDER -->
+
         <div class="size-finder">
+
           <div class="size-finder-title">
             TÌM SIZE PHÙ HỢP
           </div>
 
-          <!-- Chiều cao -->
           <div class="finder-row">
+
             <div class="finder-label-row">
               <span>Chiều cao</span>
+
               <span class="finder-value">
                 <span id="longHeight">165</span> cm
               </span>
             </div>
+
             <input
               class="finder-slider"
               id="longHeightSlider"
@@ -812,20 +1463,24 @@ header{
               step="1"
               oninput="updateSizeFinder('long')"
             >
+
             <div class="finder-scale">
               <span>150cm</span>
               <span>185cm</span>
             </div>
+
           </div>
 
-          <!-- Cân nặng -->
           <div class="finder-row">
+
             <div class="finder-label-row">
               <span>Cân nặng</span>
+
               <span class="finder-value">
                 <span id="longWeight">55</span> kg
               </span>
             </div>
+
             <input
               class="finder-slider"
               id="longWeightSlider"
@@ -836,35 +1491,82 @@ header{
               step="1"
               oninput="updateSizeFinder('long')"
             >
+
             <div class="finder-scale">
               <span>40kg</span>
               <span>80kg</span>
             </div>
+
           </div>
 
           <div class="size-result">
-            Gợi ý: <strong id="longSuggestedSize">M</strong>
+
+            Gợi ý:
+            <strong id="longSuggestedSize">M</strong>
+
             <div class="size-note">
-              Chỉ mang tính tham khảo. Form oversize nên ưu tiên size quen mặc nếu muốn giữ độ rộng.
+              Chỉ mang tính tham khảo.
+              Form oversize nên ưu tiên size quen mặc nếu muốn giữ độ rộng.
             </div>
+
+            <button
+              class="use-size-btn"
+              onclick="useSuggestedSize('long')"
+            >
+              CHỌN SIZE GỢI Ý
+            </button>
+
           </div>
+
         </div>
 
       </div>
 
+      <!-- QUANTITY -->
+
       <div class="option">
+
         <div class="option-title">Số lượng</div>
 
         <div class="quantity">
-          <button class="qty-btn" onclick="changeQty('long',-1)">−</button>
+
+          <button
+            class="qty-btn"
+            onclick="changeQty('long',-1)"
+          >
+            −
+          </button>
+
           <div class="qty-number" id="longQty">1</div>
-          <button class="qty-btn" onclick="changeQty('long',1)">+</button>
+
+          <button
+            class="qty-btn"
+            onclick="changeQty('long',1)"
+          >
+            +
+          </button>
+
         </div>
+
       </div>
 
-      <button class="order-btn" onclick="openOrder('long')">
-        ĐẶT HÀNG
-      </button>
+      <div class="product-actions">
+
+        <button
+          class="add-cart-btn"
+          onclick="addToCart('long')"
+        >
+          THÊM VÀO GIỎ
+        </button>
+
+        <button
+          class="order-btn"
+          onclick="buyNow('long')"
+        >
+          MUA NGAY
+        </button>
+
+      </div>
 
     </div>
 
@@ -878,114 +1580,288 @@ header{
 
 </div>
 
+<!-- FLOATING CART -->
 
-<!-- ======================
-     ORDER MODAL
-======================= -->
+<button class="floating-cart" onclick="openCart()" aria-label="Giỏ hàng">
+  🛍
+  <span class="cart-badge" id="cartBadge">0</span>
+</button>
 
-<div class="modal" id="orderModal">
+<!-- =========================
+     CART MODAL
+========================= -->
+
+<div class="modal" id="cartModal">
+
   <div class="modal-box">
-    <button class="close-btn" onclick="closeOrder()">×</button>
 
-    <div class="modal-title">ĐẶT HÀNG</div>
-
-    <div class="summary">
-      <div>Sản phẩm: <strong id="orderProduct"></strong></div>
-      <div>Màu: <strong id="orderColor"></strong></div>
-      <div>Size: <strong id="orderSize"></strong></div>
-      <div>Số lượng: <strong id="orderQty"></strong></div>
-      <div class="summary-total">Tổng: <span id="orderTotal"></span></div>
-    </div>
-
-    <div class="field">
-      <input id="customerName" type="text" placeholder="Họ và tên">
-    </div>
-
-    <div class="field">
-      <input id="customerPhone" type="tel" inputmode="numeric" placeholder="Số điện thoại">
-    </div>
-
-    <div class="field">
-      <textarea id="customerAddress" placeholder="Địa chỉ nhận hàng"></textarea>
-    </div>
-
-    <div class="payment-title">Phương thức thanh toán</div>
-
-    <label class="payment-card active" id="codCard">
-      <input type="radio" name="payment" value="COD" checked onchange="changePayment()">
-      <div>
-        <div class="payment-name">Thanh toán khi nhận hàng (COD)</div>
-        <div class="payment-desc">Thanh toán cho đơn vị vận chuyển khi nhận hàng.</div>
-      </div>
-    </label>
-
-    <label class="payment-card" id="transferCard">
-      <input type="radio" name="payment" value="Chuyển khoản" onchange="changePayment()">
-      <div>
-        <div class="payment-name">Chuyển khoản ngân hàng</div>
-        <div class="payment-desc">Chuyển khoản theo thông tin bên dưới.</div>
-      </div>
-    </label>
-
-    <div class="bank-info" id="bankInfo">
-      <div>Ngân hàng: <strong>Sacombank</strong></div>
-      <div>Số tài khoản: <strong>070130993840</strong></div>
-      <div>Chủ tài khoản: <strong>VO QUANG TRUNG</strong></div>
-      <div>Nội dung chuyển khoản: <strong>SĐT + Tên khách hàng</strong></div>
-      <button class="copy-btn" onclick="copyAccount()">SAO CHÉP SỐ TÀI KHOẢN</button>
-    </div>
-
-    <button class="confirm-btn" id="confirmOrderBtn" onclick="submitOrder()">
-      XÁC NHẬN ĐẶT HÀNG
+    <button
+      class="close-btn"
+      onclick="closeCart()"
+    >
+      ×
     </button>
+
+    <div class="modal-title">
+      GIỎ HÀNG
+    </div>
+
+    <div id="cartItems"></div>
+
+    <div id="cartFooter" style="display:none;">
+
+      <div class="cart-total">
+        <span>Tổng</span>
+        <span id="cartTotal">0đ</span>
+      </div>
+
+      <button
+        class="checkout-btn"
+        onclick="openCheckout()"
+      >
+        TIẾN HÀNH ĐẶT HÀNG
+      </button>
+
+    </div>
+
   </div>
+
 </div>
 
+<!-- =========================
+     CHECKOUT MODAL
+========================= -->
 
-<!-- ======================
+<div class="modal" id="checkoutModal">
+
+  <div class="modal-box">
+
+    <button
+      class="close-btn"
+      onclick="closeCheckout()"
+    >
+      ×
+    </button>
+
+    <div class="modal-title">
+      ĐẶT HÀNG
+    </div>
+
+    <div class="summary" id="checkoutSummary"></div>
+
+    <div class="field">
+      <input
+        id="customerName"
+        type="text"
+        placeholder="Họ và tên"
+      >
+    </div>
+
+    <div class="field">
+      <input
+        id="customerPhone"
+        type="tel"
+        inputmode="numeric"
+        placeholder="Số điện thoại"
+      >
+    </div>
+
+    <div class="field">
+      <textarea
+        id="customerAddress"
+        placeholder="Địa chỉ nhận hàng"
+      ></textarea>
+    </div>
+
+    <div class="field">
+      <textarea
+        id="customerNote"
+        placeholder="Ghi chú đơn hàng (không bắt buộc)"
+      ></textarea>
+    </div>
+
+    <div class="payment-title">
+      Phương thức thanh toán
+    </div>
+
+    <label
+      class="payment-card active"
+      id="codCard"
+    >
+
+      <input
+        type="radio"
+        name="payment"
+        value="COD"
+        checked
+        onchange="changePayment()"
+      >
+
+      <div>
+        <div class="payment-name">
+          Thanh toán khi nhận hàng (COD)
+        </div>
+
+        <div class="payment-desc">
+          Thanh toán cho đơn vị vận chuyển khi nhận hàng.
+        </div>
+      </div>
+
+    </label>
+
+    <label
+      class="payment-card"
+      id="transferCard"
+    >
+
+      <input
+        type="radio"
+        name="payment"
+        value="Chuyển khoản"
+        onchange="changePayment()"
+      >
+
+      <div>
+        <div class="payment-name">
+          Chuyển khoản ngân hàng
+        </div>
+
+        <div class="payment-desc">
+          Chuyển khoản theo thông tin bên dưới.
+        </div>
+      </div>
+
+    </label>
+
+    <div
+      class="bank-info"
+      id="bankInfo"
+    >
+
+      <div>
+        Ngân hàng:
+        <strong>Sacombank</strong>
+      </div>
+
+      <div>
+        Số tài khoản:
+        <strong>070130993840</strong>
+      </div>
+
+      <div>
+        Chủ tài khoản:
+        <strong>VO QUANG TRUNG</strong>
+      </div>
+
+      <div>
+        Nội dung chuyển khoản:
+        <strong>SĐT + Tên khách hàng</strong>
+      </div>
+
+      <button
+        class="copy-btn"
+        onclick="copyAccount()"
+      >
+        SAO CHÉP SỐ TÀI KHOẢN
+      </button>
+
+    </div>
+
+    <button
+      class="confirm-btn"
+      id="confirmOrderBtn"
+      onclick="submitOrder()"
+    >
+      XÁC NHẬN ĐẶT HÀNG
+    </button>
+
+  </div>
+
+</div>
+
+<!-- =========================
      THANK YOU
-======================= -->
+========================= -->
 
-<section class="thank-you" id="thankYouPage">
+<section
+  class="thank-you"
+  id="thankYouPage"
+>
+
   <div class="thank-box">
-    <div class="thank-logo">FORME</div>
-    <h2>THANK YOU FOR YOUR ORDER.</h2>
+
+    <div class="thank-logo">
+      FORME
+    </div>
+
+    <h2>
+      THANK YOU FOR YOUR ORDER.
+    </h2>
+
     <p>
       Đơn hàng của bạn đã được ghi nhận.
       FORME sẽ liên hệ xác nhận đơn hàng trong thời gian sớm nhất.
     </p>
 
-    <div class="thank-summary" id="thankSummary"></div>
+    <div
+      class="thank-summary"
+      id="thankSummary"
+    ></div>
 
-    <button class="continue-btn" onclick="continueShopping()">
+    <button
+      class="continue-btn"
+      onclick="continueShopping()"
+    >
       TIẾP TỤC MUA SẮM
     </button>
 
-    <p style="margin-top:25px; color:#777; font-size:10px; letter-spacing:1.5px;">
+    <p
+      style="
+        margin-top:25px;
+        color:#777;
+        font-size:10px;
+        letter-spacing:1.5px;
+      "
+    >
       NOTHING EXTRA. JUST THE RIGHT FORM.
     </p>
+
   </div>
+
 </section>
 
+<div class="toast" id="toast"></div>
 
 <script>
 
 /* =========================
-   GIÁ & CẤU HÌNH ẢNH
+   PRICE
 ========================= */
 
 const BOXY_PRICE = 240000;
 const LONG_PRICE = 290000;
 
+/* =========================
+   IMAGE CONFIG
+
+   SAU NÀY DÁN LINK ẢNH VÀO ""
+
+   VD:
+   Black: "https://....jpg"
+========================= */
+
 const images = {
-  boxy: {
-    Black: "",
-    White: ""
+
+  boxy:{
+    Black:"",
+    White:""
   },
-  long: {
-    Black: "",
-    White: ""
+
+  long:{
+    Black:"",
+    White:""
   }
+
 };
 
 /* =========================
@@ -993,160 +1869,954 @@ const images = {
 ========================= */
 
 const products = {
-  boxy: {
-    name: "Boxy T-Shirt",
-    price: BOXY_PRICE,
-    color: "Black",
-    size: "",
-    qty: 1
+
+  boxy:{
+    id:"boxy",
+    name:"Boxy T-Shirt",
+    price:BOXY_PRICE,
+    color:"Black",
+    size:"",
+    qty:1
   },
-  long: {
-    name: "Long Sleeve Oversize",
-    price: LONG_PRICE,
-    color: "Black",
-    size: "",
-    qty: 1
+
+  long:{
+    id:"long",
+    name:"Long Sleeve Oversize",
+    price:LONG_PRICE,
+    color:"Black",
+    size:"",
+    qty:1
   }
+
 };
 
-let currentProduct = null;
+/* =========================
+   CART
+========================= */
+
+let cart = JSON.parse(
+  localStorage.getItem("formeCart") || "[]"
+);
 
 /* =========================
    FORMAT MONEY
 ========================= */
 
 function formatMoney(number){
-  return new Intl.NumberFormat("vi-VN").format(number) + "đ";
+
+  return new Intl.NumberFormat("vi-VN")
+    .format(number) + "đ";
+
 }
 
 /* =========================
-   CHỌN MÀU
+   TOAST
 ========================= */
 
-function selectColor(type, color, button){
-  const section = button.closest(".product-card");
-  section.querySelectorAll(".color-btn").forEach(btn => btn.classList.remove("active"));
+let toastTimer;
+
+function showToast(message){
+
+  const toast = document.getElementById("toast");
+
+  toast.textContent = message;
+  toast.classList.add("show");
+
+  clearTimeout(toastTimer);
+
+  toastTimer = setTimeout(() => {
+
+    toast.classList.remove("show");
+
+  },1800);
+
+}
+
+/* =========================
+   FILTER PRODUCTS
+========================= */
+
+function filterProducts(category,button){
+
+  document
+    .querySelectorAll(".category-btn")
+    .forEach(btn => btn.classList.remove("active"));
+
+  button.classList.add("active");
+
+  const cards =
+    document.querySelectorAll(".product-card");
+
+  cards.forEach(card => {
+
+    const categories =
+      card.dataset.category.split(" ");
+
+    if(
+      category === "all" ||
+      categories.includes(category)
+    ){
+
+      card.classList.remove("hidden");
+
+    }else{
+
+      card.classList.add("hidden");
+
+    }
+
+  });
+
+  if(category === "new"){
+
+    document
+      .getElementById("collectionTitle")
+      .scrollIntoView({
+        behavior:"smooth",
+        block:"start"
+      });
+
+  }
+
+}
+
+/* =========================
+   FEATURED → PRODUCT
+========================= */
+
+function goToProduct(type,color){
+
+  const section =
+    document.getElementById(
+      "product-" + type
+    );
+
+  const button =
+    section.querySelector(
+      `.color-btn[data-color="${color}"]`
+    );
+
+  if(button){
+
+    selectColor(
+      type,
+      color,
+      button
+    );
+
+  }
+
+  section.scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
+
+}
+
+/* =========================
+   SELECT COLOR
+========================= */
+
+function selectColor(type,color,button){
+
+  const section =
+    button.closest(".product-card");
+
+  section
+    .querySelectorAll(".color-btn")
+    .forEach(btn => {
+      btn.classList.remove("active");
+    });
+
   button.classList.add("active");
 
   products[type].color = color;
-  document.getElementById(type + "ColorText").textContent = color;
-  changeImage(type, color);
+
+  document
+    .getElementById(
+      type + "ColorText"
+    )
+    .textContent = color;
+
+  changeImage(type,color);
+
 }
 
 /* =========================
-   ĐỔI ẢNH
+   CHANGE IMAGE
 ========================= */
 
-function changeImage(type, color){
-  const image = document.getElementById(type + "Image");
-  const placeholder = document.getElementById(type + "Placeholder");
-  const placeholderColor = document.getElementById(type + "PlaceholderColor");
-  const url = images[type][color];
+function changeImage(type,color){
+
+  const image =
+    document.getElementById(
+      type + "Image"
+    );
+
+  const placeholder =
+    document.getElementById(
+      type + "Placeholder"
+    );
+
+  const placeholderColor =
+    document.getElementById(
+      type + "PlaceholderColor"
+    );
+
+  const url =
+    images[type][color];
 
   if(url){
+
     image.src = url;
-    image.style.display = "block";
-    placeholder.style.display = "none";
+
+    image.style.display =
+      "block";
+
+    placeholder.style.display =
+      "none";
+
   }else{
-    image.style.display = "none";
-    placeholder.style.display = "flex";
-    placeholderColor.textContent = color.toUpperCase();
+
+    image.style.display =
+      "none";
+
+    placeholder.style.display =
+      "flex";
+
+    placeholderColor.textContent =
+      color.toUpperCase();
+
   }
+
 }
 
 /* =========================
-   CHỌN SIZE
+   FEATURED IMAGE
 ========================= */
 
-function selectSize(type, size, button){
-  const section = button.closest(".product-card");
-  section.querySelectorAll(".size-btn").forEach(btn => btn.classList.remove("active"));
+function setupFeaturedImages(){
+
+  const map = [
+
+    {
+      id:"featuredBoxyBlack",
+      url:images.boxy.Black
+    },
+
+    {
+      id:"featuredBoxyWhite",
+      url:images.boxy.White
+    },
+
+    {
+      id:"featuredLongBlack",
+      url:images.long.Black
+    },
+
+    {
+      id:"featuredLongWhite",
+      url:images.long.White
+    }
+
+  ];
+
+  map.forEach(item => {
+
+    if(!item.url) return;
+
+    const box =
+      document.getElementById(item.id);
+
+    box.innerHTML =
+      `<img src="${item.url}" style="display:block">`;
+
+  });
+
+}
+
+/* =========================
+   SELECT SIZE
+========================= */
+
+function selectSize(type,size,button){
+
+  const section =
+    button.closest(".product-card");
+
+  section
+    .querySelectorAll(".size-btn")
+    .forEach(btn => {
+      btn.classList.remove("active");
+    });
+
   button.classList.add("active");
 
   products[type].size = size;
-  document.getElementById(type + "SizeText").textContent = size;
+
+  document
+    .getElementById(
+      type + "SizeText"
+    )
+    .textContent = size;
+
 }
 
 /* =========================
-   THANH KÉO TÌM SIZE (CHIỀU CAO & CÂN NẶNG)
+   SIZE FINDER
+
+   LOGIC ĐÃ SỬA
 ========================= */
 
 function updateSizeFinder(type){
-  const heightSlider = document.getElementById(type + "HeightSlider");
-  const weightSlider = document.getElementById(type + "WeightSlider");
 
-  const height = Number(heightSlider.value);
-  const weight = Number(weightSlider.value);
+  const height =
+    Number(
+      document.getElementById(
+        type + "HeightSlider"
+      ).value
+    );
 
-  document.getElementById(type + "Height").textContent = height;
-  document.getElementById(type + "Weight").textContent = weight;
+  const weight =
+    Number(
+      document.getElementById(
+        type + "WeightSlider"
+      ).value
+    );
+
+  document
+    .getElementById(
+      type + "Height"
+    )
+    .textContent = height;
+
+  document
+    .getElementById(
+      type + "Weight"
+    )
+    .textContent = weight;
+
+  let sizeScore = 0;
+
+  /* CHIỀU CAO */
+
+  if(height <= 160){
+
+    sizeScore += 0;
+
+  }else if(height <= 172){
+
+    sizeScore += 1;
+
+  }else{
+
+    sizeScore += 2;
+
+  }
+
+  /* CÂN NẶNG */
+
+  if(weight <= 50){
+
+    sizeScore += 0;
+
+  }else if(weight <= 64){
+
+    sizeScore += 1;
+
+  }else{
+
+    sizeScore += 2;
+
+  }
 
   let suggestedSize = "M";
 
-  if(type === "boxy"){
-    if(height <= 160 || weight <= 50){
-      suggestedSize = "S";
-    }else if(height <= 170 || weight <= 63){
-      suggestedSize = "M";
-    }else{
-      suggestedSize = "L";
-    }
+  if(sizeScore <= 1){
+
+    suggestedSize = "S";
+
+  }else if(sizeScore <= 3){
+
+    suggestedSize = "M";
+
+  }else{
+
+    suggestedSize = "L";
+
   }
+
+  /*
+    LONG SLEEVE OVERSIZE
+    hơi rộng hơn BOXY
+  */
 
   if(type === "long"){
-    if(height <= 162 || weight <= 52){
+
+    if(
+      height <= 160 &&
+      weight <= 52
+    ){
+
       suggestedSize = "S";
-    }else if(height <= 172 || weight <= 65){
-      suggestedSize = "M";
-    }else{
-      suggestedSize = "L";
+
     }
+
+    else if(
+      height >= 176 ||
+      weight >= 70
+    ){
+
+      suggestedSize = "L";
+
+    }
+
   }
 
-  document.getElementById(type + "SuggestedSize").textContent = suggestedSize;
+  document
+    .getElementById(
+      type + "SuggestedSize"
+    )
+    .textContent = suggestedSize;
+
 }
 
 /* =========================
-   SỐ LƯỢNG
+   USE SUGGESTED SIZE
 ========================= */
 
-function changeQty(type, amount){
+function useSuggestedSize(type){
+
+  const size =
+    document.getElementById(
+      type + "SuggestedSize"
+    ).textContent;
+
+  const section =
+    document.getElementById(
+      "product-" + type
+    );
+
+  const button =
+    section.querySelector(
+      `.size-btn[data-size="${size}"]`
+    );
+
+  if(button){
+
+    selectSize(
+      type,
+      size,
+      button
+    );
+
+    showToast(
+      "Đã chọn size " + size
+    );
+
+  }
+
+}
+
+/* =========================
+   PRODUCT QUANTITY
+========================= */
+
+function changeQty(type,amount){
+
   products[type].qty += amount;
-  if(products[type].qty < 1) products[type].qty = 1;
-  if(products[type].qty > 10) products[type].qty = 10;
 
-  document.getElementById(type + "Qty").textContent = products[type].qty;
+  if(products[type].qty < 1){
+
+    products[type].qty = 1;
+
+  }
+
+  if(products[type].qty > 10){
+
+    products[type].qty = 10;
+
+  }
+
+  document
+    .getElementById(
+      type + "Qty"
+    )
+    .textContent =
+      products[type].qty;
+
 }
 
 /* =========================
-   MỞ ĐẶT HÀNG
+   ADD TO CART
 ========================= */
 
-function openOrder(type){
-  const product = products[type];
+function addToCart(type){
+
+  const product =
+    products[type];
 
   if(!product.size){
-    alert("Vui lòng chọn size trước khi đặt hàng.");
-    return;
+
+    alert(
+      "Vui lòng chọn size trước khi thêm vào giỏ."
+    );
+
+    return false;
+
   }
 
-  currentProduct = type;
+  const existing =
+    cart.find(item =>
+      item.id === product.id &&
+      item.color === product.color &&
+      item.size === product.size
+    );
 
-  document.getElementById("orderProduct").textContent = product.name;
-  document.getElementById("orderColor").textContent = product.color;
-  document.getElementById("orderSize").textContent = product.size;
-  document.getElementById("orderQty").textContent = product.qty;
-  document.getElementById("orderTotal").textContent = formatMoney(product.price * product.qty);
+  if(existing){
 
-  document.getElementById("orderModal").classList.add("active");
+    existing.qty +=
+      product.qty;
+
+    if(existing.qty > 10){
+
+      existing.qty = 10;
+
+    }
+
+  }else{
+
+    cart.push({
+
+      cartId:
+        Date.now() +
+        "_" +
+        Math.random()
+          .toString(36)
+          .slice(2),
+
+      id:product.id,
+
+      name:product.name,
+
+      price:product.price,
+
+      color:product.color,
+
+      size:product.size,
+
+      qty:product.qty
+
+    });
+
+  }
+
+  saveCart();
+
+  showToast(
+    "Đã thêm vào giỏ hàng"
+  );
+
+  return true;
+
 }
 
 /* =========================
-   CLOSE MODAL
+   BUY NOW
 ========================= */
 
-function closeOrder(){
-  document.getElementById("orderModal").classList.remove("active");
+function buyNow(type){
+
+  const product =
+    products[type];
+
+  if(!product.size){
+
+    alert(
+      "Vui lòng chọn size trước khi đặt hàng."
+    );
+
+    return;
+
+  }
+
+  const added =
+    addToCart(type);
+
+  if(added){
+
+    openCart();
+
+  }
+
+}
+
+/* =========================
+   SAVE CART
+========================= */
+
+function saveCart(){
+
+  localStorage.setItem(
+    "formeCart",
+    JSON.stringify(cart)
+  );
+
+  updateCartBadge();
+
+  renderCart();
+
+}
+
+/* =========================
+   CART BADGE
+========================= */
+
+function updateCartBadge(){
+
+  const totalQty =
+    cart.reduce(
+      (sum,item) =>
+        sum + item.qty,
+      0
+    );
+
+  document
+    .getElementById(
+      "cartBadge"
+    )
+    .textContent =
+      totalQty;
+
+}
+
+/* =========================
+   OPEN / CLOSE CART
+========================= */
+
+function openCart(){
+
+  renderCart();
+
+  document
+    .getElementById(
+      "cartModal"
+    )
+    .classList.add("active");
+
+  document.body.classList.add(
+    "modal-open"
+  );
+
+}
+
+function closeCart(){
+
+  document
+    .getElementById(
+      "cartModal"
+    )
+    .classList.remove("active");
+
+  unlockBodyIfNoModal();
+
+}
+
+/* =========================
+   CART ITEM QUANTITY
+========================= */
+
+function changeCartQty(cartId,amount){
+
+  const item =
+    cart.find(
+      x => x.cartId === cartId
+    );
+
+  if(!item) return;
+
+  item.qty += amount;
+
+  if(item.qty < 1){
+
+    removeCartItem(cartId);
+
+    return;
+
+  }
+
+  if(item.qty > 10){
+
+    item.qty = 10;
+
+  }
+
+  saveCart();
+
+}
+
+/* =========================
+   REMOVE CART ITEM
+========================= */
+
+function removeCartItem(cartId){
+
+  cart =
+    cart.filter(
+      item =>
+        item.cartId !== cartId
+    );
+
+  saveCart();
+
+}
+
+/* =========================
+   CART TOTAL
+========================= */
+
+function getCartTotal(){
+
+  return cart.reduce(
+
+    (sum,item) =>
+      sum +
+      item.price *
+      item.qty,
+
+    0
+
+  );
+
+}
+
+/* =========================
+   RENDER CART
+========================= */
+
+function renderCart(){
+
+  const container =
+    document.getElementById(
+      "cartItems"
+    );
+
+  const footer =
+    document.getElementById(
+      "cartFooter"
+    );
+
+  if(cart.length === 0){
+
+    container.innerHTML = `
+      <div class="cart-empty">
+        Giỏ hàng của bạn đang trống.
+      </div>
+    `;
+
+    footer.style.display =
+      "none";
+
+    return;
+
+  }
+
+  let html = "";
+
+  cart.forEach(item => {
+
+    html += `
+
+      <div class="cart-item">
+
+        <div>
+
+          <div class="cart-item-name">
+            ${escapeHtml(item.name)}
+          </div>
+
+          <div class="cart-item-meta">
+            Màu: ${escapeHtml(item.color)}<br>
+            Size: ${escapeHtml(item.size)}
+          </div>
+
+          <div class="cart-item-price">
+            ${formatMoney(item.price)}
+          </div>
+
+          <button
+            class="remove-btn"
+            onclick="removeCartItem('${item.cartId}')"
+          >
+            Xóa
+          </button>
+
+        </div>
+
+        <div>
+
+          <div class="cart-item-actions">
+
+            <button
+              class="cart-mini-btn"
+              onclick="changeCartQty('${item.cartId}',-1)"
+            >
+              −
+            </button>
+
+            <div class="cart-mini-qty">
+              ${item.qty}
+            </div>
+
+            <button
+              class="cart-mini-btn"
+              onclick="changeCartQty('${item.cartId}',1)"
+            >
+              +
+            </button>
+
+          </div>
+
+          <div
+            style="
+              text-align:right;
+              margin-top:10px;
+              font-size:11px;
+              font-weight:700;
+            "
+          >
+            ${formatMoney(
+              item.price *
+              item.qty
+            )}
+          </div>
+
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+  container.innerHTML = html;
+
+  document
+    .getElementById(
+      "cartTotal"
+    )
+    .textContent =
+      formatMoney(
+        getCartTotal()
+      );
+
+  footer.style.display =
+    "block";
+
+}
+
+/* =========================
+   CHECKOUT
+========================= */
+
+function openCheckout(){
+
+  if(cart.length === 0){
+
+    alert(
+      "Giỏ hàng đang trống."
+    );
+
+    return;
+
+  }
+
+  closeCart();
+
+  renderCheckoutSummary();
+
+  document
+    .getElementById(
+      "checkoutModal"
+    )
+    .classList.add("active");
+
+  document.body.classList.add(
+    "modal-open"
+  );
+
+}
+
+function closeCheckout(){
+
+  document
+    .getElementById(
+      "checkoutModal"
+    )
+    .classList.remove("active");
+
+  unlockBodyIfNoModal();
+
+}
+
+/* =========================
+   CHECKOUT SUMMARY
+========================= */
+
+function renderCheckoutSummary(){
+
+  const box =
+    document.getElementById(
+      "checkoutSummary"
+    );
+
+  let html = "";
+
+  cart.forEach(item => {
+
+    html += `
+
+      <div class="summary-item">
+
+        <strong>
+          ${escapeHtml(item.name)}
+        </strong>
+
+        <br>
+
+        ${escapeHtml(item.color)}
+        / Size ${escapeHtml(item.size)}
+        / SL ${item.qty}
+
+        <br>
+
+        ${formatMoney(
+          item.price *
+          item.qty
+        )}
+
+      </div>
+
+    `;
+
+  });
+
+  html += `
+
+    <div class="summary-total">
+      <span>Tổng</span>
+
+      <span>
+        ${formatMoney(
+          getCartTotal()
+        )}
+      </span>
+    </div>
+
+  `;
+
+  box.innerHTML = html;
+
 }
 
 /* =========================
@@ -1154,102 +2824,409 @@ function closeOrder(){
 ========================= */
 
 function changePayment(){
-  const payment = document.querySelector('input[name="payment"]:checked').value;
-  const cod = document.getElementById("codCard");
-  const transfer = document.getElementById("transferCard");
-  const bank = document.getElementById("bankInfo");
 
-  cod.classList.remove("active");
-  transfer.classList.remove("active");
+  const payment =
+    document.querySelector(
+      'input[name="payment"]:checked'
+    ).value;
+
+  const cod =
+    document.getElementById(
+      "codCard"
+    );
+
+  const transfer =
+    document.getElementById(
+      "transferCard"
+    );
+
+  const bank =
+    document.getElementById(
+      "bankInfo"
+    );
+
+  cod.classList.remove(
+    "active"
+  );
+
+  transfer.classList.remove(
+    "active"
+  );
 
   if(payment === "COD"){
-    cod.classList.add("active");
-    bank.classList.remove("active");
+
+    cod.classList.add(
+      "active"
+    );
+
+    bank.classList.remove(
+      "active"
+    );
+
   }else{
-    transfer.classList.add("active");
-    bank.classList.add("active");
+
+    transfer.classList.add(
+      "active"
+    );
+
+    bank.classList.add(
+      "active"
+    );
+
   }
+
 }
 
 /* =========================
-   COPY STK
+   COPY ACCOUNT
 ========================= */
 
-function copyAccount(){
-  navigator.clipboard.writeText("070130993840");
-  alert("Đã sao chép số tài khoản.");
+async function copyAccount(){
+
+  const account =
+    "070130993840";
+
+  try{
+
+    await navigator.clipboard
+      .writeText(account);
+
+    showToast(
+      "Đã sao chép số tài khoản"
+    );
+
+  }catch(error){
+
+    const input =
+      document.createElement(
+        "textarea"
+      );
+
+    input.value =
+      account;
+
+    document.body.appendChild(
+      input
+    );
+
+    input.select();
+
+    document.execCommand(
+      "copy"
+    );
+
+    input.remove();
+
+    showToast(
+      "Đã sao chép số tài khoản"
+    );
+
+  }
+
 }
 
 /* =========================
-   GỬI ĐƠN HÀNG
+   ESCAPE HTML
+========================= */
+
+function escapeHtml(text){
+
+  const div =
+    document.createElement(
+      "div"
+    );
+
+  div.textContent =
+    String(text);
+
+  return div.innerHTML;
+
+}
+
+/* =========================
+   ORDER CODE
+========================= */
+
+function createOrderCode(){
+
+  const now =
+    new Date();
+
+  return (
+    "FORME" +
+    now.getFullYear()
+      .toString()
+      .slice(-2) +
+    String(
+      now.getMonth() + 1
+    ).padStart(2,"0") +
+    String(
+      now.getDate()
+    ).padStart(2,"0") +
+    "-" +
+    Math.floor(
+      1000 +
+      Math.random() *
+      9000
+    )
+  );
+
+}
+
+/* =========================
+   SUBMIT ORDER
 ========================= */
 
 async function submitOrder(){
-  const name = document.getElementById("customerName").value.trim();
-  const phone = document.getElementById("customerPhone").value.trim();
-  const address = document.getElementById("customerAddress").value.trim();
-  const payment = document.querySelector('input[name="payment"]:checked').value;
 
-  if(!name){ alert("Vui lòng nhập họ và tên."); return; }
-  if(!phone){ alert("Vui lòng nhập số điện thoại."); return; }
-  if(!/^[0-9]{9,11}$/.test(phone)){ alert("Số điện thoại chưa đúng."); return; }
-  if(!address){ alert("Vui lòng nhập địa chỉ nhận hàng."); return; }
+  if(cart.length === 0){
 
-  const product = products[currentProduct];
-  const total = product.price * product.qty;
+    alert(
+      "Giỏ hàng đang trống."
+    );
+
+    return;
+
+  }
+
+  const name =
+    document
+      .getElementById(
+        "customerName"
+      )
+      .value
+      .trim();
+
+  const phone =
+    document
+      .getElementById(
+        "customerPhone"
+      )
+      .value
+      .replace(/\s+/g,"")
+      .trim();
+
+  const address =
+    document
+      .getElementById(
+        "customerAddress"
+      )
+      .value
+      .trim();
+
+  const note =
+    document
+      .getElementById(
+        "customerNote"
+      )
+      .value
+      .trim();
+
+  const payment =
+    document.querySelector(
+      'input[name="payment"]:checked'
+    ).value;
+
+  if(!name){
+
+    alert(
+      "Vui lòng nhập họ và tên."
+    );
+
+    return;
+
+  }
+
+  if(!phone){
+
+    alert(
+      "Vui lòng nhập số điện thoại."
+    );
+
+    return;
+
+  }
+
+  if(
+    !/^[0-9]{9,11}$/.test(phone)
+  ){
+
+    alert(
+      "Số điện thoại chưa đúng."
+    );
+
+    return;
+
+  }
+
+  if(!address){
+
+    alert(
+      "Vui lòng nhập địa chỉ nhận hàng."
+    );
+
+    return;
+
+  }
+
+  const button =
+    document.getElementById(
+      "confirmOrderBtn"
+    );
+
+  button.disabled = true;
+
+  button.textContent =
+    "ĐANG GỬI ĐƠN...";
+
+  const orderCode =
+    createOrderCode();
+
+  const total =
+    getCartTotal();
+
+  const orderItemsText =
+    cart
+      .map((item,index) => {
+
+        return (
+          `${index + 1}. ` +
+          `${item.name} | ` +
+          `${item.color} | ` +
+          `Size ${item.size} | ` +
+          `SL ${item.qty} | ` +
+          `${formatMoney(
+            item.price *
+            item.qty
+          )}`
+        );
+
+      })
+      .join("\n");
 
   const order = {
-    product: product.name,
-    color: product.color,
-    size: product.size,
-    quantity: product.qty,
-    total: total,
-    name: name,
-    phone: phone,
-    address: address,
-    payment: payment,
-    time: new Date().toLocaleString("vi-VN")
+
+    orderCode,
+
+    items:[
+      ...cart
+    ],
+
+    total,
+
+    name,
+
+    phone,
+
+    address,
+
+    note,
+
+    payment,
+
+    time:new Date()
+      .toLocaleString(
+        "vi-VN"
+      )
+
   };
 
-  const button = document.getElementById("confirmOrderBtn");
-  button.disabled = true;
-  button.textContent = "ĐANG GỬI ĐƠN...";
-
   try{
-    const response = await fetch("https://formsubmit.co/ajax/formebasic882@gmail.com", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify({
-        "_subject": "FORME - CÓ ĐƠN HÀNG MỚI",
-        "_template": "table",
-        "Sản phẩm": order.product,
-        "Màu": order.color,
-        "Size": order.size,
-        "Số lượng": order.quantity,
-        "Tổng tiền": formatMoney(order.total),
-        "Tên khách": order.name,
-        "Số điện thoại": order.phone,
-        "Địa chỉ": order.address,
-        "Thanh toán": order.payment,
-        "Thời gian": order.time
-      })
-    });
 
-    if(!response.ok) throw new Error("Send failed");
+    const response =
+      await fetch(
+        "https://formsubmit.co/ajax/formebasic882@gmail.com",
+        {
 
-    localStorage.setItem("formeLastOrder", JSON.stringify(order));
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "application/json",
+
+            "Accept":
+              "application/json"
+          },
+
+          body:JSON.stringify({
+
+            "_subject":
+              `FORME - ĐƠN MỚI ${orderCode}`,
+
+            "_template":
+              "table",
+
+            "_captcha":
+              "false",
+
+            "Mã đơn":
+              orderCode,
+
+            "Sản phẩm":
+              orderItemsText,
+
+            "Tổng tiền":
+              formatMoney(total),
+
+            "Tên khách":
+              name,
+
+            "Số điện thoại":
+              phone,
+
+            "Địa chỉ":
+              address,
+
+            "Ghi chú":
+              note || "Không có",
+
+            "Thanh toán":
+              payment,
+
+            "Thời gian":
+              order.time
+
+          })
+
+        }
+      );
+
+    if(!response.ok){
+
+      throw new Error(
+        "Send failed"
+      );
+
+    }
+
+    localStorage.setItem(
+      "formeLastOrder",
+      JSON.stringify(order)
+    );
+
+    cart = [];
+
+    saveCart();
+
     showThankYou(order);
 
   }catch(error){
+
     console.error(error);
-    alert("Có lỗi khi gửi đơn. Vui lòng thử lại.");
+
+    alert(
+      "Có lỗi khi gửi đơn. Vui lòng thử lại."
+    );
+
   }finally{
+
     button.disabled = false;
-    button.textContent = "XÁC NHẬN ĐẶT HÀNG";
+
+    button.textContent =
+      "XÁC NHẬN ĐẶT HÀNG";
+
   }
+
 }
 
 /* =========================
@@ -1257,45 +3234,306 @@ async function submitOrder(){
 ========================= */
 
 function showThankYou(order){
-  closeOrder();
-  document.getElementById("shopPage").style.display = "none";
-  document.getElementById("thankYouPage").classList.add("active");
 
-  document.getElementById("thankSummary").innerHTML = `
-    <strong>${order.product}</strong><br>
-    Màu: ${order.color}<br>
-    Size: ${order.size}<br>
-    Số lượng: ${order.quantity}<br>
-    Tổng: <strong>${formatMoney(order.total)}</strong><br>
-    Thanh toán: ${order.payment}
-  `;
+  closeCheckout();
 
-  window.scrollTo(0, 0);
+  document
+    .getElementById(
+      "shopPage"
+    )
+    .style.display =
+      "none";
+
+  document
+    .querySelector(
+      ".floating-cart"
+    )
+    .style.display =
+      "none";
+
+  document
+    .getElementById(
+      "thankYouPage"
+    )
+    .classList.add(
+      "active"
+    );
+
+  let itemsHtml = "";
+
+  order.items.forEach(
+    (item,index) => {
+
+      itemsHtml += `
+
+        <div
+          style="
+            padding:8px 0;
+            border-bottom:1px solid #ddd;
+          "
+        >
+
+          <strong>
+            ${index + 1}.
+            ${escapeHtml(item.name)}
+          </strong>
+
+          <br>
+
+          Màu:
+          ${escapeHtml(item.color)}
+
+          <br>
+
+          Size:
+          ${escapeHtml(item.size)}
+
+          <br>
+
+          Số lượng:
+          ${item.qty}
+
+          <br>
+
+          Thành tiền:
+          ${formatMoney(
+            item.price *
+            item.qty
+          )}
+
+        </div>
+
+      `;
+
+    }
+  );
+
+  document
+    .getElementById(
+      "thankSummary"
+    )
+    .innerHTML = `
+
+      <strong>
+        Mã đơn:
+        ${escapeHtml(
+          order.orderCode
+        )}
+      </strong>
+
+      <br><br>
+
+      ${itemsHtml}
+
+      <br>
+
+      Tổng:
+      <strong>
+        ${formatMoney(
+          order.total
+        )}
+      </strong>
+
+      <br>
+
+      Thanh toán:
+      ${escapeHtml(
+        order.payment
+      )}
+
+      <br>
+
+      Người nhận:
+      ${escapeHtml(
+        order.name
+      )}
+
+      <br>
+
+      SĐT:
+      ${escapeHtml(
+        order.phone
+      )}
+
+    `;
+
+  window.scrollTo(
+    0,
+    0
+  );
+
 }
 
 /* =========================
-   MUA TIẾP
+   CONTINUE SHOPPING
 ========================= */
 
 function continueShopping(){
-  document.getElementById("thankYouPage").classList.remove("active");
-  document.getElementById("shopPage").style.display = "block";
 
-  document.getElementById("customerName").value = "";
-  document.getElementById("customerPhone").value = "";
-  document.getElementById("customerAddress").value = "";
+  document
+    .getElementById(
+      "thankYouPage"
+    )
+    .classList.remove(
+      "active"
+    );
 
-  window.scrollTo(0, 0);
+  document
+    .getElementById(
+      "shopPage"
+    )
+    .style.display =
+      "block";
+
+  document
+    .querySelector(
+      ".floating-cart"
+    )
+    .style.display =
+      "flex";
+
+  document
+    .getElementById(
+      "customerName"
+    )
+    .value = "";
+
+  document
+    .getElementById(
+      "customerPhone"
+    )
+    .value = "";
+
+  document
+    .getElementById(
+      "customerAddress"
+    )
+    .value = "";
+
+  document
+    .getElementById(
+      "customerNote"
+    )
+    .value = "";
+
+  window.scrollTo(
+    0,
+    0
+  );
+
 }
 
-/* CLICK OUTSIDE TO CLOSE MODAL */
-document.getElementById("orderModal").addEventListener("click", function(e){
-  if(e.target === this) closeOrder();
-});
+/* =========================
+   MODAL OUTSIDE CLICK
+========================= */
 
-/* Khởi tạo gợi ý size ban đầu */
-updateSizeFinder("boxy");
-updateSizeFinder("long");
+document
+  .getElementById(
+    "cartModal"
+  )
+  .addEventListener(
+    "click",
+    function(e){
+
+      if(e.target === this){
+
+        closeCart();
+
+      }
+
+    }
+  );
+
+document
+  .getElementById(
+    "checkoutModal"
+  )
+  .addEventListener(
+    "click",
+    function(e){
+
+      if(e.target === this){
+
+        closeCheckout();
+
+      }
+
+    }
+  );
+
+/* =========================
+   ESC KEY
+========================= */
+
+document.addEventListener(
+  "keydown",
+  function(e){
+
+    if(e.key === "Escape"){
+
+      closeCart();
+
+      closeCheckout();
+
+    }
+
+  }
+);
+
+/* =========================
+   BODY LOCK
+========================= */
+
+function unlockBodyIfNoModal(){
+
+  const hasActiveModal =
+    document.querySelector(
+      ".modal.active"
+    );
+
+  if(!hasActiveModal){
+
+    document.body.classList.remove(
+      "modal-open"
+    );
+
+  }
+
+}
+
+/* =========================
+   INIT
+========================= */
+
+function init(){
+
+  updateSizeFinder(
+    "boxy"
+  );
+
+  updateSizeFinder(
+    "long"
+  );
+
+  changeImage(
+    "boxy",
+    "Black"
+  );
+
+  changeImage(
+    "long",
+    "Black"
+  );
+
+  setupFeaturedImages();
+
+  updateCartBadge();
+
+  renderCart();
+
+}
+
+init();
 
 </script>
 
