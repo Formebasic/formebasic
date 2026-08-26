@@ -197,32 +197,36 @@ header{
 .size-finder-title{
   font-size:12px;
   font-weight:700;
-  margin-bottom:12px;
+  margin-bottom:14px;
 }
 
-.weight-row{
+.finder-row{
+  margin-bottom:14px;
+}
+
+.finder-label-row{
   display:flex;
   justify-content:space-between;
   align-items:center;
   font-size:12px;
-  margin-bottom:10px;
+  margin-bottom:6px;
 }
 
-.weight-value{
+.finder-value{
   font-weight:700;
 }
 
-.weight-slider{
+.finder-slider{
   width:100%;
   accent-color:#111;
 }
 
-.weight-scale{
+.finder-scale{
   display:flex;
   justify-content:space-between;
   color:#999;
   font-size:10px;
-  margin-top:4px;
+  margin-top:3px;
 }
 
 .size-result{
@@ -487,7 +491,6 @@ header{
 }
 
 @media(max-width:760px){
-
   .header-sub{
     display:none;
   }
@@ -540,13 +543,12 @@ header{
 <main class="products">
 
   <!-- ======================
-       BOXY T-SHIRT
+        BOXY T-SHIRT
   ======================= -->
 
   <section class="product-card" data-product="boxy">
 
     <div class="image-wrap">
-
       <div class="placeholder" id="boxyPlaceholder">
         <strong id="boxyPlaceholderColor">BLACK</strong>
         BOXY T-SHIRT IMAGE
@@ -558,7 +560,6 @@ header{
         src=""
         alt="Boxy T-Shirt"
       >
-
     </div>
 
     <div class="product-info">
@@ -573,13 +574,11 @@ header{
       </div>
 
       <div class="option">
-
         <div class="option-title">
           Màu — <span id="boxyColorText">Black</span>
         </div>
 
         <div class="color-list">
-
           <button
             class="color-btn active"
             onclick="selectColor('boxy','Black',this)"
@@ -593,19 +592,15 @@ header{
           >
             WHITE
           </button>
-
         </div>
-
       </div>
 
       <div class="option">
-
         <div class="option-title">
           Size — <span id="boxySizeText">Chưa chọn</span>
         </div>
 
         <div class="size-list">
-
           <button
             class="size-btn"
             onclick="selectSize('boxy','S',this)"
@@ -626,91 +621,83 @@ header{
           >
             L
           </button>
-
         </div>
 
         <!-- THANH KÉO TÌM SIZE -->
-
         <div class="size-finder">
-
           <div class="size-finder-title">
             TÌM SIZE PHÙ HỢP
           </div>
 
-          <div class="weight-row">
-            <span>Cân nặng</span>
-            <span class="weight-value">
-              <span id="boxyWeight">55</span> kg
-            </span>
-          </div>
-
-          <input
-            class="weight-slider"
-            id="boxySlider"
-            type="range"
-            min="40"
-            max="75"
-            value="55"
-            step="1"
-            oninput="updateSizeFinder('boxy')"
-          >
-
-          <div class="weight-scale">
-            <span>40kg</span>
-            <span>75kg</span>
-          </div>
-
-          <div class="size-result">
-            Gợi ý:
-            <strong id="boxySuggestedSize">M</strong>
-
-            <div class="size-note">
-              Chỉ mang tính tham khảo. Nếu thích mặc rộng hơn,
-              có thể tăng 1 size.
+          <!-- Chiều cao -->
+          <div class="finder-row">
+            <div class="finder-label-row">
+              <span>Chiều cao</span>
+              <span class="finder-value">
+                <span id="boxyHeight">165</span> cm
+              </span>
+            </div>
+            <input
+              class="finder-slider"
+              id="boxyHeightSlider"
+              type="range"
+              min="150"
+              max="185"
+              value="165"
+              step="1"
+              oninput="updateSizeFinder('boxy')"
+            >
+            <div class="finder-scale">
+              <span>150cm</span>
+              <span>185cm</span>
             </div>
           </div>
 
+          <!-- Cân nặng -->
+          <div class="finder-row">
+            <div class="finder-label-row">
+              <span>Cân nặng</span>
+              <span class="finder-value">
+                <span id="boxyWeight">55</span> kg
+              </span>
+            </div>
+            <input
+              class="finder-slider"
+              id="boxyWeightSlider"
+              type="range"
+              min="40"
+              max="80"
+              value="55"
+              step="1"
+              oninput="updateSizeFinder('boxy')"
+            >
+            <div class="finder-scale">
+              <span>40kg</span>
+              <span>80kg</span>
+            </div>
+          </div>
+
+          <div class="size-result">
+            Gợi ý: <strong id="boxySuggestedSize">M</strong>
+            <div class="size-note">
+              Chỉ mang tính tham khảo. Nếu thích mặc rộng hơn, có thể tăng 1 size.
+            </div>
+          </div>
         </div>
 
       </div>
 
       <div class="option">
-
-        <div class="option-title">
-          Số lượng
-        </div>
+        <div class="option-title">Số lượng</div>
 
         <div class="quantity">
-
-          <button
-            class="qty-btn"
-            onclick="changeQty('boxy',-1)"
-          >
-            −
-          </button>
-
-          <div
-            class="qty-number"
-            id="boxyQty"
-          >
-            1
-          </div>
-
-          <button
-            class="qty-btn"
-            onclick="changeQty('boxy',1)"
-          >
-            +
-          </button>
-
+          <button class="qty-btn" onclick="changeQty('boxy',-1)">−</button>
+          <div class="qty-number" id="boxyQty">1</div>
+          <button class="qty-btn" onclick="changeQty('boxy',1)">+</button>
         </div>
-
       </div>
 
-      <button
-        class="order-btn"
-        onclick="openOrder('boxy')"
-      >
+      <button class="order-btn" onclick="openOrder('boxy')">
         ĐẶT HÀNG
       </button>
 
@@ -720,13 +707,12 @@ header{
 
 
   <!-- ======================
-       LONG SLEEVE
+        LONG SLEEVE
   ======================= -->
 
   <section class="product-card" data-product="long">
 
     <div class="image-wrap">
-
       <div class="placeholder" id="longPlaceholder">
         <strong id="longPlaceholderColor">BLACK</strong>
         LONG SLEEVE IMAGE
@@ -738,18 +724,13 @@ header{
         src=""
         alt="Long Sleeve Oversize"
       >
-
     </div>
 
     <div class="product-info">
 
-      <h2 class="product-name">
-        LONG SLEEVE OVERSIZE
-      </h2>
+      <h2 class="product-name">LONG SLEEVE OVERSIZE</h2>
 
-      <div class="price" id="longPriceText">
-        290.000đ
-      </div>
+      <div class="price" id="longPriceText">290.000đ</div>
 
       <div class="description">
         Áo tay dài oversize basic, form rộng thoải mái,
@@ -758,13 +739,11 @@ header{
       </div>
 
       <div class="option">
-
         <div class="option-title">
           Màu — <span id="longColorText">Black</span>
         </div>
 
         <div class="color-list">
-
           <button
             class="color-btn active"
             onclick="selectColor('long','Black',this)"
@@ -778,19 +757,15 @@ header{
           >
             WHITE
           </button>
-
         </div>
-
       </div>
 
       <div class="option">
-
         <div class="option-title">
           Size — <span id="longSizeText">Chưa chọn</span>
         </div>
 
         <div class="size-list">
-
           <button
             class="size-btn"
             onclick="selectSize('long','S',this)"
@@ -811,92 +786,83 @@ header{
           >
             L
           </button>
-
         </div>
 
         <!-- THANH KÉO TÌM SIZE -->
-
         <div class="size-finder">
-
           <div class="size-finder-title">
             TÌM SIZE PHÙ HỢP
           </div>
 
-          <div class="weight-row">
-            <span>Cân nặng</span>
-
-            <span class="weight-value">
-              <span id="longWeight">55</span> kg
-            </span>
-          </div>
-
-          <input
-            class="weight-slider"
-            id="longSlider"
-            type="range"
-            min="40"
-            max="75"
-            value="55"
-            step="1"
-            oninput="updateSizeFinder('long')"
-          >
-
-          <div class="weight-scale">
-            <span>40kg</span>
-            <span>75kg</span>
-          </div>
-
-          <div class="size-result">
-            Gợi ý:
-            <strong id="longSuggestedSize">M</strong>
-
-            <div class="size-note">
-              Chỉ mang tính tham khảo. Form oversize nên
-              ưu tiên size quen mặc nếu muốn giữ độ rộng.
+          <!-- Chiều cao -->
+          <div class="finder-row">
+            <div class="finder-label-row">
+              <span>Chiều cao</span>
+              <span class="finder-value">
+                <span id="longHeight">165</span> cm
+              </span>
+            </div>
+            <input
+              class="finder-slider"
+              id="longHeightSlider"
+              type="range"
+              min="150"
+              max="185"
+              value="165"
+              step="1"
+              oninput="updateSizeFinder('long')"
+            >
+            <div class="finder-scale">
+              <span>150cm</span>
+              <span>185cm</span>
             </div>
           </div>
 
+          <!-- Cân nặng -->
+          <div class="finder-row">
+            <div class="finder-label-row">
+              <span>Cân nặng</span>
+              <span class="finder-value">
+                <span id="longWeight">55</span> kg
+              </span>
+            </div>
+            <input
+              class="finder-slider"
+              id="longWeightSlider"
+              type="range"
+              min="40"
+              max="80"
+              value="55"
+              step="1"
+              oninput="updateSizeFinder('long')"
+            >
+            <div class="finder-scale">
+              <span>40kg</span>
+              <span>80kg</span>
+            </div>
+          </div>
+
+          <div class="size-result">
+            Gợi ý: <strong id="longSuggestedSize">M</strong>
+            <div class="size-note">
+              Chỉ mang tính tham khảo. Form oversize nên ưu tiên size quen mặc nếu muốn giữ độ rộng.
+            </div>
+          </div>
         </div>
 
       </div>
 
       <div class="option">
-
-        <div class="option-title">
-          Số lượng
-        </div>
+        <div class="option-title">Số lượng</div>
 
         <div class="quantity">
-
-          <button
-            class="qty-btn"
-            onclick="changeQty('long',-1)"
-          >
-            −
-          </button>
-
-          <div
-            class="qty-number"
-            id="longQty"
-          >
-            1
-          </div>
-
-          <button
-            class="qty-btn"
-            onclick="changeQty('long',1)"
-          >
-            +
-          </button>
-
+          <button class="qty-btn" onclick="changeQty('long',-1)">−</button>
+          <div class="qty-number" id="longQty">1</div>
+          <button class="qty-btn" onclick="changeQty('long',1)">+</button>
         </div>
-
       </div>
 
-      <button
-        class="order-btn"
-        onclick="openOrder('long')"
-      >
+      <button class="order-btn" onclick="openOrder('long')">
         ĐẶT HÀNG
       </button>
 
@@ -917,175 +883,62 @@ header{
      ORDER MODAL
 ======================= -->
 
-<div
-  class="modal"
-  id="orderModal"
->
+<div class="modal" id="orderModal">
+  <div class="modal-box">
+    <button class="close-btn" onclick="closeOrder()">×</button>
 
-<div class="modal-box">
+    <div class="modal-title">ĐẶT HÀNG</div>
 
-<button
-  class="close-btn"
-  onclick="closeOrder()"
->
-×
-</button>
+    <div class="summary">
+      <div>Sản phẩm: <strong id="orderProduct"></strong></div>
+      <div>Màu: <strong id="orderColor"></strong></div>
+      <div>Size: <strong id="orderSize"></strong></div>
+      <div>Số lượng: <strong id="orderQty"></strong></div>
+      <div class="summary-total">Tổng: <span id="orderTotal"></span></div>
+    </div>
 
-<div class="modal-title">
-  ĐẶT HÀNG
-</div>
+    <div class="field">
+      <input id="customerName" type="text" placeholder="Họ và tên">
+    </div>
 
-<div class="summary">
+    <div class="field">
+      <input id="customerPhone" type="tel" inputmode="numeric" placeholder="Số điện thoại">
+    </div>
 
-  <div>
-    Sản phẩm:
-    <strong id="orderProduct"></strong>
+    <div class="field">
+      <textarea id="customerAddress" placeholder="Địa chỉ nhận hàng"></textarea>
+    </div>
+
+    <div class="payment-title">Phương thức thanh toán</div>
+
+    <label class="payment-card active" id="codCard">
+      <input type="radio" name="payment" value="COD" checked onchange="changePayment()">
+      <div>
+        <div class="payment-name">Thanh toán khi nhận hàng (COD)</div>
+        <div class="payment-desc">Thanh toán cho đơn vị vận chuyển khi nhận hàng.</div>
+      </div>
+    </label>
+
+    <label class="payment-card" id="transferCard">
+      <input type="radio" name="payment" value="Chuyển khoản" onchange="changePayment()">
+      <div>
+        <div class="payment-name">Chuyển khoản ngân hàng</div>
+        <div class="payment-desc">Chuyển khoản theo thông tin bên dưới.</div>
+      </div>
+    </label>
+
+    <div class="bank-info" id="bankInfo">
+      <div>Ngân hàng: <strong>Sacombank</strong></div>
+      <div>Số tài khoản: <strong>070130993840</strong></div>
+      <div>Chủ tài khoản: <strong>VO QUANG TRUNG</strong></div>
+      <div>Nội dung chuyển khoản: <strong>SĐT + Tên khách hàng</strong></div>
+      <button class="copy-btn" onclick="copyAccount()">SAO CHÉP SỐ TÀI KHOẢN</button>
+    </div>
+
+    <button class="confirm-btn" id="confirmOrderBtn" onclick="submitOrder()">
+      XÁC NHẬN ĐẶT HÀNG
+    </button>
   </div>
-
-  <div>
-    Màu:
-    <strong id="orderColor"></strong>
-  </div>
-
-  <div>
-    Size:
-    <strong id="orderSize"></strong>
-  </div>
-
-  <div>
-    Số lượng:
-    <strong id="orderQty"></strong>
-  </div>
-
-  <div class="summary-total">
-    Tổng:
-    <span id="orderTotal"></span>
-  </div>
-
-</div>
-
-<div class="field">
-  <input
-    id="customerName"
-    type="text"
-    placeholder="Họ và tên"
-  >
-</div>
-
-<div class="field">
-  <input
-    id="customerPhone"
-    type="tel"
-    inputmode="numeric"
-    placeholder="Số điện thoại"
-  >
-</div>
-
-<div class="field">
-  <textarea
-    id="customerAddress"
-    placeholder="Địa chỉ nhận hàng"
-  ></textarea>
-</div>
-
-<div class="payment-title">
-  Phương thức thanh toán
-</div>
-
-<label
-  class="payment-card active"
-  id="codCard"
->
-
-<input
-  type="radio"
-  name="payment"
-  value="COD"
-  checked
-  onchange="changePayment()"
->
-
-<div>
-  <div class="payment-name">
-    Thanh toán khi nhận hàng (COD)
-  </div>
-
-  <div class="payment-desc">
-    Thanh toán cho đơn vị vận chuyển khi nhận hàng.
-  </div>
-</div>
-
-</label>
-
-
-<label
-  class="payment-card"
-  id="transferCard"
->
-
-<input
-  type="radio"
-  name="payment"
-  value="Chuyển khoản"
-  onchange="changePayment()"
->
-
-<div>
-  <div class="payment-name">
-    Chuyển khoản ngân hàng
-  </div>
-
-  <div class="payment-desc">
-    Chuyển khoản theo thông tin bên dưới.
-  </div>
-</div>
-
-</label>
-
-
-<div
-  class="bank-info"
-  id="bankInfo"
->
-
-<div>
-  Ngân hàng:
-  <strong>Sacombank</strong>
-</div>
-
-<div>
-  Số tài khoản:
-  <strong>070130993840</strong>
-</div>
-
-<div>
-  Chủ tài khoản:
-  <strong>VO QUANG TRUNG</strong>
-</div>
-
-<div>
-  Nội dung chuyển khoản:
-  <strong>SĐT + Tên khách hàng</strong>
-</div>
-
-<button
-  class="copy-btn"
-  onclick="copyAccount()"
->
-  SAO CHÉP SỐ TÀI KHOẢN
-</button>
-
-</div>
-
-<button
-  class="confirm-btn"
-  id="confirmOrderBtn"
-  onclick="submitOrder()"
->
-  XÁC NHẬN ĐẶT HÀNG
-</button>
-
-</div>
 </div>
 
 
@@ -1093,836 +946,354 @@ header{
      THANK YOU
 ======================= -->
 
-<section
-  class="thank-you"
-  id="thankYouPage"
->
+<section class="thank-you" id="thankYouPage">
+  <div class="thank-box">
+    <div class="thank-logo">FORME</div>
+    <h2>THANK YOU FOR YOUR ORDER.</h2>
+    <p>
+      Đơn hàng của bạn đã được ghi nhận.
+      FORME sẽ liên hệ xác nhận đơn hàng trong thời gian sớm nhất.
+    </p>
 
-<div class="thank-box">
+    <div class="thank-summary" id="thankSummary"></div>
 
-<div class="thank-logo">
-  FORME
-</div>
+    <button class="continue-btn" onclick="continueShopping()">
+      TIẾP TỤC MUA SẮM
+    </button>
 
-<h2>
-  THANK YOU FOR YOUR ORDER.
-</h2>
-
-<p>
-  Đơn hàng của bạn đã được ghi nhận.
-  FORME sẽ liên hệ xác nhận đơn hàng trong thời gian sớm nhất.
-</p>
-
-<div
-  class="thank-summary"
-  id="thankSummary"
-></div>
-
-<button
-  class="continue-btn"
-  onclick="continueShopping()"
->
-  TIẾP TỤC MUA SẮM
-</button>
-
-<p>
-  NOTHING EXTRA. JUST THE RIGHT FORM.
-</p>
-
-</div>
+    <p style="margin-top:25px; color:#777; font-size:10px; letter-spacing:1.5px;">
+      NOTHING EXTRA. JUST THE RIGHT FORM.
+    </p>
+  </div>
 </section>
 
 
 <script>
 
 /* =========================
-   GIÁ
+   GIÁ & CẤU HÌNH ẢNH
 ========================= */
 
 const BOXY_PRICE = 240000;
-
-/*
-  Nếu giá áo tay dài KHÔNG phải 290k
-  thì chỉ sửa số bên dưới.
-*/
-
 const LONG_PRICE = 290000;
 
-
-/* =========================
-   ẢNH SẢN PHẨM
-========================= */
-
-/*
-  Sau này chỉ cần bỏ link ảnh vào đây.
-
-  Ví dụ:
-
-  Black:"https://....jpg"
-  White:"https://....jpg"
-*/
-
 const images = {
-
-  boxy:{
-    Black:"",
-    White:""
+  boxy: {
+    Black: "",
+    White: ""
   },
-
-  long:{
-    Black:"",
-    White:""
+  long: {
+    Black: "",
+    White: ""
   }
-
 };
-
 
 /* =========================
    PRODUCT DATA
 ========================= */
 
 const products = {
-
-  boxy:{
-    name:"Boxy T-Shirt",
-    price:BOXY_PRICE,
-    color:"Black",
-    size:"",
-    qty:1
+  boxy: {
+    name: "Boxy T-Shirt",
+    price: BOXY_PRICE,
+    color: "Black",
+    size: "",
+    qty: 1
   },
-
-  long:{
-    name:"Long Sleeve Oversize",
-    price:LONG_PRICE,
-    color:"Black",
-    size:"",
-    qty:1
+  long: {
+    name: "Long Sleeve Oversize",
+    price: LONG_PRICE,
+    color: "Black",
+    size: "",
+    qty: 1
   }
-
 };
 
 let currentProduct = null;
-
 
 /* =========================
    FORMAT MONEY
 ========================= */
 
 function formatMoney(number){
-
-  return new Intl.NumberFormat(
-    "vi-VN"
-  ).format(number) + "đ";
-
+  return new Intl.NumberFormat("vi-VN").format(number) + "đ";
 }
-
 
 /* =========================
    CHỌN MÀU
 ========================= */
 
-function selectColor(type,color,button){
-
-  const section =
-    button.closest(".product-card");
-
-  section
-    .querySelectorAll(".color-btn")
-    .forEach(btn=>{
-      btn.classList.remove("active");
-    });
-
+function selectColor(type, color, button){
+  const section = button.closest(".product-card");
+  section.querySelectorAll(".color-btn").forEach(btn => btn.classList.remove("active"));
   button.classList.add("active");
 
   products[type].color = color;
-
-  document.getElementById(
-    type+"ColorText"
-  ).textContent = color;
-
-  changeImage(type,color);
-
+  document.getElementById(type + "ColorText").textContent = color;
+  changeImage(type, color);
 }
-
 
 /* =========================
    ĐỔI ẢNH
 ========================= */
 
-function changeImage(type,color){
-
-  const image =
-    document.getElementById(
-      type+"Image"
-    );
-
-  const placeholder =
-    document.getElementById(
-      type+"Placeholder"
-    );
-
-  const placeholderColor =
-    document.getElementById(
-      type+"PlaceholderColor"
-    );
-
-  const url =
-    images[type][color];
+function changeImage(type, color){
+  const image = document.getElementById(type + "Image");
+  const placeholder = document.getElementById(type + "Placeholder");
+  const placeholderColor = document.getElementById(type + "PlaceholderColor");
+  const url = images[type][color];
 
   if(url){
-
     image.src = url;
-
-    image.style.display =
-      "block";
-
-    placeholder.style.display =
-      "none";
-
+    image.style.display = "block";
+    placeholder.style.display = "none";
   }else{
-
-    image.style.display =
-      "none";
-
-    placeholder.style.display =
-      "flex";
-
-    placeholderColor.textContent =
-      color.toUpperCase();
-
+    image.style.display = "none";
+    placeholder.style.display = "flex";
+    placeholderColor.textContent = color.toUpperCase();
   }
-
 }
-
 
 /* =========================
    CHỌN SIZE
 ========================= */
 
-function selectSize(type,size,button){
-
-  const section =
-    button.closest(".product-card");
-
-  section
-    .querySelectorAll(".size-btn")
-    .forEach(btn=>{
-      btn.classList.remove("active");
-    });
-
+function selectSize(type, size, button){
+  const section = button.closest(".product-card");
+  section.querySelectorAll(".size-btn").forEach(btn => btn.classList.remove("active"));
   button.classList.add("active");
 
   products[type].size = size;
-
-  document.getElementById(
-    type+"SizeText"
-  ).textContent = size;
-
+  document.getElementById(type + "SizeText").textContent = size;
 }
 
-
 /* =========================
-   THANH KÉO TÌM SIZE
+   THANH KÉO TÌM SIZE (CHIỀU CAO & CÂN NẶNG)
 ========================= */
 
 function updateSizeFinder(type){
+  const heightSlider = document.getElementById(type + "HeightSlider");
+  const weightSlider = document.getElementById(type + "WeightSlider");
 
-  const slider =
-    document.getElementById(
-      type+"Slider"
-    );
+  const height = Number(heightSlider.value);
+  const weight = Number(weightSlider.value);
 
-  const weight =
-    Number(slider.value);
+  document.getElementById(type + "Height").textContent = height;
+  document.getElementById(type + "Weight").textContent = weight;
 
-  document.getElementById(
-    type+"Weight"
-  ).textContent = weight;
-
-
-  let suggestedSize = "S";
-
+  let suggestedSize = "M";
 
   if(type === "boxy"){
-
-    if(weight <= 49){
-
+    if(height <= 160 || weight <= 50){
       suggestedSize = "S";
-
-    }else if(weight <= 60){
-
+    }else if(height <= 170 || weight <= 63){
       suggestedSize = "M";
-
     }else{
-
       suggestedSize = "L";
-
     }
-
   }
-
 
   if(type === "long"){
-
-    if(weight <= 50){
-
+    if(height <= 162 || weight <= 52){
       suggestedSize = "S";
-
-    }else if(weight <= 62){
-
+    }else if(height <= 172 || weight <= 65){
       suggestedSize = "M";
-
     }else{
-
       suggestedSize = "L";
-
     }
-
   }
 
-
-  document.getElementById(
-    type+"SuggestedSize"
-  ).textContent =
-    suggestedSize;
-
+  document.getElementById(type + "SuggestedSize").textContent = suggestedSize;
 }
-
 
 /* =========================
    SỐ LƯỢNG
 ========================= */
 
-function changeQty(type,amount){
-
+function changeQty(type, amount){
   products[type].qty += amount;
+  if(products[type].qty < 1) products[type].qty = 1;
+  if(products[type].qty > 10) products[type].qty = 10;
 
-  if(products[type].qty < 1){
-
-    products[type].qty = 1;
-
-  }
-
-  if(products[type].qty > 10){
-
-    products[type].qty = 10;
-
-  }
-
-  document.getElementById(
-    type+"Qty"
-  ).textContent =
-    products[type].qty;
-
+  document.getElementById(type + "Qty").textContent = products[type].qty;
 }
-
 
 /* =========================
    MỞ ĐẶT HÀNG
 ========================= */
 
 function openOrder(type){
-
-  const product =
-    products[type];
+  const product = products[type];
 
   if(!product.size){
-
-    alert(
-      "Vui lòng chọn size trước khi đặt hàng."
-    );
-
+    alert("Vui lòng chọn size trước khi đặt hàng.");
     return;
-
   }
 
   currentProduct = type;
 
-  document.getElementById(
-    "orderProduct"
-  ).textContent =
-    product.name;
+  document.getElementById("orderProduct").textContent = product.name;
+  document.getElementById("orderColor").textContent = product.color;
+  document.getElementById("orderSize").textContent = product.size;
+  document.getElementById("orderQty").textContent = product.qty;
+  document.getElementById("orderTotal").textContent = formatMoney(product.price * product.qty);
 
-  document.getElementById(
-    "orderColor"
-  ).textContent =
-    product.color;
-
-  document.getElementById(
-    "orderSize"
-  ).textContent =
-    product.size;
-
-  document.getElementById(
-    "orderQty"
-  ).textContent =
-    product.qty;
-
-  document.getElementById(
-    "orderTotal"
-  ).textContent =
-    formatMoney(
-      product.price *
-      product.qty
-    );
-
-  document.getElementById(
-    "orderModal"
-  ).classList.add(
-    "active"
-  );
-
+  document.getElementById("orderModal").classList.add("active");
 }
 
-
 /* =========================
-   CLOSE
+   CLOSE MODAL
 ========================= */
 
 function closeOrder(){
-
-  document.getElementById(
-    "orderModal"
-  ).classList.remove(
-    "active"
-  );
-
+  document.getElementById("orderModal").classList.remove("active");
 }
-
 
 /* =========================
    PAYMENT
 ========================= */
 
 function changePayment(){
+  const payment = document.querySelector('input[name="payment"]:checked').value;
+  const cod = document.getElementById("codCard");
+  const transfer = document.getElementById("transferCard");
+  const bank = document.getElementById("bankInfo");
 
-  const payment =
-    document.querySelector(
-      'input[name="payment"]:checked'
-    ).value;
-
-  const cod =
-    document.getElementById(
-      "codCard"
-    );
-
-  const transfer =
-    document.getElementById(
-      "transferCard"
-    );
-
-  const bank =
-    document.getElementById(
-      "bankInfo"
-    );
-
-  cod.classList.remove(
-    "active"
-  );
-
-  transfer.classList.remove(
-    "active"
-  );
+  cod.classList.remove("active");
+  transfer.classList.remove("active");
 
   if(payment === "COD"){
-
-    cod.classList.add(
-      "active"
-    );
-
-    bank.classList.remove(
-      "active"
-    );
-
+    cod.classList.add("active");
+    bank.classList.remove("active");
   }else{
-
-    transfer.classList.add(
-      "active"
-    );
-
-    bank.classList.add(
-      "active"
-    );
-
+    transfer.classList.add("active");
+    bank.classList.add("active");
   }
-
 }
-
 
 /* =========================
    COPY STK
 ========================= */
 
 function copyAccount(){
-
-  navigator.clipboard.writeText(
-    "070130993840"
-  );
-
-  alert(
-    "Đã sao chép số tài khoản."
-  );
-
+  navigator.clipboard.writeText("070130993840");
+  alert("Đã sao chép số tài khoản.");
 }
 
-
 /* =========================
-   GỬI ĐƠN THẬT
+   GỬI ĐƠN HÀNG
 ========================= */
 
 async function submitOrder(){
+  const name = document.getElementById("customerName").value.trim();
+  const phone = document.getElementById("customerPhone").value.trim();
+  const address = document.getElementById("customerAddress").value.trim();
+  const payment = document.querySelector('input[name="payment"]:checked').value;
 
-  const name =
-    document.getElementById(
-      "customerName"
-    ).value.trim();
+  if(!name){ alert("Vui lòng nhập họ và tên."); return; }
+  if(!phone){ alert("Vui lòng nhập số điện thoại."); return; }
+  if(!/^[0-9]{9,11}$/.test(phone)){ alert("Số điện thoại chưa đúng."); return; }
+  if(!address){ alert("Vui lòng nhập địa chỉ nhận hàng."); return; }
 
-  const phone =
-    document.getElementById(
-      "customerPhone"
-    ).value.trim();
-
-  const address =
-    document.getElementById(
-      "customerAddress"
-    ).value.trim();
-
-  const payment =
-    document.querySelector(
-      'input[name="payment"]:checked'
-    ).value;
-
-
-  if(!name){
-
-    alert(
-      "Vui lòng nhập họ và tên."
-    );
-
-    return;
-
-  }
-
-
-  if(!phone){
-
-    alert(
-      "Vui lòng nhập số điện thoại."
-    );
-
-    return;
-
-  }
-
-
-  if(!/^[0-9]{9,11}$/.test(phone)){
-
-    alert(
-      "Số điện thoại chưa đúng."
-    );
-
-    return;
-
-  }
-
-
-  if(!address){
-
-    alert(
-      "Vui lòng nhập địa chỉ nhận hàng."
-    );
-
-    return;
-
-  }
-
-
-  const product =
-    products[currentProduct];
-
-
-  const total =
-    product.price *
-    product.qty;
-
+  const product = products[currentProduct];
+  const total = product.price * product.qty;
 
   const order = {
-
-    product:
-      product.name,
-
-    color:
-      product.color,
-
-    size:
-      product.size,
-
-    quantity:
-      product.qty,
-
-    total:
-      total,
-
-    name:
-      name,
-
-    phone:
-      phone,
-
-    address:
-      address,
-
-    payment:
-      payment,
-
-    time:
-      new Date().toLocaleString(
-        "vi-VN"
-      )
-
+    product: product.name,
+    color: product.color,
+    size: product.size,
+    quantity: product.qty,
+    total: total,
+    name: name,
+    phone: phone,
+    address: address,
+    payment: payment,
+    time: new Date().toLocaleString("vi-VN")
   };
 
-
-  const button =
-    document.getElementById(
-      "confirmOrderBtn"
-    );
-
-
+  const button = document.getElementById("confirmOrderBtn");
   button.disabled = true;
-
-  button.textContent =
-    "ĐANG GỬI ĐƠN...";
-
+  button.textContent = "ĐANG GỬI ĐƠN...";
 
   try{
+    const response = await fetch("https://formsubmit.co/ajax/formebasic882@gmail.com", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        "_subject": "FORME - CÓ ĐƠN HÀNG MỚI",
+        "_template": "table",
+        "Sản phẩm": order.product,
+        "Màu": order.color,
+        "Size": order.size,
+        "Số lượng": order.quantity,
+        "Tổng tiền": formatMoney(order.total),
+        "Tên khách": order.name,
+        "Số điện thoại": order.phone,
+        "Địa chỉ": order.address,
+        "Thanh toán": order.payment,
+        "Thời gian": order.time
+      })
+    });
 
-    const response =
-      await fetch(
-        "https://formsubmit.co/ajax/formebasic882@gmail.com",
-        {
+    if(!response.ok) throw new Error("Send failed");
 
-          method:"POST",
-
-          headers:{
-            "Content-Type":
-              "application/json",
-
-            "Accept":
-              "application/json"
-          },
-
-          body:JSON.stringify({
-
-            "_subject":
-              "FORME - CÓ ĐƠN HÀNG MỚI",
-
-            "_template":
-              "table",
-
-            "Sản phẩm":
-              order.product,
-
-            "Màu":
-              order.color,
-
-            "Size":
-              order.size,
-
-            "Số lượng":
-              order.quantity,
-
-            "Tổng tiền":
-              formatMoney(
-                order.total
-              ),
-
-            "Tên khách":
-              order.name,
-
-            "Số điện thoại":
-              order.phone,
-
-            "Địa chỉ":
-              order.address,
-
-            "Thanh toán":
-              order.payment,
-
-            "Thời gian":
-              order.time
-
-          })
-
-        }
-      );
-
-
-    if(!response.ok){
-
-      throw new Error(
-        "Send failed"
-      );
-
-    }
-
-
-    localStorage.setItem(
-      "formeLastOrder",
-      JSON.stringify(order)
-    );
-
-
+    localStorage.setItem("formeLastOrder", JSON.stringify(order));
     showThankYou(order);
 
-
   }catch(error){
-
     console.error(error);
-
-    alert(
-      "Có lỗi khi gửi đơn. Vui lòng thử lại."
-    );
-
+    alert("Có lỗi khi gửi đơn. Vui lòng thử lại.");
   }finally{
-
     button.disabled = false;
-
-    button.textContent =
-      "XÁC NHẬN ĐẶT HÀNG";
-
+    button.textContent = "XÁC NHẬN ĐẶT HÀNG";
   }
-
 }
-
 
 /* =========================
    THANK YOU
 ========================= */
 
 function showThankYou(order){
-
   closeOrder();
+  document.getElementById("shopPage").style.display = "none";
+  document.getElementById("thankYouPage").classList.add("active");
 
-  document.getElementById(
-    "shopPage"
-  ).style.display =
-    "none";
-
-  document.getElementById(
-    "thankYouPage"
-  ).classList.add(
-    "active"
-  );
-
-
-  document.getElementById(
-    "thankSummary"
-  ).innerHTML = `
-
-    <strong>
-      ${order.product}
-    </strong>
-
-    <br>
-
-    Màu:
-    ${order.color}
-
-    <br>
-
-    Size:
-    ${order.size}
-
-    <br>
-
-    Số lượng:
-    ${order.quantity}
-
-    <br>
-
-    Tổng:
-    <strong>
-      ${formatMoney(order.total)}
-    </strong>
-
-    <br>
-
-    Thanh toán:
-    ${order.payment}
-
+  document.getElementById("thankSummary").innerHTML = `
+    <strong>${order.product}</strong><br>
+    Màu: ${order.color}<br>
+    Size: ${order.size}<br>
+    Số lượng: ${order.quantity}<br>
+    Tổng: <strong>${formatMoney(order.total)}</strong><br>
+    Thanh toán: ${order.payment}
   `;
 
-
-  window.scrollTo(
-    0,
-    0
-  );
-
+  window.scrollTo(0, 0);
 }
-
 
 /* =========================
    MUA TIẾP
 ========================= */
 
 function continueShopping(){
+  document.getElementById("thankYouPage").classList.remove("active");
+  document.getElementById("shopPage").style.display = "block";
 
-  document.getElementById(
-    "thankYouPage"
-  ).classList.remove(
-    "active"
-  );
+  document.getElementById("customerName").value = "";
+  document.getElementById("customerPhone").value = "";
+  document.getElementById("customerAddress").value = "";
 
-  document.getElementById(
-    "shopPage"
-  ).style.display =
-    "block";
-
-
-  document.getElementById(
-    "customerName"
-  ).value = "";
-
-  document.getElementById(
-    "customerPhone"
-  ).value = "";
-
-  document.getElementById(
-    "customerAddress"
-  ).value = "";
-
-
-  window.scrollTo(
-    0,
-    0
-  );
-
+  window.scrollTo(0, 0);
 }
 
+/* CLICK OUTSIDE TO CLOSE MODAL */
+document.getElementById("orderModal").addEventListener("click", function(e){
+  if(e.target === this) closeOrder();
+});
 
-/* =========================
-   CLICK NGOÀI FORM
-========================= */
-
-document.getElementById(
-  "orderModal"
-).addEventListener(
-  "click",
-  function(e){
-
-    if(e.target === this){
-
-      closeOrder();
-
-    }
-
-  }
-);
-
-
-/* Khởi tạo thanh size */
-
+/* Khởi tạo gợi ý size ban đầu */
 updateSizeFinder("boxy");
 updateSizeFinder("long");
 
