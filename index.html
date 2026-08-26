@@ -7,136 +7,377 @@
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,Helvetica,sans-serif;color:#111;background:#fff}
-header{padding:28px 20px;text-align:center;border-bottom:1px solid #eee}
-.logo{font-size:28px;font-weight:700;letter-spacing:6px}
-.tagline{font-size:11px;letter-spacing:2px;margin-top:8px;color:#777}
-main{max-width:600px;margin:auto;padding:30px 18px 60px}
-h2{font-size:18px;margin-bottom:20px;letter-spacing:1px}
-.product{border-bottom:1px solid #ddd;padding:25px 0}
-.placeholder{width:100%;height:330px;background:#f3f3f3;display:flex;justify-content:center;align-items:center;color:#aaa;font-size:13px;margin-bottom:18px}
-.product h3{font-size:17px;margin-bottom:7px}
-.price{font-size:15px;margin-bottom:18px}
-label{display:block;font-size:12px;margin:13px 0 6px;font-weight:bold}
-select,input,textarea{width:100%;padding:13px;border:1px solid #ccc;background:#fff;font-size:16px;border-radius:0}
-button{width:100%;background:#111;color:#fff;border:0;padding:15px;margin-top:18px;font-size:13px;letter-spacing:1px;cursor:pointer}
-button:disabled{opacity:.5}
 
-/* SIZE FINDER */
-.size-finder{
-  margin:30px 0;
-  padding:25px 20px;
-  background:#111;
-  color:#fff;
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  color:#111;
+  background:#fff;
 }
 
-.size-finder h2{
+body.no-scroll{overflow:hidden}
+
+header{
+  padding:28px 20px;
   text-align:center;
+  border-bottom:1px solid #eee;
+}
+
+.logo{
+  font-size:28px;
+  font-weight:700;
+  letter-spacing:6px;
+}
+
+.tagline{
+  font-size:11px;
+  letter-spacing:2px;
+  margin-top:8px;
+  color:#777;
+}
+
+main{
+  max-width:600px;
+  margin:auto;
+  padding:30px 18px 60px;
+}
+
+h2{
+  font-size:18px;
+  margin-bottom:20px;
+  letter-spacing:1px;
+}
+
+.product{
+  border-bottom:1px solid #ddd;
+  padding:25px 0;
+}
+
+.placeholder{
+  width:100%;
+  height:330px;
+  background:#f3f3f3;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:#aaa;
+  font-size:13px;
+  margin-bottom:18px;
+}
+
+.product h3{
+  font-size:17px;
   margin-bottom:7px;
 }
 
-.size-sub{
-  text-align:center;
-  color:#aaa;
+.price{
+  font-size:15px;
+  margin-bottom:18px;
+}
+
+label{
+  display:block;
   font-size:12px;
+  margin:15px 0 7px;
+  font-weight:bold;
+}
+
+select,input,textarea{
+  width:100%;
+  padding:13px;
+  border:1px solid #ccc;
+  background:#fff;
+  font-size:16px;
+  border-radius:0;
+}
+
+button{
+  width:100%;
+  background:#111;
+  color:#fff;
+  border:0;
+  padding:15px;
+  margin-top:18px;
+  font-size:13px;
+  letter-spacing:1px;
+  cursor:pointer;
+}
+
+button:disabled{opacity:.5}
+
+.size-picker-button{
+  background:#fff;
+  color:#111;
+  border:1px solid #111;
+  text-align:left;
+  margin-top:0;
+  padding:15px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.size-picked{
+  font-weight:bold;
+}
+
+.cart{
+  margin-top:35px;
+  padding:22px 0;
+  border-top:2px solid #111;
+}
+
+.cart-item{
+  padding:12px 0;
+  border-bottom:1px solid #eee;
+  font-size:14px;
+  line-height:1.6;
+}
+
+.remove{
+  background:none;
+  color:#888;
+  padding:0;
+  margin:5px 0 0;
+  text-align:left;
+  font-size:12px;
+}
+
+.total{
+  font-size:18px;
+  font-weight:bold;
+  margin-top:18px;
+}
+
+.checkout{margin-top:35px}
+
+.checkout input,
+.checkout textarea{
+  margin-bottom:12px;
+}
+
+.note{
+  font-size:12px;
+  color:#777;
+  line-height:1.6;
+  margin-top:15px;
+}
+
+footer{
+  text-align:center;
+  padding:30px 20px;
+  border-top:1px solid #eee;
+  font-size:11px;
+  color:#777;
+  line-height:1.8;
+}
+
+
+/* SIZE POPUP */
+
+#sizeModal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  z-index:9999;
+  align-items:flex-end;
+  justify-content:center;
+}
+
+.size-sheet{
+  width:100%;
+  max-width:600px;
+  max-height:92vh;
+  overflow-y:auto;
+  background:#fff;
+  padding:22px 20px 30px;
+  border-radius:18px 18px 0 0;
+}
+
+.sheet-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:6px;
+}
+
+.sheet-top h2{
+  margin:0;
+  font-size:18px;
+}
+
+.close-size{
+  width:auto;
+  background:none;
+  color:#111;
+  margin:0;
+  padding:8px;
+  font-size:24px;
+  line-height:1;
+}
+
+.sheet-sub{
+  font-size:12px;
+  color:#777;
   line-height:1.6;
   margin-bottom:25px;
 }
 
-.size-finder label{
+.manual-title{
+  font-size:11px;
+  letter-spacing:1px;
+  color:#777;
+  margin-bottom:10px;
+}
+
+.size-options{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+}
+
+.size-option{
+  margin:0;
+  background:#fff;
+  color:#111;
+  border:1px solid #ccc;
+  padding:14px 5px;
+  font-size:14px;
+}
+
+.size-option.active{
+  background:#111;
   color:#fff;
-  margin-top:20px;
+  border-color:#111;
 }
 
-.range-value{
-  font-size:28px;
+.divider{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin:25px 0;
+  color:#aaa;
+  font-size:10px;
+  letter-spacing:1px;
+}
+
+.divider:before,
+.divider:after{
+  content:"";
+  flex:1;
+  height:1px;
+  background:#ddd;
+}
+
+.finder-box{
+  background:#111;
+  color:#fff;
+  padding:22px 18px;
+}
+
+.finder-title{
+  font-size:16px;
+  letter-spacing:2px;
+  margin-bottom:5px;
+}
+
+.finder-sub{
+  font-size:11px;
+  color:#aaa;
+  line-height:1.6;
+  margin-bottom:20px;
+}
+
+.finder-box label{
+  color:#fff;
+  font-size:11px;
+}
+
+.range-number{
+  font-size:27px;
   font-weight:bold;
-  margin:8px 0;
+  margin:7px 0;
 }
 
-.size-finder input[type="range"]{
+.finder-box input[type=range]{
   padding:0;
   border:0;
   accent-color:white;
 }
 
-.finder-select{
-  background:#fff;
-  color:#111;
-}
-
 .recommend{
-  margin-top:28px;
-  padding:24px 15px;
+  margin-top:22px;
   border:1px solid #555;
+  padding:20px;
   text-align:center;
 }
 
-.recommend-small{
-  font-size:11px;
-  color:#aaa;
+.recommend-label{
+  font-size:10px;
   letter-spacing:1px;
+  color:#aaa;
 }
 
 .recommend-size{
-  font-size:52px;
+  font-size:48px;
   font-weight:bold;
-  margin:8px 0;
+  margin:6px 0;
 }
 
-.recommend-note{
-  font-size:12px;
+.recommend-text{
+  font-size:11px;
   color:#bbb;
   line-height:1.6;
 }
 
-/* SIZE TABLE */
-.size-details{
+.use-recommend{
+  background:#fff;
+  color:#111;
+  margin-top:15px;
+}
+
+.size-chart{
   margin-top:20px;
 }
 
-.size-details summary{
+.size-chart summary{
   cursor:pointer;
-  font-size:12px;
-  letter-spacing:1px;
   padding:15px 0;
-  border-bottom:1px solid #555;
+  font-size:11px;
+  letter-spacing:1px;
+  border-bottom:1px solid #ddd;
 }
 
 .table-wrap{
   overflow-x:auto;
-  margin-top:15px;
+  margin-top:12px;
 }
 
-.size-table{
+table{
   width:100%;
   min-width:520px;
   border-collapse:collapse;
-  font-size:12px;
+  font-size:11px;
 }
 
-.size-table th,
-.size-table td{
-  padding:12px 8px;
-  border-bottom:1px solid #444;
+th,td{
   text-align:center;
+  padding:11px 7px;
+  border-bottom:1px solid #ddd;
 }
 
-.size-table th{
-  color:#aaa;
-  font-size:10px;
+th{
+  font-size:9px;
+  color:#777;
 }
 
-.cart{margin-top:35px;padding:22px 0;border-top:2px solid #111}
-.cart-item{padding:12px 0;border-bottom:1px solid #eee;font-size:14px;line-height:1.6}
-.remove{background:none;color:#888;padding:0;margin:5px 0 0;text-align:left;font-size:12px}
-.total{font-size:18px;font-weight:bold;margin-top:18px}
-.checkout{margin-top:35px}
-.checkout input,.checkout textarea{margin-bottom:12px}
-.note{font-size:12px;color:#777;line-height:1.6;margin-top:15px}
-footer{text-align:center;padding:30px 20px;border-top:1px solid #eee;font-size:11px;color:#777;line-height:1.8}
+.confirm-size{
+  margin-top:22px;
+}
+
 
 /* THANK YOU */
+
 #thankyou{
   display:none;
   min-height:100vh;
@@ -145,7 +386,10 @@ footer{text-align:center;padding:30px 20px;border-top:1px solid #eee;font-size:1
   text-align:center;
 }
 
-.thank-container{width:100%;max-width:500px}
+.thank-container{
+  width:100%;
+  max-width:500px;
+}
 
 #thankyou h1{
   font-size:30px;
@@ -176,9 +420,24 @@ footer{text-align:center;padding:30px 20px;border-top:1px solid #eee;font-size:1
 }
 
 .payment-row{margin-bottom:18px}
-.payment-label{font-size:11px;color:#888;letter-spacing:1px;margin-bottom:5px}
-.payment-value{font-size:17px;font-weight:bold;word-break:break-word}
-.payment-total{font-size:24px;font-weight:bold}
+
+.payment-label{
+  font-size:11px;
+  color:#888;
+  letter-spacing:1px;
+  margin-bottom:5px;
+}
+
+.payment-value{
+  font-size:17px;
+  font-weight:bold;
+  word-break:break-word;
+}
+
+.payment-total{
+  font-size:24px;
+  font-weight:bold;
+}
 
 .payment-note{
   margin-top:22px;
@@ -190,6 +449,7 @@ footer{text-align:center;padding:30px 20px;border-top:1px solid #eee;font-size:1
 #thankyou button{max-width:320px}
 </style>
 </head>
+
 
 <body>
 
@@ -204,29 +464,39 @@ footer{text-align:center;padding:30px 20px;border-top:1px solid #eee;font-size:1
 
 <h2>SHOP</h2>
 
+
 <!-- BOXY -->
+
 <div class="product">
 
-<div class="placeholder">BOXY TEE — PRODUCT IMAGE</div>
+<div class="placeholder">
+BOXY TEE — PRODUCT IMAGE
+</div>
 
 <h3>FORME BOXY TEE</h3>
 <div class="price">240.000đ</div>
 
 <label>MÀU</label>
+
 <select id="boxyColor">
 <option>Đen</option>
 <option>Trắng</option>
 </select>
 
 <label>SIZE</label>
-<select id="boxySize">
-<option>S</option>
-<option>M</option>
-<option>L</option>
-<option>XL</option>
-</select>
+
+<button
+class="size-picker-button"
+onclick="openSizeModal('boxy')"
+>
+<span id="boxySizeText">CHỌN SIZE / TÌM SIZE PHÙ HỢP</span>
+<span>→</span>
+</button>
+
+<input type="hidden" id="boxySize" value="">
 
 <label>SỐ LƯỢNG</label>
+
 <select id="boxyQty">
 <option value="1">1</option>
 <option value="2">2</option>
@@ -241,29 +511,39 @@ THÊM VÀO ĐƠN
 
 </div>
 
+
 <!-- LONG SLEEVE -->
+
 <div class="product">
 
-<div class="placeholder">LONG SLEEVE — PRODUCT IMAGE</div>
+<div class="placeholder">
+LONG SLEEVE — PRODUCT IMAGE
+</div>
 
 <h3>FORME LONG SLEEVE</h3>
 <div class="price">260.000đ</div>
 
 <label>MÀU</label>
+
 <select id="longColor">
 <option>Đen</option>
 <option>Trắng</option>
 </select>
 
 <label>SIZE</label>
-<select id="longSize">
-<option>S</option>
-<option>M</option>
-<option>L</option>
-<option>XL</option>
-</select>
+
+<button
+class="size-picker-button"
+onclick="openSizeModal('long')"
+>
+<span id="longSizeText">CHỌN SIZE / TÌM SIZE PHÙ HỢP</span>
+<span>→</span>
+</button>
+
+<input type="hidden" id="longSize" value="">
 
 <label>SỐ LƯỢNG</label>
+
 <select id="longQty">
 <option value="1">1</option>
 <option value="2">2</option>
@@ -275,149 +555,6 @@ THÊM VÀO ĐƠN
 <button onclick="addToCart('Long Sleeve',260000,'longColor','longSize','longQty')">
 THÊM VÀO ĐƠN
 </button>
-
-</div>
-
-<!-- SIZE FINDER -->
-
-<div class="size-finder">
-
-<h2>FIND YOUR FORME</h2>
-
-<div class="size-sub">
-Chọn mẫu áo, chiều cao và cân nặng.<br>
-FORME sẽ gợi ý size phù hợp cho bạn.
-</div>
-
-<label>MẪU ÁO</label>
-
-<select id="finderProduct" class="finder-select" onchange="findSize()">
-<option value="boxy">Boxy T-Shirt</option>
-<option value="long">Tay Dài Oversize</option>
-</select>
-
-<label>CHIỀU CAO</label>
-
-<div class="range-value">
-<span id="heightValue">165</span> cm
-</div>
-
-<input
-type="range"
-id="heightRange"
-min="150"
-max="190"
-value="165"
-oninput="updateFinder()"
->
-
-<label>CÂN NẶNG</label>
-
-<div class="range-value">
-<span id="weightValue">55</span> kg
-</div>
-
-<input
-type="range"
-id="weightRange"
-min="40"
-max="100"
-value="55"
-oninput="updateFinder()"
->
-
-<div class="recommend">
-
-<div class="recommend-small">
-FORME GỢI Ý
-</div>
-
-<div class="recommend-size" id="recommendedSize">
-S
-</div>
-
-<div class="recommend-note" id="recommendNote">
-Dựa trên chiều cao và cân nặng bạn đã chọn.
-</div>
-
-</div>
-
-<details class="size-details">
-
-<summary>
-XEM BẢNG THÔNG SỐ CHI TIẾT
-</summary>
-
-<div id="boxyTable" class="table-wrap">
-
-<table class="size-table">
-
-<tr>
-<th>SIZE</th>
-<th>DÀI ÁO</th>
-<th>NGỰC</th>
-<th>VAI</th>
-<th>TAY</th>
-<th>CHIỀU CAO</th>
-<th>CÂN NẶNG</th>
-</tr>
-
-<tr>
-<td>S</td><td>66</td><td>55</td><td>52</td><td>21</td><td>150–164</td><td>45–56</td>
-</tr>
-
-<tr>
-<td>M</td><td>68</td><td>57</td><td>54</td><td>22</td><td>165–173</td><td>57–67</td>
-</tr>
-
-<tr>
-<td>L</td><td>70</td><td>59</td><td>56</td><td>23</td><td>174–182</td><td>68–78</td>
-</tr>
-
-<tr>
-<td>XL</td><td>72</td><td>61</td><td>58</td><td>24</td><td>180–188</td><td>79–88</td>
-</tr>
-
-</table>
-
-</div>
-
-
-<div id="longTable" class="table-wrap" style="display:none">
-
-<table class="size-table">
-
-<tr>
-<th>SIZE</th>
-<th>DÀI ÁO</th>
-<th>NGỰC</th>
-<th>VAI</th>
-<th>TAY</th>
-<th>CHIỀU CAO</th>
-<th>CÂN NẶNG</th>
-</tr>
-
-<tr>
-<td>S</td><td>70</td><td>56</td><td>53</td><td>57</td><td>152–165</td><td>45–55</td>
-</tr>
-
-<tr>
-<td>M</td><td>72</td><td>58</td><td>55</td><td>59</td><td>166–174</td><td>56–68</td>
-</tr>
-
-<tr>
-<td>L</td><td>74</td><td>60</td><td>57</td><td>61</td><td>175–183</td><td>69–80</td>
-</tr>
-
-<tr>
-<td>XL</td><td>76</td><td>62</td><td>59</td><td>63</td><td>182–190</td><td>81–95</td>
-</tr>
-
-</table>
-
-</div>
-
-</details>
 
 </div>
 
@@ -449,9 +586,17 @@ Tổng: <span id="total">0đ</span>
 
 <input id="phone" type="tel" placeholder="Số điện thoại">
 
-<textarea id="address" rows="3" placeholder="Địa chỉ nhận hàng"></textarea>
+<textarea
+id="address"
+rows="3"
+placeholder="Địa chỉ nhận hàng"
+></textarea>
 
-<textarea id="note" rows="2" placeholder="Ghi chú (không bắt buộc)"></textarea>
+<textarea
+id="note"
+rows="2"
+placeholder="Ghi chú (không bắt buộc)"
+></textarea>
 
 <button id="orderButton" onclick="submitOrder()">
 ĐẶT HÀNG
@@ -471,6 +616,138 @@ Instagram: @formebasic.vn
 </footer>
 
 </div>
+
+
+
+<!-- SIZE MODAL -->
+
+<div id="sizeModal">
+
+<div class="size-sheet">
+
+<div class="sheet-top">
+
+<h2>CHỌN SIZE</h2>
+
+<button class="close-size" onclick="closeSizeModal()">
+×
+</button>
+
+</div>
+
+<div class="sheet-sub" id="modalProductName">
+FORME BOXY TEE
+</div>
+
+
+<div class="manual-title">
+BẠN ĐÃ BIẾT SIZE?
+</div>
+
+<div class="size-options">
+
+<button class="size-option" onclick="manualSize('S')">S</button>
+<button class="size-option" onclick="manualSize('M')">M</button>
+<button class="size-option" onclick="manualSize('L')">L</button>
+<button class="size-option" onclick="manualSize('XL')">XL</button>
+
+</div>
+
+
+<div class="divider">
+HOẶC TÌM SIZE PHÙ HỢP
+</div>
+
+
+<div class="finder-box">
+
+<div class="finder-title">
+FIND YOUR FORME
+</div>
+
+<div class="finder-sub">
+Kéo chiều cao và cân nặng để FORME gợi ý size phù hợp.
+</div>
+
+
+<label>CHIỀU CAO</label>
+
+<div class="range-number">
+<span id="heightValue">165</span> cm
+</div>
+
+<input
+type="range"
+id="heightRange"
+min="150"
+max="190"
+value="165"
+oninput="updateFinder()"
+>
+
+
+<label>CÂN NẶNG</label>
+
+<div class="range-number">
+<span id="weightValue">55</span> kg
+</div>
+
+<input
+type="range"
+id="weightRange"
+min="40"
+max="100"
+value="55"
+oninput="updateFinder()"
+>
+
+
+<div class="recommend">
+
+<div class="recommend-label">
+FORME GỢI Ý
+</div>
+
+<div class="recommend-size" id="recommendedSize">
+S
+</div>
+
+<div class="recommend-text" id="recommendText">
+Dựa trên chiều cao và cân nặng bạn đã chọn.
+</div>
+
+<button class="use-recommend" onclick="useRecommendedSize()">
+CHỌN SIZE NÀY
+</button>
+
+</div>
+
+</div>
+
+
+<details class="size-chart">
+
+<summary>
+XEM BẢNG THÔNG SỐ CHI TIẾT
+</summary>
+
+<div class="table-wrap">
+
+<table id="sizeTable"></table>
+
+</div>
+
+</details>
+
+
+<button class="confirm-size" onclick="confirmSize()">
+XÁC NHẬN SIZE
+</button>
+
+</div>
+
+</div>
+
 
 
 <!-- THANK YOU -->
@@ -523,83 +800,140 @@ Sau khi kiểm tra thanh toán, FORME sẽ liên hệ xác nhận đơn với b�
 
 </div>
 
-<button onclick="backToShop()">BACK TO FORME</button>
+<button onclick="backToShop()">
+BACK TO FORME
+</button>
 
 </div>
+
 </div>
 
 
 <script>
 
 let cart=[];
+let currentProduct="";
+let tempSize="";
+let recommendedSize="S";
+
+
+const sizeData={
+
+boxy:[
+{size:"S",length:66,chest:55,shoulder:52,sleeve:21,h1:150,h2:164,w1:45,w2:56},
+{size:"M",length:68,chest:57,shoulder:54,sleeve:22,h1:165,h2:173,w1:57,w2:67},
+{size:"L",length:70,chest:59,shoulder:56,sleeve:23,h1:174,h2:182,w1:68,w2:78},
+{size:"XL",length:72,chest:61,shoulder:58,sleeve:24,h1:180,h2:188,w1:79,w2:88}
+],
+
+long:[
+{size:"S",length:70,chest:56,shoulder:53,sleeve:57,h1:152,h2:165,w1:45,w2:55},
+{size:"M",length:72,chest:58,shoulder:55,sleeve:59,h1:166,h2:174,w1:56,w2:68},
+{size:"L",length:74,chest:60,shoulder:57,sleeve:61,h1:175,h2:183,w1:69,w2:80},
+{size:"XL",length:76,chest:62,shoulder:59,sleeve:63,h1:182,h2:190,w1:81,w2:95}
+]
+
+};
+
 
 function money(number){
 return number.toLocaleString("vi-VN")+"đ";
 }
 
 
-/* SIZE FINDER */
+/* SIZE POPUP */
+
+function openSizeModal(product){
+
+currentProduct=product;
+
+const currentValue=
+document.getElementById(
+product==="boxy" ? "boxySize" : "longSize"
+).value;
+
+tempSize=currentValue;
+
+document.getElementById("modalProductName").innerText=
+product==="boxy"
+? "FORME BOXY TEE"
+: "FORME LONG SLEEVE";
+
+document.getElementById("heightRange").value=165;
+document.getElementById("weightRange").value=55;
+
+renderSizeTable();
+updateFinder();
+updateSizeButtons();
+
+document.getElementById("sizeModal").style.display="flex";
+document.body.classList.add("no-scroll");
+
+}
+
+
+function closeSizeModal(){
+
+document.getElementById("sizeModal").style.display="none";
+document.body.classList.remove("no-scroll");
+
+}
+
+
+function manualSize(size){
+
+tempSize=size;
+updateSizeButtons();
+
+}
+
+
+function updateSizeButtons(){
+
+document.querySelectorAll(".size-option").forEach(function(button){
+
+button.classList.toggle(
+"active",
+button.innerText===tempSize
+);
+
+});
+
+}
+
 
 function updateFinder(){
 
-document.getElementById("heightValue").innerText=
-document.getElementById("heightRange").value;
+const height=
+Number(document.getElementById("heightRange").value);
 
-document.getElementById("weightValue").innerText=
-document.getElementById("weightRange").value;
+const weight=
+Number(document.getElementById("weightRange").value);
 
-findSize();
-}
+document.getElementById("heightValue").innerText=height;
+document.getElementById("weightValue").innerText=weight;
 
-
-function findSize(){
-
-const product=document.getElementById("finderProduct").value;
-const height=Number(document.getElementById("heightRange").value);
-const weight=Number(document.getElementById("weightRange").value);
-
-let sizes;
-
-if(product==="boxy"){
-
-sizes=[
-{size:"S",h1:150,h2:164,w1:45,w2:56},
-{size:"M",h1:165,h2:173,w1:57,w2:67},
-{size:"L",h1:174,h2:182,w1:68,w2:78},
-{size:"XL",h1:180,h2:188,w1:79,w2:88}
-];
-
-document.getElementById("boxyTable").style.display="block";
-document.getElementById("longTable").style.display="none";
-
-}else{
-
-sizes=[
-{size:"S",h1:152,h2:165,w1:45,w2:55},
-{size:"M",h1:166,h2:174,w1:56,w2:68},
-{size:"L",h1:175,h2:183,w1:69,w2:80},
-{size:"XL",h1:182,h2:190,w1:81,w2:95}
-];
-
-document.getElementById("boxyTable").style.display="none";
-document.getElementById("longTable").style.display="block";
-
-}
+const sizes=sizeData[currentProduct];
 
 let best=null;
 let bestScore=999999;
 
 sizes.forEach(function(s){
 
-let hCenter=(s.h1+s.h2)/2;
-let wCenter=(s.w1+s.w2)/2;
+const hc=(s.h1+s.h2)/2;
+const wc=(s.w1+s.w2)/2;
 
 let score=
-Math.abs(height-hCenter)/5+
-Math.abs(weight-wCenter)/5;
+Math.abs(height-hc)/5+
+Math.abs(weight-wc)/5;
 
-if(height>=s.h1 && height<=s.h2) score-=2;
-if(weight>=s.w1 && weight<=s.w2) score-=2;
+if(height>=s.h1 && height<=s.h2){
+score-=2;
+}
+
+if(weight>=s.w1 && weight<=s.w2){
+score-=2;
+}
 
 if(score<bestScore){
 bestScore=score;
@@ -608,9 +942,13 @@ best=s;
 
 });
 
-document.getElementById("recommendedSize").innerText=best.size;
+recommendedSize=best.size;
 
-let note="Dựa trên chiều cao và cân nặng bạn đã chọn.";
+document.getElementById("recommendedSize").innerText=
+recommendedSize;
+
+let text=
+"Dựa trên chiều cao và cân nặng bạn đã chọn.";
 
 if(
 height<best.h1 ||
@@ -618,10 +956,104 @@ height>best.h2 ||
 weight<best.w1 ||
 weight>best.w2
 ){
-note="Thông số của bạn nằm giữa các size. Đây là size gần nhất FORME gợi ý.";
+
+text=
+"Thông số của bạn nằm giữa các size. Đây là size gần nhất FORME gợi ý.";
+
 }
 
-document.getElementById("recommendNote").innerText=note;
+document.getElementById("recommendText").innerText=text;
+
+}
+
+
+function useRecommendedSize(){
+
+tempSize=recommendedSize;
+updateSizeButtons();
+
+document.querySelector(".confirm-size").scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+function confirmSize(){
+
+if(!tempSize){
+
+alert("Vui lòng chọn size hoặc dùng FIND YOUR FORME.");
+
+return;
+
+}
+
+const inputId=
+currentProduct==="boxy"
+? "boxySize"
+: "longSize";
+
+const textId=
+currentProduct==="boxy"
+? "boxySizeText"
+: "longSizeText";
+
+document.getElementById(inputId).value=tempSize;
+
+document.getElementById(textId).innerHTML=
+'ĐÃ CHỌN SIZE <span class="size-picked">'+tempSize+"</span>";
+
+closeSizeModal();
+
+}
+
+
+function renderSizeTable(){
+
+const sizes=sizeData[currentProduct];
+
+let html=`
+
+<tr>
+<th>SIZE</th>
+<th>DÀI ÁO</th>
+<th>NGỰC</th>
+<th>VAI</th>
+<th>TAY</th>
+<th>CHIỀU CAO</th>
+<th>CÂN NẶNG</th>
+</tr>
+
+`;
+
+sizes.forEach(function(s){
+
+html+=`
+
+<tr>
+
+<td><strong>${s.size}</strong></td>
+
+<td>${s.length}</td>
+
+<td>${s.chest}</td>
+
+<td>${s.shoulder}</td>
+
+<td>${s.sleeve}</td>
+
+<td>${s.h1}–${s.h2}</td>
+
+<td>${s.w1}–${s.w2}</td>
+
+</tr>
+
+`;
+
+});
+
+document.getElementById("sizeTable").innerHTML=html;
 
 }
 
@@ -634,11 +1066,28 @@ const color=document.getElementById(colorId).value;
 const size=document.getElementById(sizeId).value;
 const qty=Number(document.getElementById(qtyId).value);
 
-cart.push({product,price,color,size,qty});
+if(!size){
+
+alert("Vui lòng chọn size trước.");
+
+return;
+
+}
+
+cart.push({
+product,
+price,
+color,
+size,
+qty
+});
 
 renderCart();
 
-document.querySelector(".cart").scrollIntoView({behavior:"smooth"});
+document.querySelector(".cart").scrollIntoView({
+behavior:"smooth"
+});
+
 }
 
 
@@ -648,11 +1097,13 @@ const container=document.getElementById("cartItems");
 
 if(cart.length===0){
 
-container.innerHTML='<p style="font-size:13px;color:#888;">Chưa có sản phẩm.</p>';
+container.innerHTML=
+'<p style="font-size:13px;color:#888;">Chưa có sản phẩm.</p>';
 
 document.getElementById("total").innerText="0đ";
 
 return;
+
 }
 
 let html="";
@@ -665,6 +1116,7 @@ const subtotal=item.price*item.qty;
 total+=subtotal;
 
 html+=`
+
 <div class="cart-item">
 
 <strong>${item.product}</strong><br>
@@ -675,23 +1127,32 @@ Số lượng: ${item.qty}<br>
 
 ${money(subtotal)}
 
-<button class="remove" onclick="removeItem(${index})">
+<button
+class="remove"
+onclick="removeItem(${index})"
+>
 XÓA
 </button>
 
 </div>
+
 `;
 
 });
 
 container.innerHTML=html;
-document.getElementById("total").innerText=money(total);
+
+document.getElementById("total").innerText=
+money(total);
+
 }
 
 
 function removeItem(index){
+
 cart.splice(index,1);
 renderCart();
+
 }
 
 
@@ -699,27 +1160,47 @@ renderCart();
 
 async function submitOrder(){
 
-const name=document.getElementById("name").value.trim();
-const phone=document.getElementById("phone").value.trim();
-const address=document.getElementById("address").value.trim();
-const note=document.getElementById("note").value.trim();
+const name=
+document.getElementById("name").value.trim();
+
+const phone=
+document.getElementById("phone").value.trim();
+
+const address=
+document.getElementById("address").value.trim();
+
+const note=
+document.getElementById("note").value.trim();
+
 
 if(cart.length===0){
+
 alert("Vui lòng chọn sản phẩm.");
+
 return;
+
 }
 
+
 if(!name||!phone||!address){
-alert("Vui lòng nhập đầy đủ họ tên, số điện thoại và địa chỉ.");
+
+alert(
+"Vui lòng nhập đầy đủ họ tên, số điện thoại và địa chỉ."
+);
+
 return;
+
 }
+
 
 let total=0;
 let orderText="";
 
+
 cart.forEach(function(item,index){
 
 const subtotal=item.price*item.qty;
+
 total+=subtotal;
 
 orderText+=
@@ -732,14 +1213,20 @@ item.product+
 
 });
 
-const transferContent="FORME "+phone;
 
-const button=document.getElementById("orderButton");
+const transferContent=
+"FORME "+phone;
+
+
+const button=
+document.getElementById("orderButton");
 
 button.disabled=true;
 button.innerText="ĐANG GỬI ĐƠN...";
 
-const formData=new FormData();
+
+const formData=
+new FormData();
 
 formData.append("Họ tên",name);
 formData.append("Số điện thoại",phone);
@@ -750,14 +1237,18 @@ formData.append("Ghi chú",note||"Không có");
 formData.append("Nội dung chuyển khoản",transferContent);
 formData.append("_subject","ĐƠN HÀNG MỚI - FORME");
 
+
 try{
 
-const response=await fetch(
+const response=
+await fetch(
 "https://formsubmit.co/ajax/formebasic882@gmail.com",
 {
 method:"POST",
 body:formData,
-headers:{"Accept":"application/json"}
+headers:{
+"Accept":"application/json"
+}
 }
 );
 
@@ -765,17 +1256,26 @@ if(!response.ok){
 throw new Error("Không gửi được đơn");
 }
 
-document.getElementById("paymentTotal").innerText=money(total);
-document.getElementById("paymentContent").innerText=transferContent;
+
+document.getElementById("paymentTotal").innerText=
+money(total);
+
+document.getElementById("paymentContent").innerText=
+transferContent;
+
 
 document.getElementById("shop").style.display="none";
+
 document.getElementById("thankyou").style.display="flex";
 
 window.scrollTo(0,0);
 
+
 }catch(error){
 
-alert("Chưa gửi được đơn. Vui lòng thử lại hoặc liên hệ FORME qua Instagram @formebasic.vn");
+alert(
+"Chưa gửi được đơn. Vui lòng thử lại hoặc liên hệ FORME qua Instagram @formebasic.vn"
+);
 
 }finally{
 
@@ -790,6 +1290,7 @@ button.innerText="ĐẶT HÀNG";
 function backToShop(){
 
 cart=[];
+
 renderCart();
 
 document.getElementById("name").value="";
@@ -797,13 +1298,22 @@ document.getElementById("phone").value="";
 document.getElementById("address").value="";
 document.getElementById("note").value="";
 
+document.getElementById("boxySize").value="";
+document.getElementById("longSize").value="";
+
+document.getElementById("boxySizeText").innerText=
+"CHỌN SIZE / TÌM SIZE PHÙ HỢP";
+
+document.getElementById("longSizeText").innerText=
+"CHỌN SIZE / TÌM SIZE PHÙ HỢP";
+
 document.getElementById("thankyou").style.display="none";
+
 document.getElementById("shop").style.display="block";
 
 window.scrollTo(0,0);
-}
 
-updateFinder();
+}
 
 </script>
 
