@@ -35,6 +35,52 @@ button{
 body.modal-open{
   overflow:hidden;
 }
+  .freeship-bar{
+  height:28px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#f4f4f4;
+  color:#777;
+  font-size:9px;
+  letter-spacing:1.2px;
+  text-align:center;
+  position:sticky;
+  top:0;
+  z-index:110;
+}
+  /* =========================
+   FREESHIP BAR
+========================= */
+
+.freeship-bar{
+  height:28px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#f4f4f4;
+  color:#666;
+  font-size:9px;
+  letter-spacing:1.2px;
+  text-align:center;
+  position:sticky;
+  top:0;
+  z-index:110;
+}
+
+/* SALE PRICE */
+
+.old-price{
+  color:#999;
+  text-decoration:line-through;
+  margin-right:7px;
+  font-size:.9em;
+}
+
+.sale-price{
+  color:#111;
+  font-weight:700;
+}
 
 /* =========================
    HEADER
@@ -48,7 +94,7 @@ header{
   padding:0 18px;
   border-bottom:1px solid #eee;
   position:sticky;
-  top:0;
+  top:28px;
   background:rgba(255,255,255,.96);
   backdrop-filter:blur(10px);
   z-index:100;
@@ -98,7 +144,7 @@ header{
   margin:0 auto;
   padding:0 18px 20px;
   position:sticky;
-  top:64px;
+  top:92px;
   z-index:90;
   background:#fff;
 }
@@ -327,6 +373,17 @@ header{
 .price{
   margin-top:10px;
   font-size:18px;
+}
+  .old-price{
+  color:#999;
+  text-decoration:line-through;
+  margin-right:8px;
+  font-weight:400;
+}
+
+.sale-price{
+  color:#111;
+  font-weight:700;
 }
 
 .description{
@@ -1017,7 +1074,7 @@ header{
   }
 
   .category-wrap{
-    top:64px;
+    top:92px;
   }
 
   .featured{
@@ -1069,7 +1126,9 @@ header{
 <body>
 
 <div id="shopPage">
-
+<div class="freeship-bar">
+  FREESHIP CHO ĐƠN HÀNG TỪ 500.000Đ
+</div>
 <header>
   <div class="logo">FORME</div>
   <div class="header-sub">NOTHING EXTRA. JUST THE RIGHT FORM.</div>
@@ -1121,7 +1180,10 @@ header{
 
       <div class="featured-info">
         <div class="featured-name">BOXY T-SHIRT — BLACK</div>
-        <div class="featured-price">240.000đ</div>
+        <div class="featured-price">
+  <span class="old-price">240.000đ</span>
+  <span class="sale-price">189.000đ</span>
+</div>
 
         <button class="featured-btn" onclick="goToProduct('boxy','Black')">
           XEM SẢN PHẨM
@@ -1136,7 +1198,10 @@ header{
 
       <div class="featured-info">
         <div class="featured-name">BOXY T-SHIRT — WHITE</div>
-        <div class="featured-price">240.000đ</div>
+        <div class="featured-price">
+  <span class="old-price">240.000đ</span>
+  <span class="sale-price">189.000đ</span>
+</div>
 
         <button class="featured-btn" onclick="goToProduct('boxy','White')">
           XEM SẢN PHẨM
@@ -1151,7 +1216,10 @@ header{
 
       <div class="featured-info">
         <div class="featured-name">LONG SLEEVE — BLACK</div>
-        <div class="featured-price">290.000đ</div>
+        <div class="featured-price">
+  <span class="old-price">290.000đ</span>
+  <span class="sale-price">229.000đ</span>
+</div>
 
         <button class="featured-btn" onclick="goToProduct('long','Black')">
           XEM SẢN PHẨM
@@ -1166,7 +1234,10 @@ header{
 
       <div class="featured-info">
         <div class="featured-name">LONG SLEEVE — WHITE</div>
-        <div class="featured-price">290.000đ</div>
+        <div class="featured-price">
+  <span class="old-price">290.000đ</span>
+  <span class="sale-price">229.000đ</span>
+</div>
 
         <button class="featured-btn" onclick="goToProduct('long','White')">
           XEM SẢN PHẨM
@@ -1220,7 +1291,10 @@ header{
 
       <h2 class="product-name">BOXY T-SHIRT</h2>
 
-      <div class="price">240.000đ</div>
+      <div class="price">
+  <span class="old-price">240.000đ</span>
+  <span class="sale-price">189.000đ</span>
+</div>
 
       <div class="description">
         Áo thun boxy basic, form gọn và dễ phối.
@@ -1532,7 +1606,10 @@ header{
 
       <h2 class="product-name">LONG SLEEVE OVERSIZE</h2>
 
-      <div class="price">290.000đ</div>
+  <div class="price">
+  <span class="old-price">290.000đ</span>
+  <span class="sale-price">229.000đ</span>
+</div>
 
       <div class="description">
         Áo tay dài oversize basic, form rộng thoải mái,
@@ -2081,8 +2158,10 @@ header{
    PRICE
 ========================= */
 
-const BOXY_PRICE = 240000;
-const LONG_PRICE = 290000;
+const BOXY_PRICE = 189000;
+const LONG_PRICE = 229000;
+  const FREE_SHIP_MIN = 500000;
+const SHIPPING_FEE = 30000;
 
 /* =========================
    IMAGE CONFIG
@@ -2867,6 +2946,21 @@ function getCartTotal(){
   );
 
 }
+function getShippingFee(){
+
+  const subtotal = getCartTotal();
+
+  return subtotal >= FREE_SHIP_MIN
+    ? 0
+    : SHIPPING_FEE;
+
+}
+
+function getOrderTotal(){
+
+  return getCartTotal() + getShippingFee();
+
+}  
 
 /* =========================
    RENDER CART
@@ -3081,18 +3175,61 @@ function renderCheckoutSummary(){
 
   html += `
 
-    <div class="summary-total">
-      <span>Tổng</span>
+const subtotal = getCartTotal();
+const shipping = getShippingFee();
+const total = getOrderTotal();
 
-      <span>
-        ${formatMoney(
-          getCartTotal()
-        )}
-      </span>
-    </div>
+html += `
 
-  `;
+  <div style="
+    display:flex;
+    justify-content:space-between;
+    margin-top:12px;
+  ">
+    <span>Tạm tính</span>
+    <span>${formatMoney(subtotal)}</span>
+  </div>
 
+  <div style="
+    display:flex;
+    justify-content:space-between;
+    margin-top:7px;
+  ">
+    <span>Phí vận chuyển</span>
+    <span>
+      ${shipping === 0 ? "FREESHIP" : formatMoney(shipping)}
+    </span>
+  </div>
+
+  ${
+    subtotal < FREE_SHIP_MIN
+      ? `
+        <div style="
+          margin-top:9px;
+          font-size:10px;
+          color:#777;
+        ">
+          Mua thêm ${formatMoney(FREE_SHIP_MIN - subtotal)}
+          để được FREESHIP.
+        </div>
+      `
+      : `
+        <div style="
+          margin-top:9px;
+          font-size:10px;
+          font-weight:700;
+        ">
+          ✓ Đơn hàng của bạn được FREESHIP.
+        </div>
+      `
+  }
+
+  <div class="summary-total">
+    <span>Tổng thanh toán</span>
+    <span>${formatMoney(total)}</span>
+  </div>
+
+`;
   box.innerHTML = html;
 
 }
@@ -3360,8 +3497,9 @@ async function submitOrder(){
   const orderCode =
     createOrderCode();
 
-  const total =
-    getCartTotal();
+  const subtotal = getCartTotal();
+const shipping = getShippingFee();
+const total = getOrderTotal();
 
   const orderItemsText =
     cart
@@ -3390,7 +3528,9 @@ async function submitOrder(){
       ...cart
     ],
 
-    total,
+    subtotal,
+shipping,
+total,
 
     name,
 
@@ -3443,9 +3583,16 @@ async function submitOrder(){
             "Sản phẩm":
               orderItemsText,
 
-            "Tổng tiền":
-              formatMoney(total),
+        "Tiền sản phẩm":
+  formatMoney(subtotal),
 
+"Phí vận chuyển":
+  shipping === 0
+    ? "FREESHIP"
+    : formatMoney(shipping),
+
+"Tổng thanh toán":
+  formatMoney(total),
             "Tên khách":
               name,
 
@@ -3605,12 +3752,28 @@ function showThankYou(order){
 
       <br>
 
-      Tổng:
-      <strong>
-        ${formatMoney(
-          order.total
-        )}
-      </strong>
+     Tiền sản phẩm:
+<strong>
+  ${formatMoney(order.subtotal)}
+</strong>
+
+<br>
+
+Phí vận chuyển:
+<strong>
+  ${
+    order.shipping === 0
+      ? "FREESHIP"
+      : formatMoney(order.shipping)
+  }
+</strong>
+
+<br>
+
+Tổng thanh toán:
+<strong>
+  ${formatMoney(order.total)}
+</strong>
 
       <br>
 
@@ -3784,7 +3947,24 @@ function unlockBodyIfNoModal(){
 ========================= */
 
 function init(){
+cart = cart.map(item => {
 
+  if(item.id === "boxy"){
+    item.price = BOXY_PRICE;
+  }
+
+  if(item.id === "long"){
+    item.price = LONG_PRICE;
+  }
+
+  return item;
+
+});
+
+localStorage.setItem(
+  "formeCart",
+  JSON.stringify(cart)
+);
   updateSizeFinder(
     "boxy"
   );
