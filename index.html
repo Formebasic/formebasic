@@ -1290,7 +1290,13 @@ header{
           >
             L
           </button>
-
+<button
+  class="size-btn"
+  data-size="XL"
+  onclick="selectSize('boxy','XL',this)"
+>
+  XL
+</button>
         </div>
 
       <button
@@ -1399,46 +1405,41 @@ header{
 
     <table class="size-chart-table">
 
-      <thead>
-        <tr>
-          <th>SIZE</th>
-          <th>S</th>
-          <th>M</th>
-          <th>L</th>
-        </tr>
-      </thead>
+<tbody>
 
-      <tbody>
+  <tr>
+    <td>Dài áo</td>
+    <td>66</td>
+    <td>68</td>
+    <td>70</td>
+    <td>72</td>
+  </tr>
 
-        <tr>
-          <td>Dài áo</td>
-          <td>--</td>
-          <td>--</td>
-          <td>--</td>
-        </tr>
+  <tr>
+    <td>Rộng ngực</td>
+    <td>55</td>
+    <td>57</td>
+    <td>59</td>
+    <td>61</td>
+  </tr>
 
-        <tr>
-          <td>Ngang ngực</td>
-          <td>--</td>
-          <td>--</td>
-          <td>--</td>
-        </tr>
+  <tr>
+    <td>Rộng vai</td>
+    <td>52</td>
+    <td>54</td>
+    <td>56</td>
+    <td>58</td>
+  </tr>
 
-        <tr>
-          <td>Vai</td>
-          <td>--</td>
-          <td>--</td>
-          <td>--</td>
-        </tr>
+  <tr>
+    <td>Dài tay</td>
+    <td>21</td>
+    <td>22</td>
+    <td>23</td>
+    <td>24</td>
+  </tr>
 
-        <tr>
-          <td>Tay áo</td>
-          <td>--</td>
-          <td>--</td>
-          <td>--</td>
-        </tr>
-
-      </tbody>
+</tbody>
 
     </table>
 
@@ -1602,7 +1603,13 @@ header{
           >
             L
           </button>
-
+<button
+  class="size-btn"
+  data-size="XL"
+  onclick="selectSize('long','XL',this)"
+>
+  XL
+</button>
         </div>
 
         <button
@@ -1711,46 +1718,42 @@ header{
 
     <table class="size-chart-table">
 
-      <thead>
-        <tr>
-          <th>SIZE</th>
-          <th>S</th>
-          <th>M</th>
-          <th>L</th>
-        </tr>
-      </thead>
-
       <tbody>
 
-        <tr>
-          <td>Dài áo</td>
-          <td>--</td>
-          <td>--</td>
-          <td>--</td>
-        </tr>
+  <tr>
+    <td>Dài áo</td>
+    <td>70</td>
+    <td>72</td>
+    <td>74</td>
+    <td>76</td>
+  </tr>
 
-        <tr>
-          <td>Ngang ngực</td>
-          <td>--</td>
-          <td>--</td>
-          <td>--</td>
-        </tr>
+  <tr>
+    <td>Rộng ngực</td>
+    <td>56</td>
+    <td>58</td>
+    <td>60</td>
+    <td>62</td>
+  </tr>
 
-        <tr>
-          <td>Vai</td>
-          <td>--</td>
-          <td>--</td>
-          <td>--</td>
-        </tr>
+  <tr>
+    <td>Rộng vai</td>
+    <td>53</td>
+    <td>55</td>
+    <td>57</td>
+    <td>59</td>
+  </tr>
 
-        <tr>
-          <td>Dài tay</td>
-          <td>--</td>
-          <td>--</td>
-          <td>--</td>
-        </tr>
+  <tr>
+    <td>Dài tay</td>
+    <td>57</td>
+    <td>59</td>
+    <td>61</td>
+    <td>63</td>
+  </tr>
 
-      </tbody>
+</tbody>
+ 
 
     </table>
 
@@ -2379,10 +2382,9 @@ function setupFeaturedImages(){
    SELECT SIZE
 ========================= */
 
-function selectSize(type,size,button){
+function selectSize(type, size, button){
 
-  const section =
-    button.closest(".product-card");
+  const section = button.closest(".product-card");
 
   section
     .querySelectorAll(".size-btn")
@@ -2394,11 +2396,18 @@ function selectSize(type,size,button){
 
   products[type].size = size;
 
-  document
-    .getElementById(
-      type + "SizeText"
-    )
-    .textContent = size;
+  const sizeText = document.getElementById(type + "SizeText");
+
+  if(sizeText){
+    sizeText.textContent = size;
+  }
+
+  /* Đồng bộ size với bảng gợi ý size */
+  const recommendedSize = document.getElementById("recommendedSize");
+
+  if(recommendedSize){
+    recommendedSize.textContent = size;
+  }
 
 }
 /* =========================
