@@ -1120,6 +1120,126 @@ header{
     bottom:18px;
   }
 }
+  /* =========================
+   FLOATING SALE - GEN Z HỜI HỢT
+========================= */
+
+.floating-sale{
+  position:fixed;
+  right:16px;
+  bottom:88px;
+  width:205px;
+  background:#fff;
+  border:1px solid #111;
+  padding:18px 15px 15px;
+  z-index:999;
+  box-shadow:0 6px 20px rgba(0,0,0,.08);
+  animation:lazyFloat 4.5s ease-in-out infinite;
+}
+
+.floating-sale-close{
+  position:absolute;
+  top:5px;
+  right:7px;
+  border:none;
+  background:transparent;
+  color:#111;
+  font-size:15px;
+  padding:3px;
+}
+
+.floating-sale-small{
+  font-size:9px;
+  letter-spacing:1.8px;
+  text-transform:lowercase;
+  color:#777;
+  margin-bottom:8px;
+}
+
+.floating-sale-percent{
+  font-size:42px;
+  font-weight:700;
+  letter-spacing:-2px;
+  line-height:1;
+  margin-bottom:7px;
+}
+
+.floating-sale-text{
+  font-size:11px;
+  line-height:1.5;
+  color:#555;
+  margin-bottom:15px;
+}
+
+.floating-sale-price{
+  padding:7px 0;
+  border-top:1px solid #eee;
+  font-size:11px;
+}
+
+.floating-sale-price:last-of-type{
+  border-bottom:1px solid #eee;
+}
+
+.floating-sale-name{
+  font-size:9px;
+  letter-spacing:1px;
+  color:#777;
+  margin-bottom:3px;
+}
+
+.floating-sale-old{
+  text-decoration:line-through;
+  color:#aaa;
+  margin-right:6px;
+}
+
+.floating-sale-new{
+  font-size:16px;
+  font-weight:600;
+}
+
+.floating-sale-btn{
+  width:100%;
+  border:none;
+  background:transparent;
+  color:#111;
+  text-align:left;
+  padding:12px 0 0;
+  font-size:11px;
+  letter-spacing:.4px;
+}
+
+@keyframes lazyFloat{
+  0%,100%{
+    transform:translateY(0) rotate(-1deg);
+  }
+
+  50%{
+    transform:translateY(-6px) rotate(.5deg);
+  }
+}
+
+@media(max-width:600px){
+  .floating-sale{
+    right:10px;
+    bottom:75px;
+    width:175px;
+    padding:16px 13px 13px;
+  }
+
+  .floating-sale-percent{
+    font-size:35px;
+  }
+
+  .floating-sale-text{
+    font-size:10px;
+  }
+
+  .floating-sale-new{
+    font-size:14px;
+  }
+}
 </style>
 </head>
 
@@ -3992,6 +4112,45 @@ localStorage.setItem(
 init();
 
 </script>
+<div class="floating-sale" id="floatingSale">
 
+  <button
+    class="floating-sale-close"
+    onclick="document.getElementById('floatingSale').style.display='none'"
+    aria-label="Đóng">
+    ×
+  </button>
+
+  <div class="floating-sale-small">
+    opening sale
+  </div>
+
+  <div class="floating-sale-percent">
+    -21%
+  </div>
+
+  <div class="floating-sale-text">
+    mở bán chứ chưa mở lòng.
+  </div>
+
+  <div class="floating-sale-price">
+    <div class="floating-sale-name">BOXY</div>
+    <span class="floating-sale-old">240K</span>
+    <span class="floating-sale-new">189K</span>
+  </div>
+
+  <div class="floating-sale-price">
+    <div class="floating-sale-name">LONG SLEEVE</div>
+    <span class="floating-sale-old">290K</span>
+    <span class="floating-sale-new">229K</span>
+  </div>
+
+  <button
+    class="floating-sale-btn"
+    onclick="document.getElementById('products')?.scrollIntoView({behavior:'smooth'})">
+    coi thử →
+  </button>
+
+</div>
 </body>
 </html>
