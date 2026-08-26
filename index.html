@@ -388,33 +388,85 @@ header{
    SIZE FINDER
 ========================= */
 
+.size-guide-toggle{
+  margin-top:13px;
+  width:100%;
+  height:45px;
+  border:1px solid #ddd;
+  background:#fff;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:1.1px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 14px;
+}
+
+.size-guide-toggle span:last-child{
+  font-size:16px;
+  font-weight:400;
+  transition:.2s ease;
+}
+
+.size-guide-toggle.active span:last-child{
+  transform:rotate(45deg);
+}
+
 .size-finder{
-  margin-top:16px;
-  padding:16px;
-  background:#f7f7f7;
+  display:none;
+  margin-top:10px;
+  padding:20px 16px 16px;
+  background:#f8f8f8;
   border:1px solid #eee;
 }
 
+.size-finder.active{
+  display:block;
+}
+
+.size-finder-head{
+  text-align:center;
+  padding-bottom:17px;
+  margin-bottom:18px;
+  border-bottom:1px solid #e1e1e1;
+}
+
 .size-finder-title{
-  font-size:12px;
-  font-weight:700;
-  margin-bottom:14px;
+  font-size:10px;
+  letter-spacing:1.5px;
+  color:#777;
+  margin-bottom:7px;
+}
+
+.size-finder-result-label{
+  font-size:11px;
+  color:#777;
+}
+
+.size-finder-result{
+  margin-top:4px;
+  font-size:30px;
+  line-height:1;
+  font-weight:600;
+  letter-spacing:1px;
 }
 
 .finder-row{
-  margin-bottom:14px;
+  margin-bottom:19px;
 }
 
 .finder-label-row{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  font-size:12px;
-  margin-bottom:6px;
+  font-size:11px;
+  margin-bottom:8px;
 }
 
 .finder-value{
   font-weight:700;
+  font-size:12px;
 }
 
 .finder-slider{
@@ -426,36 +478,84 @@ header{
   display:flex;
   justify-content:space-between;
   color:#999;
-  font-size:10px;
-  margin-top:3px;
-}
-
-.size-result{
-  margin-top:14px;
-  padding-top:13px;
-  border-top:1px solid #ddd;
-  font-size:12px;
-  line-height:1.6;
-}
-
-.size-result strong{
-  font-size:16px;
+  font-size:9px;
+  margin-top:4px;
 }
 
 .size-note{
-  color:#777;
-  font-size:10px;
-  margin-top:5px;
+  text-align:center;
+  color:#888;
+  font-size:9px;
+  line-height:1.6;
+  margin:3px 0 14px;
 }
 
 .use-size-btn{
-  margin-top:10px;
-  padding:9px 12px;
-  border:1px solid #111;
-  background:#fff;
+  width:100%;
+  height:45px;
+  border:0;
+  background:#111;
+  color:#fff;
   font-size:10px;
   font-weight:700;
-  letter-spacing:.7px;
+  letter-spacing:1.2px;
+}
+
+/* SIZE CHART */
+
+.size-chart{
+  margin-top:21px;
+  padding-top:18px;
+  border-top:1px solid #ddd;
+}
+
+.size-chart-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:12px;
+}
+
+.size-chart-title strong{
+  font-size:10px;
+  letter-spacing:1.2px;
+}
+
+.size-chart-title span{
+  font-size:9px;
+  color:#999;
+}
+
+.size-chart-table{
+  width:100%;
+  border-collapse:collapse;
+  background:#fff;
+  font-size:10px;
+}
+
+.size-chart-table th,
+.size-chart-table td{
+  padding:11px 7px;
+  text-align:center;
+  border:1px solid #e4e4e4;
+}
+
+.size-chart-table th{
+  font-weight:700;
+  background:#f5f5f5;
+}
+
+.size-chart-table td:first-child,
+.size-chart-table th:first-child{
+  text-align:left;
+  padding-left:10px;
+}
+
+.size-chart-note{
+  font-size:9px;
+  color:#999;
+  margin-top:9px;
+  line-height:1.5;
 }
 
 /* =========================
@@ -1193,92 +1293,162 @@ header{
 
         </div>
 
-        <!-- SIZE FINDER -->
+      <button
+  class="size-guide-toggle"
+  onclick="toggleSizeGuide('boxy',this)"
+>
+  <span>TÌM SIZE PHÙ HỢP</span>
+  <span>+</span>
+</button>
 
-        <div class="size-finder">
+<div class="size-finder" id="boxySizeFinder">
 
-          <div class="size-finder-title">
-            TÌM SIZE PHÙ HỢP
-          </div>
+  <div class="size-finder-head">
 
-          <div class="finder-row">
+    <div class="size-finder-title">
+      SIZE FORME GỢI Ý CHO BẠN
+    </div>
 
-            <div class="finder-label-row">
-              <span>Chiều cao</span>
+    <div class="size-finder-result-label">
+      Dựa trên chiều cao và cân nặng
+    </div>
 
-              <span class="finder-value">
-                <span id="boxyHeight">165</span> cm
-              </span>
-            </div>
+    <div
+      class="size-finder-result"
+      id="boxySuggestedSize"
+    >
+      M
+    </div>
 
-            <input
-              class="finder-slider"
-              id="boxyHeightSlider"
-              type="range"
-              min="150"
-              max="185"
-              value="165"
-              step="1"
-              oninput="updateSizeFinder('boxy')"
-            >
+  </div>
 
-            <div class="finder-scale">
-              <span>150cm</span>
-              <span>185cm</span>
-            </div>
+  <div class="finder-row">
 
-          </div>
+    <div class="finder-label-row">
+      <span>CHIỀU CAO</span>
 
-          <div class="finder-row">
+      <span class="finder-value">
+        <span id="boxyHeight">165</span> CM
+      </span>
+    </div>
 
-            <div class="finder-label-row">
-              <span>Cân nặng</span>
+    <input
+      class="finder-slider"
+      id="boxyHeightSlider"
+      type="range"
+      min="150"
+      max="185"
+      value="165"
+      step="1"
+      oninput="updateSizeFinder('boxy')"
+    >
 
-              <span class="finder-value">
-                <span id="boxyWeight">55</span> kg
-              </span>
-            </div>
+    <div class="finder-scale">
+      <span>150 CM</span>
+      <span>185 CM</span>
+    </div>
 
-            <input
-              class="finder-slider"
-              id="boxyWeightSlider"
-              type="range"
-              min="40"
-              max="80"
-              value="55"
-              step="1"
-              oninput="updateSizeFinder('boxy')"
-            >
+  </div>
 
-            <div class="finder-scale">
-              <span>40kg</span>
-              <span>80kg</span>
-            </div>
+  <div class="finder-row">
 
-          </div>
+    <div class="finder-label-row">
+      <span>CÂN NẶNG</span>
 
-          <div class="size-result">
+      <span class="finder-value">
+        <span id="boxyWeight">55</span> KG
+      </span>
+    </div>
 
-            Gợi ý:
-            <strong id="boxySuggestedSize">M</strong>
+    <input
+      class="finder-slider"
+      id="boxyWeightSlider"
+      type="range"
+      min="40"
+      max="80"
+      value="55"
+      step="1"
+      oninput="updateSizeFinder('boxy')"
+    >
 
-            <div class="size-note">
-              Chỉ mang tính tham khảo.
-              Nếu thích mặc rộng hơn, có thể tăng 1 size.
-            </div>
+    <div class="finder-scale">
+      <span>40 KG</span>
+      <span>80 KG</span>
+    </div>
 
-            <button
-              class="use-size-btn"
-              onclick="useSuggestedSize('boxy')"
-            >
-              CHỌN SIZE GỢI Ý
-            </button>
+  </div>
 
-          </div>
+  <div class="size-note">
+    Size gợi ý mang tính tham khảo.
+    Nếu thích mặc rộng hơn, có thể tăng 1 size.
+  </div>
 
-        </div>
+  <button
+    class="use-size-btn"
+    onclick="useSuggestedSize('boxy')"
+  >
+    XÁC NHẬN SIZE GỢI Ý
+  </button>
 
-      </div>
+  <div class="size-chart">
+
+    <div class="size-chart-title">
+      <strong>BẢNG SỐ ĐO ÁO</strong>
+      <span>Đơn vị: CM</span>
+    </div>
+
+    <table class="size-chart-table">
+
+      <thead>
+        <tr>
+          <th>SIZE</th>
+          <th>S</th>
+          <th>M</th>
+          <th>L</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td>Dài áo</td>
+          <td>--</td>
+          <td>--</td>
+          <td>--</td>
+        </tr>
+
+        <tr>
+          <td>Ngang ngực</td>
+          <td>--</td>
+          <td>--</td>
+          <td>--</td>
+        </tr>
+
+        <tr>
+          <td>Vai</td>
+          <td>--</td>
+          <td>--</td>
+          <td>--</td>
+        </tr>
+
+        <tr>
+          <td>Tay áo</td>
+          <td>--</td>
+          <td>--</td>
+          <td>--</td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+    <div class="size-chart-note">
+      Số đo sản phẩm có thể chênh lệch nhẹ do quá trình sản xuất.
+    </div>
+
+  </div>
+
+</div>
 
       <!-- QUANTITY -->
 
@@ -1435,92 +1605,162 @@ header{
 
         </div>
 
-        <!-- SIZE FINDER -->
+        <button
+  class="size-guide-toggle"
+  onclick="toggleSizeGuide('long',this)"
+>
+  <span>TÌM SIZE PHÙ HỢP</span>
+  <span>+</span>
+</button>
 
-        <div class="size-finder">
+<div class="size-finder" id="longSizeFinder">
 
-          <div class="size-finder-title">
-            TÌM SIZE PHÙ HỢP
-          </div>
+  <div class="size-finder-head">
 
-          <div class="finder-row">
+    <div class="size-finder-title">
+      SIZE FORME GỢI Ý CHO BẠN
+    </div>
 
-            <div class="finder-label-row">
-              <span>Chiều cao</span>
+    <div class="size-finder-result-label">
+      Dựa trên chiều cao và cân nặng
+    </div>
 
-              <span class="finder-value">
-                <span id="longHeight">165</span> cm
-              </span>
-            </div>
+    <div
+      class="size-finder-result"
+      id="longSuggestedSize"
+    >
+      M
+    </div>
 
-            <input
-              class="finder-slider"
-              id="longHeightSlider"
-              type="range"
-              min="150"
-              max="185"
-              value="165"
-              step="1"
-              oninput="updateSizeFinder('long')"
-            >
+  </div>
 
-            <div class="finder-scale">
-              <span>150cm</span>
-              <span>185cm</span>
-            </div>
+  <div class="finder-row">
 
-          </div>
+    <div class="finder-label-row">
+      <span>CHIỀU CAO</span>
 
-          <div class="finder-row">
+      <span class="finder-value">
+        <span id="longHeight">165</span> CM
+      </span>
+    </div>
 
-            <div class="finder-label-row">
-              <span>Cân nặng</span>
+    <input
+      class="finder-slider"
+      id="longHeightSlider"
+      type="range"
+      min="150"
+      max="185"
+      value="165"
+      step="1"
+      oninput="updateSizeFinder('long')"
+    >
 
-              <span class="finder-value">
-                <span id="longWeight">55</span> kg
-              </span>
-            </div>
+    <div class="finder-scale">
+      <span>150 CM</span>
+      <span>185 CM</span>
+    </div>
 
-            <input
-              class="finder-slider"
-              id="longWeightSlider"
-              type="range"
-              min="40"
-              max="80"
-              value="55"
-              step="1"
-              oninput="updateSizeFinder('long')"
-            >
+  </div>
 
-            <div class="finder-scale">
-              <span>40kg</span>
-              <span>80kg</span>
-            </div>
+  <div class="finder-row">
 
-          </div>
+    <div class="finder-label-row">
+      <span>CÂN NẶNG</span>
 
-          <div class="size-result">
+      <span class="finder-value">
+        <span id="longWeight">55</span> KG
+      </span>
+    </div>
 
-            Gợi ý:
-            <strong id="longSuggestedSize">M</strong>
+    <input
+      class="finder-slider"
+      id="longWeightSlider"
+      type="range"
+      min="40"
+      max="80"
+      value="55"
+      step="1"
+      oninput="updateSizeFinder('long')"
+    >
 
-            <div class="size-note">
-              Chỉ mang tính tham khảo.
-              Form oversize nên ưu tiên size quen mặc nếu muốn giữ độ rộng.
-            </div>
+    <div class="finder-scale">
+      <span>40 KG</span>
+      <span>80 KG</span>
+    </div>
 
-            <button
-              class="use-size-btn"
-              onclick="useSuggestedSize('long')"
-            >
-              CHỌN SIZE GỢI Ý
-            </button>
+  </div>
 
-          </div>
+  <div class="size-note">
+    Size gợi ý mang tính tham khảo.
+    Form oversize nên chọn size quen mặc nếu muốn giữ độ rộng.
+  </div>
 
-        </div>
+  <button
+    class="use-size-btn"
+    onclick="useSuggestedSize('long')"
+  >
+    XÁC NHẬN SIZE GỢI Ý
+  </button>
 
-      </div>
+  <div class="size-chart">
+
+    <div class="size-chart-title">
+      <strong>BẢNG SỐ ĐO ÁO</strong>
+      <span>Đơn vị: CM</span>
+    </div>
+
+    <table class="size-chart-table">
+
+      <thead>
+        <tr>
+          <th>SIZE</th>
+          <th>S</th>
+          <th>M</th>
+          <th>L</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td>Dài áo</td>
+          <td>--</td>
+          <td>--</td>
+          <td>--</td>
+        </tr>
+
+        <tr>
+          <td>Ngang ngực</td>
+          <td>--</td>
+          <td>--</td>
+          <td>--</td>
+        </tr>
+
+        <tr>
+          <td>Vai</td>
+          <td>--</td>
+          <td>--</td>
+          <td>--</td>
+        </tr>
+
+        <tr>
+          <td>Dài tay</td>
+          <td>--</td>
+          <td>--</td>
+          <td>--</td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+    <div class="size-chart-note">
+      Số đo sản phẩm có thể chênh lệch nhẹ do quá trình sản xuất.
+    </div>
+
+  </div>
+
+</div>
 
       <!-- QUANTITY -->
 
@@ -2161,7 +2401,36 @@ function selectSize(type,size,button){
     .textContent = size;
 
 }
+/* =========================
+   OPEN / CLOSE SIZE GUIDE
+========================= */
 
+function toggleSizeGuide(type,button){
+
+  const finder =
+    document.getElementById(
+      type + "SizeFinder"
+    );
+
+  const isOpen =
+    finder.classList.contains(
+      "active"
+    );
+
+  finder.classList.toggle(
+    "active"
+  );
+
+  button.classList.toggle(
+    "active"
+  );
+
+  button
+    .querySelector("span:last-child")
+    .textContent =
+      isOpen ? "+" : "×";
+
+}
 /* =========================
    SIZE FINDER
 
