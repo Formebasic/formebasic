@@ -3173,67 +3173,65 @@ function renderCheckoutSummary(){
 
   });
 
+  const subtotal = getCartTotal();
+  const shipping = getShippingFee();
+  const total = getOrderTotal();
+
   html += `
 
-const subtotal = getCartTotal();
-const shipping = getShippingFee();
-const total = getOrderTotal();
+    <div style="
+      display:flex;
+      justify-content:space-between;
+      margin-top:12px;
+    ">
+      <span>Tạm tính</span>
+      <span>${formatMoney(subtotal)}</span>
+    </div>
 
-html += `
+    <div style="
+      display:flex;
+      justify-content:space-between;
+      margin-top:7px;
+    ">
+      <span>Phí vận chuyển</span>
+      <span>
+        ${shipping === 0 ? "FREESHIP" : formatMoney(shipping)}
+      </span>
+    </div>
 
-  <div style="
-    display:flex;
-    justify-content:space-between;
-    margin-top:12px;
-  ">
-    <span>Tạm tính</span>
-    <span>${formatMoney(subtotal)}</span>
-  </div>
+    ${
+      subtotal < FREE_SHIP_MIN
+        ? `
+          <div style="
+            margin-top:9px;
+            font-size:10px;
+            color:#777;
+          ">
+            Mua thêm ${formatMoney(FREE_SHIP_MIN - subtotal)}
+            để được FREESHIP.
+          </div>
+        `
+        : `
+          <div style="
+            margin-top:9px;
+            font-size:10px;
+            font-weight:700;
+          ">
+            ✓ Đơn hàng của bạn được FREESHIP.
+          </div>
+        `
+    }
 
-  <div style="
-    display:flex;
-    justify-content:space-between;
-    margin-top:7px;
-  ">
-    <span>Phí vận chuyển</span>
-    <span>
-      ${shipping === 0 ? "FREESHIP" : formatMoney(shipping)}
-    </span>
-  </div>
+    <div class="summary-total">
+      <span>Tổng thanh toán</span>
+      <span>${formatMoney(total)}</span>
+    </div>
 
-  ${
-    subtotal < FREE_SHIP_MIN
-      ? `
-        <div style="
-          margin-top:9px;
-          font-size:10px;
-          color:#777;
-        ">
-          Mua thêm ${formatMoney(FREE_SHIP_MIN - subtotal)}
-          để được FREESHIP.
-        </div>
-      `
-      : `
-        <div style="
-          margin-top:9px;
-          font-size:10px;
-          font-weight:700;
-        ">
-          ✓ Đơn hàng của bạn được FREESHIP.
-        </div>
-      `
-  }
+  `;
 
-  <div class="summary-total">
-    <span>Tổng thanh toán</span>
-    <span>${formatMoney(total)}</span>
-  </div>
-
-`;
   box.innerHTML = html;
 
 }
-
 /* =========================
    PAYMENT
 ========================= */
