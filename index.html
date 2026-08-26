@@ -1,1126 +1,1568 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FORME — Basic Wear</title>
-
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,Helvetica,sans-serif;color:#111;background:#fff}
-body.no-scroll{overflow:hidden}
-
-header{
-  padding:28px 20px;
-  text-align:center;
-  border-bottom:1px solid #eee
-}
-
-.logo{
-  font-size:28px;
-  font-weight:700;
-  letter-spacing:6px
-}
-
-.tagline{
-  font-size:11px;
-  letter-spacing:2px;
-  margin-top:8px;
-  color:#777
-}
-
-main{
-  max-width:600px;
-  margin:auto;
-  padding:30px 18px 60px
-}
-
-h2{
-  font-size:18px;
-  margin-bottom:20px;
-  letter-spacing:1px
-}
-
-.product{
-  border-bottom:1px solid #ddd;
-  padding:25px 0
-}
-
-.placeholder{
-  width:100%;
-  height:330px;
-  background:#f3f3f3;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  color:#aaa;
-  font-size:13px;
-  margin-bottom:18px;
-  text-align:center;
-  padding:20px
-}
-
-.product h3{
-  font-size:17px;
-  margin-bottom:7px
-}
-
-.price{
-  font-size:15px;
-  margin-bottom:18px
-}
-
-label{
-  display:block;
-  font-size:12px;
-  margin:15px 0 7px;
-  font-weight:bold
-}
-
-select,input,textarea{
-  width:100%;
-  padding:13px;
-  border:1px solid #ccc;
-  background:#fff;
-  font-size:16px;
-  border-radius:0
-}
-
-button{
-  width:100%;
-  background:#111;
-  color:#fff;
-  border:0;
-  padding:15px;
-  margin-top:18px;
-  font-size:13px;
-  letter-spacing:1px;
-  cursor:pointer
-}
-
-button:disabled{opacity:.5}
-
-.size-picker-button{
-  background:#fff;
-  color:#111;
-  border:1px solid #111;
-  text-align:left;
-  margin-top:0;
-  padding:15px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center
-}
-
-.size-picked{font-weight:bold}
-
-.cart{
-  margin-top:35px;
-  padding:22px 0;
-  border-top:2px solid #111
-}
-
-.cart-item{
-  padding:12px 0;
-  border-bottom:1px solid #eee;
-  font-size:14px;
-  line-height:1.6
-}
-
-.remove{
-  background:none;
-  color:#888;
-  padding:0;
-  margin:5px 0 0;
-  text-align:left;
-  font-size:12px
-}
-
-.total{
-  font-size:18px;
-  font-weight:bold;
-  margin-top:18px
-}
-
-.checkout{margin-top:35px}
-.checkout input,.checkout textarea{margin-bottom:12px}
-
-.note{
-  font-size:12px;
-  color:#777;
-  line-height:1.6;
-  margin-top:15px
-}
-
-footer{
-  text-align:center;
-  padding:30px 20px;
-  border-top:1px solid #eee;
-  font-size:11px;
-  color:#777;
-  line-height:1.8
-}
-
-/* SIZE POPUP */
-
-#sizeModal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.55);
-  z-index:9999;
-  align-items:flex-end;
-  justify-content:center
-}
-
-.size-sheet{
-  width:100%;
-  max-width:600px;
-  max-height:92vh;
-  overflow-y:auto;
-  background:#fff;
-  padding:22px 20px 30px;
-  border-radius:18px 18px 0 0
-}
-
-.sheet-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:6px
-}
-
-.sheet-top h2{
-  margin:0;
-  font-size:18px
-}
-
-.close-size{
-  width:auto;
-  background:none;
-  color:#111;
-  margin:0;
-  padding:8px;
-  font-size:24px;
-  line-height:1
-}
-
-.sheet-sub{
-  font-size:12px;
-  color:#777;
-  line-height:1.6;
-  margin-bottom:25px
-}
-
-.manual-title{
-  font-size:11px;
-  letter-spacing:1px;
-  color:#777;
-  margin-bottom:10px
-}
-
-.size-options{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:8px
-}
-
-.size-option{
-  margin:0;
-  background:#fff;
-  color:#111;
-  border:1px solid #ccc;
-  padding:14px 5px;
-  font-size:14px
-}
-
-.size-option.active{
-  background:#111;
-  color:#fff;
-  border-color:#111
-}
-
-.divider{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  margin:25px 0;
-  color:#aaa;
-  font-size:10px;
-  letter-spacing:1px
-}
-
-.divider:before,
-.divider:after{
-  content:"";
-  flex:1;
-  height:1px;
-  background:#ddd
-}
-
-.finder-box{
-  background:#111;
-  color:#fff;
-  padding:22px 18px
-}
-
-.finder-title{
-  font-size:16px;
-  letter-spacing:2px;
-  margin-bottom:5px
-}
-
-.finder-sub{
-  font-size:11px;
-  color:#aaa;
-  line-height:1.6;
-  margin-bottom:20px
-}
-
-.finder-box label{
-  color:#fff;
-  font-size:11px
-}
-
-.range-number{
-  font-size:27px;
-  font-weight:bold;
-  margin:7px 0
-}
-
-.finder-box input[type=range]{
-  padding:0;
-  border:0;
-  accent-color:white
-}
-
-.recommend{
-  margin-top:22px;
-  border:1px solid #555;
-  padding:20px;
-  text-align:center
-}
-
-.recommend-label{
-  font-size:10px;
-  letter-spacing:1px;
-  color:#aaa
-}
-
-.recommend-size{
-  font-size:48px;
-  font-weight:bold;
-  margin:6px 0
-}
-
-.recommend-text{
-  font-size:11px;
-  color:#bbb;
-  line-height:1.6
-}
-
-.use-recommend{
-  background:#fff;
-  color:#111;
-  margin-top:15px
-}
-
-.size-chart{margin-top:20px}
-
-.size-chart summary{
-  cursor:pointer;
-  padding:15px 0;
-  font-size:11px;
-  letter-spacing:1px;
-  border-bottom:1px solid #ddd
-}
-
-.table-wrap{
-  overflow-x:auto;
-  margin-top:12px
-}
-
-table{
-  width:100%;
-  min-width:520px;
-  border-collapse:collapse;
-  font-size:11px
-}
-
-th,td{
-  text-align:center;
-  padding:11px 7px;
-  border-bottom:1px solid #ddd
-}
-
-th{
-  font-size:9px;
-  color:#777
-}
-
-.confirm-size{margin-top:22px}
-
-/* THANK YOU */
-
-#thankyou{
-  display:none;
-  min-height:100vh;
-  padding:50px 20px;
-  justify-content:center;
-  text-align:center
-}
-
-.thank-container{
-  width:100%;
-  max-width:500px
-}
-
-#thankyou h1{
-  font-size:30px;
-  letter-spacing:4px;
-  margin-bottom:18px
-}
-
-.thank-text{
-  font-size:14px;
-  line-height:1.8;
-  color:#555;
-  margin-bottom:35px
-}
-
-.payment{
-  border-top:1px solid #ddd;
-  border-bottom:1px solid #ddd;
-  padding:30px 0;
-  text-align:left;
-  margin-bottom:25px
-}
-
-.payment h2{
-  text-align:center;
-  font-size:16px;
-  letter-spacing:2px;
-  margin-bottom:25px
-}
-
-.payment-row{margin-bottom:18px}
-
-.payment-label{
-  font-size:11px;
-  color:#888;
-  letter-spacing:1px;
-  margin-bottom:5px
-}
-
-.payment-value{
-  font-size:17px;
-  font-weight:bold;
-  word-break:break-word
-}
-
-.payment-total{
-  font-size:24px;
-  font-weight:bold
-}
-
-.payment-note{
-  margin-top:22px;
-  font-size:12px;
-  color:#777;
-  line-height:1.7
-}
-
-#thankyou button{max-width:320px}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>FORME BASIC</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #111;
+      background: #fff;
+    }
+
+    button,
+    input,
+    textarea {
+      font-family: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    header {
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 22px;
+      border-bottom: 1px solid #eee;
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,.96);
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 20px;
+      letter-spacing: 4px;
+      font-weight: 700;
+    }
+
+    .header-text {
+      font-size: 11px;
+      letter-spacing: 1px;
+      color: #777;
+    }
+
+    .product {
+      max-width: 1050px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 55px;
+      padding: 45px 25px 80px;
+    }
+
+    .product-image-wrap {
+      background: #f4f4f4;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .product-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .placeholder {
+      width: 100%;
+      height: 100%;
+      background: #eee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      color: #888;
+      font-size: 13px;
+      letter-spacing: 1px;
+    }
+
+    .placeholder strong {
+      color: #111;
+      margin-bottom: 8px;
+    }
+
+    .product-info {
+      padding-top: 10px;
+    }
+
+    .product-name {
+      font-size: 25px;
+      font-weight: 500;
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .price {
+      margin-top: 12px;
+      font-size: 18px;
+    }
+
+    .description {
+      font-size: 13px;
+      line-height: 1.7;
+      color: #666;
+      margin-top: 22px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .option {
+      margin-top: 25px;
+    }
+
+    .option-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .colors {
+      display: flex;
+      gap: 10px;
+    }
+
+    .color-btn {
+      border: 1px solid #ddd;
+      background: #fff;
+      padding: 12px 20px;
+      font-size: 12px;
+    }
+
+    .color-btn.active {
+      border: 1px solid #111;
+      background: #111;
+      color: #fff;
+    }
+
+    .sizes {
+      display: flex;
+      gap: 10px;
+    }
+
+    .size-btn {
+      width: 48px;
+      height: 44px;
+      background: #fff;
+      border: 1px solid #ddd;
+      font-size: 13px;
+    }
+
+    .size-btn.active {
+      background: #111;
+      color: #fff;
+      border-color: #111;
+    }
+
+    .size-guide-toggle {
+      display: inline-block;
+      margin-top: 13px;
+      padding: 0;
+      border: none;
+      border-bottom: 1px solid #111;
+      background: none;
+      font-size: 12px;
+    }
+
+    .size-guide {
+      display: none;
+      margin-top: 15px;
+      border: 1px solid #eee;
+      padding: 16px;
+      background: #fafafa;
+    }
+
+    .size-guide.active {
+      display: block;
+    }
+
+    .size-guide-title {
+      margin: 0 0 12px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .size-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .size-table th,
+    .size-table td {
+      padding: 10px 5px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .size-note {
+      margin: 12px 0 0;
+      color: #777;
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    .quantity-box {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #ddd;
+    }
+
+    .qty-btn {
+      width: 44px;
+      height: 44px;
+      border: none;
+      background: #fff;
+      font-size: 19px;
+    }
+
+    .quantity-number {
+      width: 45px;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    .order-btn {
+      width: 100%;
+      border: 1px solid #111;
+      background: #111;
+      color: #fff;
+      height: 55px;
+      margin-top: 30px;
+      font-size: 12px;
+      letter-spacing: 2px;
+      font-weight: 600;
+    }
+
+    .slogan {
+      text-align: center;
+      border-top: 1px solid #eee;
+      padding: 40px 20px;
+      font-size: 12px;
+      color: #777;
+      letter-spacing: 2px;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      background: rgba(0,0,0,.48);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-box {
+      background: white;
+      width: 100%;
+      max-width: 460px;
+      max-height: 92vh;
+      overflow-y: auto;
+      padding: 28px 22px;
+      position: relative;
+    }
+
+    .close-btn {
+      position: absolute;
+      right: 16px;
+      top: 10px;
+      border: none;
+      background: none;
+      font-size: 27px;
+    }
+
+    .modal-title {
+      text-align: center;
+      font-size: 18px;
+      letter-spacing: 2px;
+      margin: 3px 0 25px;
+    }
+
+    .order-summary {
+      background: #f7f7f7;
+      padding: 15px;
+      margin-bottom: 20px;
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    .order-total {
+      border-top: 1px solid #ddd;
+      margin-top: 8px;
+      padding-top: 8px;
+      font-weight: 700;
+    }
+
+    .field {
+      margin-bottom: 12px;
+    }
+
+    .field input,
+    .field textarea {
+      display: block;
+      width: 100%;
+      border: 1px solid #ddd;
+      outline: none;
+      font-size: 14px;
+      padding: 14px;
+      background: white;
+    }
+
+    .field textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .payment-title {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 24px 0 13px;
+    }
+
+    .payment-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      border: 1px solid #ddd;
+      padding: 14px;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+
+    .payment-card.active {
+      border-color: #111;
+    }
+
+    .payment-card input {
+      margin-top: 2px;
+    }
+
+    .payment-name {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .payment-desc {
+      font-size: 11px;
+      color: #777;
+      margin-top: 5px;
+      line-height: 1.5;
+    }
+
+    .bank-info {
+      display: none;
+      background: #f7f7f7;
+      padding: 16px;
+      margin: 12px 0;
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    .bank-info.active {
+      display: block;
+    }
+
+    .copy-btn {
+      margin-top: 10px;
+      padding: 10px 14px;
+      border: 1px solid #111;
+      background: white;
+      font-size: 11px;
+    }
+
+    .confirm-btn {
+      width: 100%;
+      height: 54px;
+      margin-top: 20px;
+      background: #111;
+      color: white;
+      border: none;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+    }
+
+    .confirm-btn:disabled {
+      opacity: .6;
+    }
+
+    .thank-you {
+      display: none;
+      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 35px 25px;
+    }
+
+    .thank-you.active {
+      display: flex;
+    }
+
+    .thank-you-box {
+      max-width: 520px;
+    }
+
+    .thank-logo {
+      font-size: 19px;
+      letter-spacing: 5px;
+      font-weight: 700;
+      margin-bottom: 50px;
+    }
+
+    .thank-you h1 {
+      font-size: 25px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+    }
+
+    .thank-you p {
+      color: #666;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .thank-summary {
+      text-align: left;
+      background: #f7f7f7;
+      padding: 18px;
+      margin: 28px 0;
+      font-size: 13px;
+      line-height: 2;
+    }
+
+    .continue-btn {
+      border: 1px solid #111;
+      background: #111;
+      color: white;
+      padding: 16px 25px;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+    }
+
+    .thank-slogan {
+      margin-top: 45px;
+      font-size: 11px !important;
+      letter-spacing: 2px;
+    }
+
+    @media (max-width: 760px) {
+      header {
+        height: 62px;
+        padding: 0 16px;
+      }
+
+      .header-text {
+        display: none;
+      }
+
+      .product {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        padding: 0 0 55px;
+      }
+
+      .product-info {
+        padding: 0 18px;
+      }
+
+      .product-name {
+        font-size: 21px;
+      }
+
+      .modal {
+        align-items: flex-end;
+        padding: 0;
+      }
+
+      .modal-box {
+        max-width: none;
+        max-height: 92vh;
+        padding-bottom: 35px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<div id="shop">
-
-<header>
-<div class="logo">FORME</div>
-<div class="tagline">NOTHING EXTRA. JUST THE RIGHT FORM.</div>
-</header>
-
-<main>
-
-<h2>SHOP</h2>
-
-<!-- BOXY -->
-
-<div class="product">
-
-<div class="placeholder" id="boxyPlaceholder">
-BOXY TEE — BLACK — PRODUCT IMAGE
-</div>
-
-<h3>FORME BOXY TEE</h3>
-<div class="price">240.000đ</div>
-
-<label>MÀU</label>
-
-<select id="boxyColor" onchange="updateProductPlaceholder('boxy')">
-<option value="Đen">Đen</option>
-<option value="Trắng">Trắng</option>
-</select>
-
-<label>SIZE</label>
-
-<button class="size-picker-button" onclick="openSizeModal('boxy')">
-<span id="boxySizeText">CHỌN SIZE / TÌM SIZE PHÙ HỢP</span>
-<span>→</span>
-</button>
-
-<input type="hidden" id="boxySize" value="">
-
-<label>SỐ LƯỢNG</label>
-
-<select id="boxyQty">
-<option value="1">1</option>
-<option value="2">2</option>
-<option value="3">3</option>
-<option value="4">4</option>
-<option value="5">5</option>
-</select>
-
-<button onclick="addToCart('Boxy Tee',240000,'boxyColor','boxySize','boxyQty')">
-THÊM VÀO ĐƠN
-</button>
-
-</div>
-
-<!-- LONG SLEEVE -->
-
-<div class="product">
-
-<div class="placeholder" id="longPlaceholder">
-LONG SLEEVE — BLACK — PRODUCT IMAGE
-</div>
-
-<h3>FORME LONG SLEEVE</h3>
-<div class="price">260.000đ</div>
-
-<label>MÀU</label>
-
-<select id="longColor" onchange="updateProductPlaceholder('long')">
-<option value="Đen">Đen</option>
-<option value="Trắng">Trắng</option>
-</select>
-
-<label>SIZE</label>
-
-<button class="size-picker-button" onclick="openSizeModal('long')">
-<span id="longSizeText">CHỌN SIZE / TÌM SIZE PHÙ HỢP</span>
-<span>→</span>
-</button>
-
-<input type="hidden" id="longSize" value="">
-
-<label>SỐ LƯỢNG</label>
-
-<select id="longQty">
-<option value="1">1</option>
-<option value="2">2</option>
-<option value="3">3</option>
-<option value="4">4</option>
-<option value="5">5</option>
-</select>
-
-<button onclick="addToCart('Long Sleeve',260000,'longColor','longSize','longQty')">
-THÊM VÀO ĐƠN
-</button>
-
-</div>
-
-<!-- CART -->
-
-<div class="cart">
-<h2>ĐƠN HÀNG CỦA BẠN</h2>
-
-<div id="cartItems">
-<p style="font-size:13px;color:#888;">Chưa có sản phẩm.</p>
-</div>
-
-<div class="total">
-Tổng: <span id="total">0đ</span>
-</div>
-</div>
-
-<!-- CUSTOMER -->
-
-<div class="checkout">
-
-<h2>THÔNG TIN NHẬN HÀNG</h2>
-
-<input id="name" type="text" placeholder="Họ và tên">
-<input id="phone" type="tel" placeholder="Số điện thoại">
-<textarea id="address" rows="3" placeholder="Địa chỉ nhận hàng"></textarea>
-<textarea id="note" rows="2" placeholder="Ghi chú (không bắt buộc)"></textarea>
-
-<button id="orderButton" onclick="submitOrder()">ĐẶT HÀNG</button>
-
-<div class="note">
-Sau khi nhận được đơn, FORME sẽ liên hệ để xác nhận thông tin đơn hàng.
-</div>
-
-</div>
-
-</main>
-
-<footer>
-FORME BASIC<br>
-Instagram: @formebasic.vn
-</footer>
-
-</div>
-
-<!-- SIZE MODAL -->
-
-<div id="sizeModal">
-<div class="size-sheet">
-
-<div class="sheet-top">
-<h2>CHỌN SIZE</h2>
-<button class="close-size" onclick="closeSizeModal()">×</button>
-</div>
-
-<div class="sheet-sub" id="modalProductName">
-FORME BOXY TEE
-</div>
-
-<div class="manual-title">BẠN ĐÃ BIẾT SIZE?</div>
-
-<div class="size-options">
-<button class="size-option" onclick="manualSize('S')">S</button>
-<button class="size-option" onclick="manualSize('M')">M</button>
-<button class="size-option" onclick="manualSize('L')">L</button>
-<button class="size-option" onclick="manualSize('XL')">XL</button>
-</div>
-
-<div class="divider">HOẶC TÌM SIZE PHÙ HỢP</div>
-
-<div class="finder-box">
-
-<div class="finder-title">FIND YOUR FORME</div>
-
-<div class="finder-sub">
-Kéo chiều cao và cân nặng để FORME gợi ý size phù hợp.
-</div>
-
-<label>CHIỀU CAO</label>
-<div class="range-number">
-<span id="heightValue">165</span> cm
-</div>
-
-<input type="range" id="heightRange"
-min="150" max="190" value="165"
-oninput="updateFinder()">
-
-<label>CÂN NẶNG</label>
-<div class="range-number">
-<span id="weightValue">55</span> kg
-</div>
-
-<input type="range" id="weightRange"
-min="40" max="100" value="55"
-oninput="updateFinder()">
-
-<div class="recommend">
-
-<div class="recommend-label">FORME GỢI Ý</div>
-<div class="recommend-size" id="recommendedSize">S</div>
-
-<div class="recommend-text" id="recommendText">
-Dựa trên chiều cao và cân nặng bạn đã chọn.
-</div>
-
-<button class="use-recommend" onclick="useRecommendedSize()">
-CHỌN SIZE NÀY
-</button>
-
-</div>
-</div>
-
-<details class="size-chart">
-<summary>XEM BẢNG THÔNG SỐ CHI TIẾT</summary>
-<div class="table-wrap">
-<table id="sizeTable"></table>
-</div>
-</details>
-
-<button class="confirm-size" onclick="confirmSize()">
-XÁC NHẬN SIZE
-</button>
-
-</div>
-</div>
-
-<!-- THANK YOU -->
-
-<div id="thankyou">
-<div class="thank-container">
-
-<h1>THANK YOU ♡</h1>
-
-<div class="thank-text">
-FORME đã nhận được đơn hàng của bạn.<br>
-Vui lòng chuyển khoản theo thông tin bên dưới để hoàn tất đơn hàng.
-</div>
-
-<div class="payment">
-
-<h2>THÔNG TIN THANH TOÁN</h2>
-
-<div class="payment-row">
-<div class="payment-label">NGÂN HÀNG</div>
-<div class="payment-value">SACOMBANK</div>
-</div>
-
-<div class="payment-row">
-<div class="payment-label">SỐ TÀI KHOẢN</div>
-<div class="payment-value">070130993840</div>
-</div>
-
-<div class="payment-row">
-<div class="payment-label">CHỦ TÀI KHOẢN</div>
-<div class="payment-value">VO QUANG TRUNG</div>
-</div>
-
-<div class="payment-row">
-<div class="payment-label">SỐ TIỀN CẦN THANH TOÁN</div>
-<div class="payment-total" id="paymentTotal">0đ</div>
-</div>
-
-<div class="payment-row">
-<div class="payment-label">NỘI DUNG CHUYỂN KHOẢN</div>
-<div class="payment-value" id="paymentContent">FORME</div>
-</div>
-
-<div class="payment-note">
-Vui lòng chuyển đúng số tiền và nội dung để FORME dễ dàng xác nhận đơn hàng.
-<br><br>
-Sau khi kiểm tra thanh toán, FORME sẽ liên hệ xác nhận đơn với bạn.
-</div>
+<div id="shopPage">
+
+  <header>
+    <div class="logo">FORME</div>
+    <div class="header-text">NOTHING EXTRA. JUST THE RIGHT FORM.</div>
+  </header>
+
+  <main class="product">
+
+    <div class="product-image-wrap">
+
+      <div class="placeholder" id="imagePlaceholder">
+        <strong id="placeholderColor">BLACK</strong>
+        PRODUCT IMAGE PLACEHOLDER
+      </div>
+
+      <img
+        id="productImage"
+        class="product-image"
+        src=""
+        alt="FORME BASIC"
+        style="display:none;"
+      >
+
+    </div>
+
+    <div class="product-info">
+
+      <h1 class="product-name">
+        Boxy T-Shirt
+      </h1>
+
+      <div class="price">
+        240.000đ
+      </div>
+
+      <div class="description">
+        Áo thun boxy form basic, thiết kế tối giản và dễ phối.
+        Hai màu Black / White.
+      </div>
+
+      <div class="option">
+
+        <div class="option-label">
+          Màu —
+          <span id="selectedColorText">Black</span>
+        </div>
+
+        <div class="colors">
+
+          <button
+            class="color-btn active"
+            data-color="Black"
+            onclick="selectColor(this)"
+          >
+            BLACK
+          </button>
+
+          <button
+            class="color-btn"
+            data-color="White"
+            onclick="selectColor(this)"
+          >
+            WHITE
+          </button>
+
+        </div>
+
+      </div>
+
+      <div class="option">
+
+        <div class="option-label">
+          Size —
+          <span id="selectedSizeText">Chưa chọn</span>
+        </div>
+
+        <div class="sizes">
+
+          <button
+            class="size-btn"
+            data-size="S"
+            onclick="selectSize(this)"
+          >
+            S
+          </button>
+
+          <button
+            class="size-btn"
+            data-size="M"
+            onclick="selectSize(this)"
+          >
+            M
+          </button>
+
+          <button
+            class="size-btn"
+            data-size="L"
+            onclick="selectSize(this)"
+          >
+            L
+          </button>
+
+        </div>
+
+        <button
+          class="size-guide-toggle"
+          onclick="toggleSizeGuide()"
+        >
+          Hướng dẫn chọn size
+        </button>
+
+        <div
+          class="size-guide"
+          id="sizeGuide"
+        >
+
+          <p class="size-guide-title">
+            SIZE GUIDE
+          </p>
+
+          <table class="size-table">
+
+            <tr>
+              <th>Size</th>
+              <th>Cân nặng gợi ý</th>
+              <th>Form</th>
+            </tr>
+
+            <tr>
+              <td>S</td>
+              <td>40–50kg</td>
+              <td>Vừa</td>
+            </tr>
+
+            <tr>
+              <td>M</td>
+              <td>50–60kg</td>
+              <td>Vừa / rộng</td>
+            </tr>
+
+            <tr>
+              <td>L</td>
+              <td>60–72kg</td>
+              <td>Rộng</td>
+            </tr>
+
+          </table>
+
+          <p class="size-note">
+            Bảng trên là gợi ý. Form thực tế còn tùy chiều cao,
+            dáng người và sở thích mặc.
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="option">
+
+        <div class="option-label">
+          Số lượng
+        </div>
+
+        <div class="quantity-box">
+
+          <button
+            class="qty-btn"
+            onclick="changeQuantity(-1)"
+          >
+            −
+          </button>
+
+          <div
+            class="quantity-number"
+            id="quantity"
+          >
+            1
+          </div>
+
+          <button
+            class="qty-btn"
+            onclick="changeQuantity(1)"
+          >
+            +
+          </button>
+
+        </div>
+
+      </div>
+
+      <button
+        class="order-btn"
+        onclick="openOrder()"
+      >
+        ĐẶT HÀNG
+      </button>
+
+    </div>
+
+  </main>
+
+  <div class="slogan">
+    NOTHING EXTRA. JUST THE RIGHT FORM.
+  </div>
 
 </div>
 
-<button onclick="backToShop()">BACK TO FORME</button>
+
+<div
+  class="modal"
+  id="orderModal"
+>
+
+  <div class="modal-box">
+
+    <button
+      class="close-btn"
+      onclick="closeOrder()"
+    >
+      ×
+    </button>
+
+    <div class="modal-title">
+      ĐẶT HÀNG
+    </div>
+
+    <div class="order-summary">
+
+      <div>
+        Sản phẩm:
+        <strong>Boxy T-Shirt</strong>
+      </div>
+
+      <div>
+        Màu:
+        <strong id="orderColor"></strong>
+      </div>
+
+      <div>
+        Size:
+        <strong id="orderSize"></strong>
+      </div>
+
+      <div>
+        Số lượng:
+        <strong id="orderQuantity"></strong>
+      </div>
+
+      <div class="order-total">
+        Tổng:
+        <span id="orderTotal"></span>
+      </div>
+
+    </div>
+
+    <div class="field">
+      <input
+        id="customerName"
+        type="text"
+        placeholder="Họ và tên"
+      >
+    </div>
+
+    <div class="field">
+      <input
+        id="customerPhone"
+        type="tel"
+        inputmode="numeric"
+        placeholder="Số điện thoại"
+      >
+    </div>
+
+    <div class="field">
+      <textarea
+        id="customerAddress"
+        placeholder="Địa chỉ nhận hàng"
+      ></textarea>
+    </div>
+
+    <div class="payment-title">
+      Phương thức thanh toán
+    </div>
+
+    <label
+      class="payment-card active"
+      id="codCard"
+    >
+
+      <input
+        type="radio"
+        name="payment"
+        value="COD"
+        checked
+        onchange="changePayment()"
+      >
+
+      <div>
+        <div class="payment-name">
+          Thanh toán khi nhận hàng (COD)
+        </div>
+
+        <div class="payment-desc">
+          Thanh toán cho đơn vị vận chuyển khi nhận hàng.
+        </div>
+      </div>
+
+    </label>
+
+    <label
+      class="payment-card"
+      id="transferCard"
+    >
+
+      <input
+        type="radio"
+        name="payment"
+        value="Chuyển khoản"
+        onchange="changePayment()"
+      >
+
+      <div>
+        <div class="payment-name">
+          Chuyển khoản ngân hàng
+        </div>
+
+        <div class="payment-desc">
+          Chuyển khoản trước sau khi đặt đơn.
+        </div>
+      </div>
+
+    </label>
+
+    <div
+      class="bank-info"
+      id="bankInfo"
+    >
+
+      <div>
+        Ngân hàng:
+        <strong>Sacombank</strong>
+      </div>
+
+      <div>
+        Số tài khoản:
+        <strong>070130993840</strong>
+      </div>
+
+      <div>
+        Chủ tài khoản:
+        <strong>VO QUANG TRUNG</strong>
+      </div>
+
+      <div>
+        Nội dung:
+        <strong>SĐT + Tên khách hàng</strong>
+      </div>
+
+      <button
+        type="button"
+        class="copy-btn"
+        onclick="copyAccountNumber()"
+      >
+        SAO CHÉP SỐ TÀI KHOẢN
+      </button>
+
+    </div>
+
+    <button
+      class="confirm-btn"
+      onclick="submitOrder()"
+    >
+      XÁC NHẬN ĐẶT HÀNG
+    </button>
+
+  </div>
 
 </div>
-</div>
+
+
+<section
+  class="thank-you"
+  id="thankYouPage"
+>
+
+  <div class="thank-you-box">
+
+    <div class="thank-logo">
+      FORME
+    </div>
+
+    <h1>
+      THANK YOU FOR YOUR ORDER.
+    </h1>
+
+    <p>
+      Đơn hàng của bạn đã được ghi nhận.
+      FORME sẽ liên hệ xác nhận đơn hàng trong thời gian sớm nhất.
+    </p>
+
+    <div
+      class="thank-summary"
+      id="thankSummary"
+    ></div>
+
+    <button
+      class="continue-btn"
+      onclick="continueShopping()"
+    >
+      TIẾP TỤC MUA SẮM
+    </button>
+
+    <p class="thank-slogan">
+      NOTHING EXTRA. JUST THE RIGHT FORM.
+    </p>
+
+  </div>
+
+</section>
+
 
 <script>
 
-let cart=[];
-let currentProduct="";
-let tempSize="";
-let recommendedSize="S";
+  const PRODUCT_NAME = "Boxy T-Shirt";
+  const PRODUCT_PRICE = 240000;
 
-const sizeData={
+  /*
+    SAU NÀY CÓ ẢNH THẬT THÌ THAY LINK Ở ĐÂY
+  */
 
-boxy:[
-{size:"S",length:66,chest:55,shoulder:52,sleeve:21,h1:150,h2:164,w1:45,w2:56},
-{size:"M",length:68,chest:57,shoulder:54,sleeve:22,h1:165,h2:173,w1:57,w2:67},
-{size:"L",length:70,chest:59,shoulder:56,sleeve:23,h1:174,h2:182,w1:68,w2:78},
-{size:"XL",length:72,chest:61,shoulder:58,sleeve:24,h1:180,h2:188,w1:79,w2:88}
-],
+  const PRODUCT_IMAGES = {
+    Black: "",
+    White: ""
+  };
 
-long:[
-{size:"S",length:70,chest:56,shoulder:53,sleeve:57,h1:152,h2:165,w1:45,w2:55},
-{size:"M",length:72,chest:58,shoulder:55,sleeve:59,h1:166,h2:174,w1:56,w2:68},
-{size:"L",length:74,chest:60,shoulder:57,sleeve:61,h1:175,h2:183,w1:69,w2:80},
-{size:"XL",length:76,chest:62,shoulder:59,sleeve:63,h1:182,h2:190,w1:81,w2:95}
-]
+  let selectedColor = "Black";
+  let selectedSize = "";
+  let quantity = 1;
 
-};
 
-function money(number){
-return number.toLocaleString("vi-VN")+"đ";
-}
+  function selectColor(button) {
 
-/* BLACK / WHITE PLACEHOLDER */
+    document
+      .querySelectorAll(".color-btn")
+      .forEach(btn => {
+        btn.classList.remove("active");
+      });
 
-function updateProductPlaceholder(product){
+    button.classList.add("active");
 
-if(product==="boxy"){
+    selectedColor =
+      button.dataset.color;
 
-const color=document.getElementById("boxyColor").value;
+    document.getElementById(
+      "selectedColorText"
+    ).textContent =
+      selectedColor;
 
-document.getElementById("boxyPlaceholder").innerText=
-color==="Đen"
-? "BOXY TEE — BLACK — PRODUCT IMAGE"
-: "BOXY TEE — WHITE — PRODUCT IMAGE";
+    changeProductImage(
+      selectedColor
+    );
 
-}else{
+  }
 
-const color=document.getElementById("longColor").value;
 
-document.getElementById("longPlaceholder").innerText=
-color==="Đen"
-? "LONG SLEEVE — BLACK — PRODUCT IMAGE"
-: "LONG SLEEVE — WHITE — PRODUCT IMAGE";
+  function changeProductImage(color) {
 
-}
+    const image =
+      document.getElementById(
+        "productImage"
+      );
 
-}
+    const placeholder =
+      document.getElementById(
+        "imagePlaceholder"
+      );
 
-/* SIZE */
+    const placeholderColor =
+      document.getElementById(
+        "placeholderColor"
+      );
 
-function openSizeModal(product){
+    const imageURL =
+      PRODUCT_IMAGES[color];
 
-currentProduct=product;
+    if (imageURL) {
 
-const currentValue=document.getElementById(
-product==="boxy" ? "boxySize" : "longSize"
-).value;
+      image.src =
+        imageURL;
 
-tempSize=currentValue;
+      image.style.display =
+        "block";
 
-document.getElementById("modalProductName").innerText=
-product==="boxy" ? "FORME BOXY TEE" : "FORME LONG SLEEVE";
+      placeholder.style.display =
+        "none";
 
-document.getElementById("heightRange").value=165;
-document.getElementById("weightRange").value=55;
+    } else {
 
-renderSizeTable();
-updateFinder();
-updateSizeButtons();
+      image.style.display =
+        "none";
 
-document.getElementById("sizeModal").style.display="flex";
-document.body.classList.add("no-scroll");
+      placeholder.style.display =
+        "flex";
 
-}
+      placeholderColor.textContent =
+        color.toUpperCase();
 
-function closeSizeModal(){
-document.getElementById("sizeModal").style.display="none";
-document.body.classList.remove("no-scroll");
-}
+    }
 
-function manualSize(size){
-tempSize=size;
-updateSizeButtons();
-}
+  }
 
-function updateSizeButtons(){
 
-document.querySelectorAll(".size-option").forEach(function(button){
+  function selectSize(button) {
 
-button.classList.toggle(
-"active",
-button.innerText===tempSize
-);
+    document
+      .querySelectorAll(".size-btn")
+      .forEach(btn => {
+        btn.classList.remove("active");
+      });
 
-});
+    button.classList.add("active");
 
-}
+    selectedSize =
+      button.dataset.size;
 
-function updateFinder(){
+    document.getElementById(
+      "selectedSizeText"
+    ).textContent =
+      selectedSize;
 
-const height=Number(document.getElementById("heightRange").value);
-const weight=Number(document.getElementById("weightRange").value);
+    document.getElementById(
+      "sizeGuide"
+    ).classList.add(
+      "active"
+    );
 
-document.getElementById("heightValue").innerText=height;
-document.getElementById("weightValue").innerText=weight;
+  }
 
-const sizes=sizeData[currentProduct];
 
-let best=null;
-let bestScore=999999;
+  function toggleSizeGuide() {
 
-sizes.forEach(function(s){
+    document.getElementById(
+      "sizeGuide"
+    ).classList.toggle(
+      "active"
+    );
 
-const hc=(s.h1+s.h2)/2;
-const wc=(s.w1+s.w2)/2;
+  }
 
-let score=
-Math.abs(height-hc)/5+
-Math.abs(weight-wc)/5;
 
-if(height>=s.h1 && height<=s.h2) score-=2;
-if(weight>=s.w1 && weight<=s.w2) score-=2;
+  function changeQuantity(change) {
 
-if(score<bestScore){
-bestScore=score;
-best=s;
-}
+    quantity += change;
 
-});
+    if (quantity < 1) {
+      quantity = 1;
+    }
 
-recommendedSize=best.size;
+    if (quantity > 10) {
+      quantity = 10;
+    }
 
-document.getElementById("recommendedSize").innerText=recommendedSize;
+    document.getElementById(
+      "quantity"
+    ).textContent =
+      quantity;
 
-let text="Dựa trên chiều cao và cân nặng bạn đã chọn.";
+  }
 
-if(
-height<best.h1 ||
-height>best.h2 ||
-weight<best.w1 ||
-weight>best.w2
-){
-text="Thông số của bạn nằm giữa các size. Đây là size gần nhất FORME gợi ý.";
-}
 
-document.getElementById("recommendText").innerText=text;
+  function formatMoney(number) {
 
-}
+    return new Intl.NumberFormat(
+      "vi-VN"
+    ).format(number) + "đ";
 
-function useRecommendedSize(){
-tempSize=recommendedSize;
-updateSizeButtons();
+  }
 
-document.querySelector(".confirm-size").scrollIntoView({
-behavior:"smooth"
-});
-}
 
-function confirmSize(){
+  function openOrder() {
 
-if(!tempSize){
-alert("Vui lòng chọn size hoặc dùng FIND YOUR FORME.");
-return;
-}
+    if (!selectedColor) {
 
-const inputId=currentProduct==="boxy" ? "boxySize" : "longSize";
-const textId=currentProduct==="boxy" ? "boxySizeText" : "longSizeText";
+      alert(
+        "Vui lòng chọn màu."
+      );
 
-document.getElementById(inputId).value=tempSize;
+      return;
 
-document.getElementById(textId).innerHTML=
-'ĐÃ CHỌN SIZE <span class="size-picked">'+tempSize+"</span>";
+    }
 
-closeSizeModal();
+    if (!selectedSize) {
 
-}
+      alert(
+        "Vui lòng chọn size."
+      );
 
-function renderSizeTable(){
+      return;
 
-const sizes=sizeData[currentProduct];
+    }
 
-let html=`
-<tr>
-<th>SIZE</th>
-<th>DÀI ÁO</th>
-<th>NGỰC</th>
-<th>VAI</th>
-<th>TAY</th>
-<th>CHIỀU CAO</th>
-<th>CÂN NẶNG</th>
-</tr>
-`;
+    document.getElementById(
+      "orderColor"
+    ).textContent =
+      selectedColor;
 
-sizes.forEach(function(s){
+    document.getElementById(
+      "orderSize"
+    ).textContent =
+      selectedSize;
 
-html+=`
-<tr>
-<td><strong>${s.size}</strong></td>
-<td>${s.length}</td>
-<td>${s.chest}</td>
-<td>${s.shoulder}</td>
-<td>${s.sleeve}</td>
-<td>${s.h1}–${s.h2}</td>
-<td>${s.w1}–${s.w2}</td>
-</tr>
-`;
+    document.getElementById(
+      "orderQuantity"
+    ).textContent =
+      quantity;
 
-});
+    document.getElementById(
+      "orderTotal"
+    ).textContent =
+      formatMoney(
+        PRODUCT_PRICE *
+        quantity
+      );
 
-document.getElementById("sizeTable").innerHTML=html;
+    document.getElementById(
+      "orderModal"
+    ).classList.add(
+      "active"
+    );
 
-}
+  }
 
-/* CART */
 
-function addToCart(product,price,colorId,sizeId,qtyId){
+  function closeOrder() {
 
-const color=document.getElementById(colorId).value;
-const size=document.getElementById(sizeId).value;
-const qty=Number(document.getElementById(qtyId).value);
+    document.getElementById(
+      "orderModal"
+    ).classList.remove(
+      "active"
+    );
 
-if(!size){
-alert("Vui lòng chọn size trước.");
-return;
-}
+  }
 
-cart.push({product,price,color,size,qty});
 
-renderCart();
+  function changePayment() {
 
-document.querySelector(".cart").scrollIntoView({
-behavior:"smooth"
-});
+    const payment =
+      document.querySelector(
+        'input[name="payment"]:checked'
+      ).value;
 
-}
+    const codCard =
+      document.getElementById(
+        "codCard"
+      );
 
-function renderCart(){
+    const transferCard =
+      document.getElementById(
+        "transferCard"
+      );
 
-const container=document.getElementById("cartItems");
+    const bankInfo =
+      document.getElementById(
+        "bankInfo"
+      );
 
-if(cart.length===0){
+    codCard.classList.remove(
+      "active"
+    );
 
-container.innerHTML=
-'<p style="font-size:13px;color:#888;">Chưa có sản phẩm.</p>';
+    transferCard.classList.remove(
+      "active"
+    );
 
-document.getElementById("total").innerText="0đ";
-return;
+    if (payment === "COD") {
 
-}
+      codCard.classList.add(
+        "active"
+      );
 
-let html="";
-let total=0;
+      bankInfo.classList.remove(
+        "active"
+      );
 
-cart.forEach(function(item,index){
+    } else {
 
-const subtotal=item.price*item.qty;
-total+=subtotal;
+      transferCard.classList.add(
+        "active"
+      );
 
-html+=`
-<div class="cart-item">
+      bankInfo.classList.add(
+        "active"
+      );
 
-<strong>${item.product}</strong><br>
-${item.color} / Size ${item.size}<br>
-Số lượng: ${item.qty}<br>
-${money(subtotal)}
+    }
 
-<button class="remove" onclick="removeItem(${index})">
-XÓA
-</button>
+  }
 
-</div>
-`;
 
-});
+  function copyAccountNumber() {
 
-container.innerHTML=html;
-document.getElementById("total").innerText=money(total);
+    const accountNumber =
+      "070130993840";
 
-}
+    navigator.clipboard.writeText(
+      accountNumber
+    );
 
-function removeItem(index){
-cart.splice(index,1);
-renderCart();
-}
+    alert(
+      "Đã sao chép số tài khoản."
+    );
 
-/* ORDER */
+  }
 
-async function submitOrder(){
 
-const name=document.getElementById("name").value.trim();
-const phone=document.getElementById("phone").value.trim();
-const address=document.getElementById("address").value.trim();
-const note=document.getElementById("note").value.trim();
+  async function submitOrder() {
 
-if(cart.length===0){
-alert("Vui lòng chọn sản phẩm.");
-return;
-}
+    const name =
+      document.getElementById(
+        "customerName"
+      ).value.trim();
 
-if(!name||!phone||!address){
-alert("Vui lòng nhập đầy đủ họ tên, số điện thoại và địa chỉ.");
-return;
-}
+    const phone =
+      document.getElementById(
+        "customerPhone"
+      ).value.trim();
 
-let total=0;
-let orderText="";
+    const address =
+      document.getElementById(
+        "customerAddress"
+      ).value.trim();
 
-cart.forEach(function(item,index){
+    const payment =
+      document.querySelector(
+        'input[name="payment"]:checked'
+      ).value;
 
-const subtotal=item.price*item.qty;
-total+=subtotal;
+    if (!name) {
 
-orderText+=
-(index+1)+". "+
-item.product+
-" | Màu: "+item.color+
-" | Size: "+item.size+
-" | SL: "+item.qty+
-" | "+money(subtotal)+"\n";
+      alert(
+        "Vui lòng nhập họ và tên."
+      );
 
-});
+      return;
 
-const transferContent="FORME "+phone;
+    }
 
-const button=document.getElementById("orderButton");
+    if (!phone) {
 
-button.disabled=true;
-button.innerText="ĐANG GỬI ĐƠN...";
+      alert(
+        "Vui lòng nhập số điện thoại."
+      );
 
-const formData=new FormData();
+      return;
 
-formData.append("Họ tên",name);
-formData.append("Số điện thoại",phone);
-formData.append("Địa chỉ",address);
-formData.append("Sản phẩm",orderText);
-formData.append("Tổng tiền",money(total));
-formData.append("Ghi chú",note||"Không có");
-formData.append("Nội dung chuyển khoản",transferContent);
-formData.append("_subject","ĐƠN HÀNG MỚI - FORME");
+    }
 
-try{
+    if (!/^[0-9]{9,11}$/.test(phone)) {
 
-const response=await fetch(
-"https://formsubmit.co/ajax/formebasic882@gmail.com",
-{
-method:"POST",
-body:formData,
-headers:{"Accept":"application/json"}
-}
-);
+      alert(
+        "Số điện thoại chưa đúng."
+      );
 
-if(!response.ok){
-throw new Error("Không gửi được đơn");
-}
+      return;
 
-document.getElementById("paymentTotal").innerText=money(total);
-document.getElementById("paymentContent").innerText=transferContent;
+    }
 
-document.getElementById("shop").style.display="none";
-document.getElementById("thankyou").style.display="flex";
+    if (!address) {
 
-window.scrollTo(0,0);
+      alert(
+        "Vui lòng nhập địa chỉ nhận hàng."
+      );
 
-}catch(error){
+      return;
 
-alert("Chưa gửi được đơn. Vui lòng thử lại hoặc liên hệ FORME qua Instagram @formebasic.vn");
+    }
 
-}finally{
+    const total =
+      PRODUCT_PRICE *
+      quantity;
 
-button.disabled=false;
-button.innerText="ĐẶT HÀNG";
+    const order = {
 
-}
+      product:
+        PRODUCT_NAME,
 
-}
+      color:
+        selectedColor,
 
-function backToShop(){
+      size:
+        selectedSize,
 
-cart=[];
-renderCart();
+      quantity:
+        quantity,
 
-document.getElementById("name").value="";
-document.getElementById("phone").value="";
-document.getElementById("address").value="";
-document.getElementById("note").value="";
+      total:
+        total,
 
-document.getElementById("boxySize").value="";
-document.getElementById("longSize").value="";
+      customerName:
+        name,
 
-document.getElementById("boxySizeText").innerText=
-"CHỌN SIZE / TÌM SIZE PHÙ HỢP";
+      customerPhone:
+        phone,
 
-document.getElementById("longSizeText").innerText=
-"CHỌN SIZE / TÌM SIZE PHÙ HỢP";
+      customerAddress:
+        address,
 
-document.getElementById("thankyou").style.display="none";
-document.getElementById("shop").style.display="block";
+      payment:
+        payment,
 
-window.scrollTo(0,0);
+      createdAt:
+        new Date().toLocaleString("vi-VN")
 
-}
+    };
 
-updateProductPlaceholder("boxy");
-updateProductPlaceholder("long");
+    const confirmButton =
+      document.querySelector(
+        ".confirm-btn"
+      );
+
+    confirmButton.disabled = true;
+
+    confirmButton.textContent =
+      "ĐANG GỬI ĐƠN...";
+
+
+    try {
+
+      const response =
+        await fetch(
+          "https://formsubmit.co/ajax/formebasic882@gmail.com",
+          {
+            method: "POST",
+
+            headers: {
+              "Content-Type":
+                "application/json",
+
+              "Accept":
+                "application/json"
+            },
+
+            body: JSON.stringify({
+
+              "_subject":
+                "FORME - CÓ ĐƠN HÀNG MỚI",
+
+              "_template":
+                "table",
+
+              "Sản phẩm":
+                order.product,
+
+              "Màu":
+                order.color,
+
+              "Size":
+                order.size,
+
+              "Số lượng":
+                order.quantity,
+
+              "Tổng tiền":
+                formatMoney(
+                  order.total
+                ),
+
+              "Tên khách hàng":
+                order.customerName,
+
+              "Số điện thoại":
+                order.customerPhone,
+
+              "Địa chỉ":
+                order.customerAddress,
+
+              "Phương thức thanh toán":
+                order.payment,
+
+              "Thời gian đặt":
+                order.createdAt
+
+            })
+          }
+        );
+
+      if (!response.ok) {
+        throw new Error(
+          "Không gửi được đơn"
+        );
+      }
+
+      localStorage.setItem(
+        "formeLastOrder",
+        JSON.stringify(order)
+      );
+
+      showThankYou(
+        order
+      );
+
+    } catch (error) {
+
+      console.error(
+        error
+      );
+
+      alert(
+        "Có lỗi khi gửi đơn. Vui lòng thử lại."
+      );
+
+    } finally {
+
+      confirmButton.disabled =
+        false;
+
+      confirmButton.textContent =
+        "XÁC NHẬN ĐẶT HÀNG";
+
+    }
+
+  }
+
+
+  function showThankYou(order) {
+
+    document.getElementById(
+      "orderModal"
+    ).classList.remove(
+      "active"
+    );
+
+    document.getElementById(
+      "shopPage"
+    ).style.display =
+      "none";
+
+    const thankPage =
+      document.getElementById(
+        "thankYouPage"
+      );
+
+    thankPage.classList.add(
+      "active"
+    );
+
+    document.getElementById(
+      "thankSummary"
+    ).innerHTML = `
+
+      <strong>${order.product}</strong>
+
+      <br>
+
+      Màu:
+      ${order.color}
+
+      <br>
+
+      Size:
+      ${order.size}
+
+      <br>
+
+      Số lượng:
+      ${order.quantity}
+
+      <br>
+
+      Tổng:
+      <strong>
+        ${formatMoney(order.total)}
+      </strong>
+
+      <br>
+
+      Thanh toán:
+      ${order.payment}
+
+    `;
+
+    window.scrollTo(
+      0,
+      0
+    );
+
+  }
+
+
+  function continueShopping() {
+
+    document.getElementById(
+      "thankYouPage"
+    ).classList.remove(
+      "active"
+    );
+
+    document.getElementById(
+      "shopPage"
+    ).style.display =
+      "block";
+
+    quantity = 1;
+
+    document.getElementById(
+      "quantity"
+    ).textContent =
+      1;
+
+    document.getElementById(
+      "customerName"
+    ).value = "";
+
+    document.getElementById(
+      "customerPhone"
+    ).value = "";
+
+    document.getElementById(
+      "customerAddress"
+    ).value = "";
+
+    window.scrollTo(
+      0,
+      0
+    );
+
+  }
+
+
+  document.getElementById(
+    "orderModal"
+  ).addEventListener(
+    "click",
+    function(event) {
+
+      if (
+        event.target === this
+      ) {
+
+        closeOrder();
+
+      }
+
+    }
+  );
 
 </script>
 
