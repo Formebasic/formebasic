@@ -58,13 +58,8 @@ body.modal-open{
   display:flex;
   align-items:center;
   justify-content:center;
-  .freeship-bar{
-  height:28px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#6F0F16; /* đỏ bầm */
-  color:#FFFFFF;      /* chữ trắng */
+  background:#6F0F16;
+  color:#FFFFFF;
   font-size:9px;
   letter-spacing:1.2px;
   text-align:center;
@@ -1283,10 +1278,100 @@ button{
   letter-spacing:1.5px;
   line-height:1;
 }
+ /* =========================
+   LANGUAGE SCREEN
+========================= */
+
+.language-screen{
+  position:fixed;
+  inset:0;
+  background:#fff;
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+}
+
+.language-box{
+  width:100%;
+  max-width:420px;
+  text-align:center;
+}
+
+.language-logo{
+  font-size:24px;
+  font-weight:700;
+  letter-spacing:6px;
+  margin-bottom:12px;
+}
+
+.language-tagline{
+  font-size:9px;
+  color:#888;
+  letter-spacing:1.6px;
+  margin-bottom:55px;
+}
+
+.language-title{
+  font-size:11px;
+  letter-spacing:1.5px;
+  margin-bottom:18px;
+}
+
+.language-btn{
+  display:block;
+  width:100%;
+  height:52px;
+  margin-top:10px;
+  border:1px solid #111;
+  background:#fff;
+  color:#111;
+  font-size:11px;
+  letter-spacing:1.5px;
+}
+
+.language-btn.primary{
+  background:#111;
+  color:#fff;
+  -webkit-text-fill-color:#fff;
+} 
 </style>
 </head>
 
 <body>
+  <!-- LANGUAGE SCREEN -->
+<div class="language-screen" id="languageScreen">
+
+  <div class="language-box">
+
+    <div class="language-logo">FORME</div>
+
+    <div class="language-tagline">
+      NOTHING EXTRA. JUST THE RIGHT FORM.
+    </div>
+
+    <div class="language-title">
+      CHỌN NGÔN NGỮ / SELECT LANGUAGE
+    </div>
+
+    <button
+      class="language-btn primary"
+      onclick="selectLanguage('vi')"
+    >
+      TIẾNG VIỆT
+    </button>
+
+    <button
+      class="language-btn"
+      onclick="selectLanguage('en')"
+    >
+      ENGLISH
+    </button>
+
+  </div>
+
+</div>
 
 <div id="shopPage">
 <div class="freeship-bar">
@@ -1421,7 +1506,7 @@ button{
   </p>
 </div>
 
-<main class="products">
+<main class="products" id="products">
 
   <!-- =========================
        BOXY
@@ -4092,12 +4177,198 @@ localStorage.setItem(
   updateCartBadge();
 
   renderCart();
+const savedLanguage = localStorage.getItem("formeLanguage");
+
+if(savedLanguage === "en"){
+  document.getElementById("languageScreen").style.display = "none";
+  applyEnglish();
+}else if(savedLanguage === "vi"){
+  document.getElementById("languageScreen").style.display = "none";
+  applyVietnamese();
+}
+}
+/* =========================
+   LANGUAGE SELECT
+========================= */
+
+function selectLanguage(lang){
+
+  localStorage.setItem("formeLanguage", lang);
+
+  document
+    .getElementById("languageScreen")
+    .style.display = "none";
+
+  if(lang === "en"){
+    applyEnglish();
+  }else{
+    applyVietnamese();
+  }
 
 }
+  /* =========================
+   LANGUAGE CONTENT
+========================= */
 
+function applyVietnamese(){
+  document.documentElement.lang = "vi";
+}
+
+function applyEnglish(){
+  document.documentElement.lang = "en";
+
+  document.querySelector(".freeship-bar").textContent =
+    "FREE SHIPPING ON ORDERS FROM 500,000₫";
+
+  document.querySelectorAll(".category-btn")[0].textContent =
+    "ALL PRODUCTS";
+
+  document.querySelectorAll(".category-btn")[1].textContent =
+    "NEW COLLECTION";
+
+  document.querySelectorAll(".category-btn")[2].textContent =
+    "BOXY";
+
+  document.querySelectorAll(".category-btn")[3].textContent =
+    "OVERSIZED LONG SLEEVE";
+
+  document.querySelector("#collectionTitle h2").textContent =
+    "NEW COLLECTION";
+
+  document.querySelector("#collectionTitle p").textContent =
+    "Everyday essentials. Minimal, easy to wear and easy to style.";
+  /* PRODUCT TEXT */
+  document.querySelectorAll(".description")[0].textContent =
+    "Basic boxy T-shirt with a clean, easy-to-style fit. Two-way cotton. Available in Black / White.";
+
+  document.querySelectorAll(".description")[1].textContent =
+    "Basic oversized long-sleeve T-shirt with a relaxed fit. Minimal and easy to style. Available in Black / White.";
+
+  /* OPTION TITLES */
+  document.querySelectorAll(".option-title").forEach(title => {
+    title.innerHTML = title.innerHTML
+      .replace("Màu", "Color")
+      .replace("Chưa chọn", "Not selected")
+      .replace("Số lượng", "Quantity");
+  });
+
+  /* SIZE FINDER BUTTONS */
+  document.querySelectorAll(".size-guide-toggle span:first-child")
+    .forEach(el => el.textContent = "FIND YOUR SIZE");
+
+  document.querySelectorAll(".size-finder-title")
+    .forEach(el => el.textContent = "FORME RECOMMENDS");
+
+  document.querySelectorAll(".size-finder-result-label")
+    .forEach(el => el.textContent = "Based on your height and weight");
+
+  document.querySelectorAll(".finder-label-row").forEach(row => {
+    row.innerHTML = row.innerHTML
+      .replace("CHIỀU CAO", "HEIGHT")
+      .replace("CÂN NẶNG", "WEIGHT");
+  });
+
+  document.querySelectorAll(".use-size-btn")
+    .forEach(el => el.textContent = "CONFIRM RECOMMENDED SIZE");
+
+  /* SIZE CHART */
+  document.querySelectorAll(".size-chart-title strong")
+    .forEach(el => el.textContent = "GARMENT MEASUREMENTS");
+
+  document.querySelectorAll(".size-chart-title span")
+    .forEach(el => el.textContent = "Unit: CM");
+
+  document.querySelectorAll(".size-chart-table").forEach(table => {
+    table.innerHTML = table.innerHTML
+      .replace("Thông số", "Measurement")
+      .replace("Ngang ngực", "Chest Width")
+      .replace("Dài áo", "Length")
+      .replace("Dài tay", "Sleeve Length");
+  });
+
+  document.querySelectorAll(".size-chart-note")
+    .forEach(el => el.textContent =
+      "Measurements may vary slightly due to the production process."
+    );
+
+  /* PRODUCT BUTTONS */
+  document.querySelectorAll(".add-cart-btn")
+    .forEach(el => el.textContent = "ADD TO BAG");
+
+  document.querySelectorAll(".order-btn")
+    .forEach(el => el.textContent = "BUY NOW");
+
+  document.querySelectorAll(".featured-btn")
+    .forEach(el => el.textContent = "VIEW PRODUCT");
+  /* CART */
+  document.querySelector("#cartModal .modal-title").textContent =
+    "SHOPPING BAG";
+
+  document.querySelector(".checkout-btn").textContent =
+    "CHECKOUT";
+
+  /* CHECKOUT */
+  document.querySelector("#checkoutModal .modal-title").textContent =
+    "CHECKOUT";
+
+  document.getElementById("customerName").placeholder =
+    "Full name";
+
+  document.getElementById("customerPhone").placeholder =
+    "Phone number";
+
+  document.getElementById("customerAddress").placeholder =
+    "Shipping address";
+
+  document.getElementById("customerNote").placeholder =
+    "Order note (optional)";
+
+  document.querySelector(".payment-title").textContent =
+    "PAYMENT METHOD";
+
+  document.querySelector("#codCard .payment-name").textContent =
+    "Cash on Delivery (COD)";
+
+  document.querySelector("#codCard .payment-desc").textContent =
+    "Pay the delivery carrier when your order arrives.";
+
+  document.querySelector("#transferCard .payment-name").textContent =
+    "Bank Transfer";
+
+  document.querySelector("#transferCard .payment-desc").textContent =
+    "Transfer payment using the bank details below.";
+
+  document.querySelector(".copy-btn").textContent =
+    "COPY ACCOUNT NUMBER";
+
+  document.querySelector(".confirm-btn").textContent =
+    "CONFIRM ORDER";
+
+  /* THANK YOU */
+  document.querySelector(".thank-box h2").textContent =
+    "THANK YOU FOR YOUR ORDER.";
+
+  document.querySelector(".thank-box > p").textContent =
+    "Your order has been received. FORME will contact you shortly to confirm your order.";
+
+  document.querySelector(".continue-btn").textContent =
+    "CONTINUE SHOPPING";
+
+  /* FLOATING SALE */
+  const saleText = document.querySelector(".floating-sale-text");
+  if(saleText){
+    saleText.textContent = "opening sale. that's it.";
+  }
+
+  const saleBtn = document.querySelector(".floating-sale-btn");
+  if(saleBtn){
+    saleBtn.textContent = "take a look →";
+  }
+}
 init();
 
 </script>
+  
 <div class="floating-sale" id="floatingSale">
 
   <button
