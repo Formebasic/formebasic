@@ -2821,8 +2821,43 @@ function updateSizeFinder(type){
   }
 
   if(type === "boxy"){
-    suggestedSize = "XEM BẢNG";
+
+  if(height <= 160){
+    if(weight <= 55){
+      suggestedSize = "S";
+    }else if(weight <= 65){
+      suggestedSize = "M";
+    }else{
+      suggestedSize = "L";
+    }
+
+  }else if(height <= 168){
+    if(weight <= 58){
+      suggestedSize = "S";
+    }else if(weight <= 68){
+      suggestedSize = "M";
+    }else{
+      suggestedSize = "L";
+    }
+
+  }else if(height <= 175){
+    if(weight <= 60){
+      suggestedSize = "M";
+    }else if(weight <= 72){
+      suggestedSize = "L";
+    }else{
+      suggestedSize = "XL";
+    }
+
+  }else{
+    if(weight <= 65){
+      suggestedSize = "L";
+    }else{
+      suggestedSize = "XL";
+    }
   }
+
+}
 
   document.getElementById(
     type + "SuggestedSize"
