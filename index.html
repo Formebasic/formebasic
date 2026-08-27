@@ -1616,41 +1616,38 @@ header{
     <table class="size-chart-table">
 
 <tbody>
+  <tr>
+    <th>Thông số</th>
+    <th>S</th>
+    <th>M</th>
+    <th>L</th>
+    <th>XL</th>
+  </tr>
+
+  <tr>
+    <td>Ngang ngực</td>
+    <td>56</td>
+    <td>58</td>
+    <td>60</td>
+    <td>62</td>
+  </tr>
 
   <tr>
     <td>Dài áo</td>
+    <td>62</td>
+    <td>64</td>
     <td>66</td>
     <td>68</td>
-    <td>70</td>
-    <td>72</td>
-  </tr>
-
-  <tr>
-    <td>Rộng ngực</td>
-    <td>55</td>
-    <td>57</td>
-    <td>59</td>
-    <td>61</td>
-  </tr>
-
-  <tr>
-    <td>Rộng vai</td>
-    <td>52</td>
-    <td>54</td>
-    <td>56</td>
-    <td>58</td>
   </tr>
 
   <tr>
     <td>Dài tay</td>
-    <td>21</td>
-    <td>22</td>
-    <td>23</td>
-    <td>24</td>
+    <td>17.5</td>
+    <td>18.5</td>
+    <td>19.5</td>
+    <td>20.5</td>
   </tr>
-
 </tbody>
-
     </table>
 
     <div class="size-chart-note">
@@ -1931,40 +1928,38 @@ header{
 
     <table class="size-chart-table">
 
-      <tbody>
+<tbody>
+  <tr>
+    <th>Thông số</th>
+    <th>S</th>
+    <th>M</th>
+    <th>L</th>
+    <th>XL</th>
+  </tr>
+
+  <tr>
+    <td>Ngang ngực</td>
+    <td>52</td>
+    <td>54</td>
+    <td>56</td>
+    <td>58</td>
+  </tr>
 
   <tr>
     <td>Dài áo</td>
+    <td>68</td>
     <td>70</td>
     <td>72</td>
     <td>74</td>
-    <td>76</td>
-  </tr>
-
-  <tr>
-    <td>Rộng ngực</td>
-    <td>56</td>
-    <td>58</td>
-    <td>60</td>
-    <td>62</td>
-  </tr>
-
-  <tr>
-    <td>Rộng vai</td>
-    <td>53</td>
-    <td>55</td>
-    <td>57</td>
-    <td>59</td>
   </tr>
 
   <tr>
     <td>Dài tay</td>
+    <td>56</td>
     <td>57</td>
+    <td>58</td>
     <td>59</td>
-    <td>61</td>
-    <td>63</td>
   </tr>
-
 </tbody>
  
 
@@ -2663,115 +2658,63 @@ function toggleSizeGuide(type,button){
 
 function updateSizeFinder(type){
 
-  const height =
-    Number(
-      document.getElementById(
-        type + "HeightSlider"
-      ).value
-    );
+  const height = Number(
+    document.getElementById(type + "HeightSlider").value
+  );
 
-  const weight =
-    Number(
-      document.getElementById(
-        type + "WeightSlider"
-      ).value
-    );
+  const weight = Number(
+    document.getElementById(type + "WeightSlider").value
+  );
 
-  document
-    .getElementById(
-      type + "Height"
-    )
-    .textContent = height;
+  document.getElementById(type + "Height").textContent = height;
+  document.getElementById(type + "Weight").textContent = weight;
 
-  document
-    .getElementById(
-      type + "Weight"
-    )
-    .textContent = weight;
-
-  let sizeScore = 0;
-
-  /* CHIỀU CAO */
-
-  if(height <= 160){
-
-    sizeScore += 0;
-
-  }else if(height <= 172){
-
-    sizeScore += 1;
-
-  }else{
-
-    sizeScore += 2;
-
-  }
-
-  /* CÂN NẶNG */
-
-  if(weight <= 50){
-
-    sizeScore += 0;
-
-  }else if(weight <= 64){
-
-    sizeScore += 1;
-
-  }else{
-
-    sizeScore += 2;
-
-  }
-
-  let suggestedSize = "M";
-
-  if(sizeScore <= 1){
-
-    suggestedSize = "S";
-
-  }else if(sizeScore <= 3){
-
-    suggestedSize = "M";
-
-  }else{
-
-    suggestedSize = "L";
-
-  }
-
-  /*
-    LONG SLEEVE OVERSIZE
-    hơi rộng hơn BOXY
-  */
+  let suggestedSize = "";
 
   if(type === "long"){
 
-    if(
-      height <= 160 &&
-      weight <= 52
-    ){
+    let heightSize;
 
-      suggestedSize = "S";
-
+    if(height <= 160){
+      heightSize = "S";
+    }else if(height <= 170){
+      heightSize = "M";
+    }else if(height <= 180){
+      heightSize = "L";
+    }else{
+      heightSize = "XL";
     }
 
-    else if(
-      height >= 176 ||
-      weight >= 70
-    ){
+    let weightSize;
 
-      suggestedSize = "L";
-
+    if(weight <= 55){
+      weightSize = "S";
+    }else if(weight <= 65){
+      weightSize = "M";
+    }else if(weight <= 75){
+      weightSize = "L";
+    }else{
+      weightSize = "XL";
     }
 
+    const sizes = ["S","M","L","XL"];
+
+    suggestedSize =
+      sizes[
+        Math.max(
+          sizes.indexOf(heightSize),
+          sizes.indexOf(weightSize)
+        )
+      ];
   }
 
-  document
-    .getElementById(
-      type + "SuggestedSize"
-    )
-    .textContent = suggestedSize;
+  if(type === "boxy"){
+    suggestedSize = "XEM BẢNG";
+  }
 
+  document.getElementById(
+    type + "SuggestedSize"
+  ).textContent = suggestedSize;
 }
 
 /* =========================
