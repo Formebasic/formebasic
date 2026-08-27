@@ -4177,15 +4177,6 @@ localStorage.setItem(
   updateCartBadge();
 
   renderCart();
-const savedLanguage = localStorage.getItem("formeLanguage");
-
-if(savedLanguage === "en"){
-  document.getElementById("languageScreen").style.display = "none";
-  applyEnglish();
-}else if(savedLanguage === "vi"){
-  document.getElementById("languageScreen").style.display = "none";
-  applyVietnamese();
-}
 }
 /* =========================
    LANGUAGE SELECT
@@ -4193,9 +4184,7 @@ if(savedLanguage === "en"){
 
 function selectLanguage(lang){
 
-  localStorage.setItem("formeLanguage", lang);
-
-  document
+    document
     .getElementById("languageScreen")
     .style.display = "none";
 
